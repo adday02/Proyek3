@@ -13,9 +13,6 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
 
 Route::prefix('admin')->group(function () {
     Route::get('dashboard', function () {
@@ -43,4 +40,16 @@ Route::prefix('admin')->group(function () {
     Route::get('pengajuan', function () {
         return view('admin/pengajuan');
     });
+});
+
+Route::get('login', function () {
+    return view('login');
+});
+
+Route::get('/', function () {
+    return view('utama');
+});
+
+Route::get('/pertamina', function () {
+    return view('detailLoker');
 });
