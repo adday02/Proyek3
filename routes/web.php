@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Admin_perusahaanController;
 
 /*
 |--------------------------------------------------------------------------
@@ -18,9 +19,7 @@ Route::prefix('admin')->group(function () {
     Route::get('dashboard', function () {
         return view('admin/dashboard');
     });
-    Route::get('perusahaan', function () {
-        return view('admin/perusahaan');
-    });
+    Route::resource('perusahaan',Admin_perusahaanController::class);
     Route::get('masyarakat', function () {
         return view('admin/masyarakat');
     });
