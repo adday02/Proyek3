@@ -55,6 +55,26 @@ Route::prefix('perusahaan')->group(function () {
     
 });
 
+Route::prefix('masyarakat')->group(function () {
+    Route::get('homeuser', function () {
+        return view('masyarakat/homeuser');
+    });
+    Route::get('lamaran', function () {
+        return view('masyarakat/lamaran');
+    });
+    
+    Route::get('lowongan', function () {
+        return view('masyarakat/lowongan');
+    });
+
+    Route::get('pelatihan', function () {
+        return view('masyarakat/pelatihan');
+    });
+    Route::get('daftarpelatihan', function () {
+        return view('masyarakat/daftarpelatihan');
+    });
+});
+
 Route::get('login', function () {
     return view('login');
 });
