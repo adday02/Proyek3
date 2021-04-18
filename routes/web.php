@@ -41,6 +41,20 @@ Route::prefix('admin')->group(function () {
     });
 });
 
+Route::prefix('perusahaan')->group(function () {
+    Route::get('dashboard', function () {
+        return view('perusahaan/dashboard');
+    });
+    Route::get('lowongan', function () {
+        return view('perusahaan/lowongan');
+    });
+    
+    Route::get('lamaran', function () {
+        return view('perusahaan/lamaran');
+    });
+    
+});
+
 Route::get('login', function () {
     return view('login');
 });

@@ -40,7 +40,7 @@
                             <td><img width="50 px" src="{{URL::to('/')}}/logo/{{$perusahaan->logo}}" class="fa-image" width="100px" href="URL::to('/')}}/logo/{{$perusahaan->logo}}" ></td></td>
                             <td>
                               <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#edit{{$perusahaan->id_perusahaan}}" >Edit</button>
-                              <button type="danger" class="btn btn-warning btn-sm" data-toggle="modal" data-target="#" >Detail</button>
+                              <button type="danger" class="btn btn-warning btn-sm" data-toggle="modal" data-target="#detail{{$perusahaan->id_perusahaan}}" >Detail</button>
                               <div style="float:right;">
                                 <form form action="{{route('perusahaan.destroy', $perusahaan->id_perusahaan)}}" method="POST">
                                     @csrf
@@ -77,16 +77,58 @@
             <div class="modal-body">
               <form action="{{route('perusahaan.store')}}" class="form-horizontal tasi-form" method="post" enctype="multipart/form-data">
                 @csrf
-                <input class="form-control" name="id_perusahaan"type="text" placeholder="ID Perusahaan"></br>
-                <input class="form-control" name="password"type="password" placeholder="Password"></br>
-                <input class="form-control" name="nama"type="text" placeholder="Nama Perusahaan"></br>
-                <input class="form-control" name="email"type="text" placeholder="Email"></br>
-                <input class="form-control" name="website"type="text" placeholder="Link Website"></br>
-                <input class="form-control" name="alamat"type="text" placeholder="Alamat"></br>
-                <textarea class="form-control"name="deskripsi" type="text" placeholder="Deskripsi Perusahaan"></textarea></br>
-                <div class="input-group mb-3">
-                  <label class="input-group-text" for="inputGroupFile01"> Logo</label>
-                  <input type="file" name="logo" class="form-control" id="inputGroupFile01">
+                <div class="row form-group">
+                    <label class="col-sm-4 control-label">ID Perusahaan</label>
+                    <div class="col-sm-8">        
+                        <input type="text" name="id_perusahaan" class="form-control" required>
+                    </div>
+                </div>
+                <div class="row form-group">
+                    <label class="col-sm-4 control-label">Password</label>
+                    <div class="col-sm-8">        
+                        <input type="password" name="password" class="form-control" required>
+                    </div>
+                </div>
+                <div class="row form-group">
+                    <label class="col-sm-4 control-label">Nama Perusahaan</label>
+                    <div class="col-sm-8">        
+                        <input type="text" name="nama" class="form-control" required>
+                    </div>
+                </div>
+
+                <div class="row form-group">
+                    <label class="col-sm-4 control-label">Email</label>
+                    <div class="col-sm-8">
+                        <input type="email" name="email" class="form-control" required>
+                    </div>
+                </div>
+
+                <div class="row form-group">
+                    <label class="col-sm-4 control-label">Link Website</label>
+                    <div class="col-sm-8">
+                        <input type="text" name="website" class="form-control" required>
+                    </div>
+                </div>
+
+                <div class="row form-group">
+                    <label class="col-sm-4 control-label">Alamat </label>
+                    <div class="col-sm-8">
+                        <input type="text" name="alamat" class="form-control" required>
+                    </div>
+                </div>
+
+                <div class="row form-group">
+                    <label class="col-sm-4 control-label">Deskripsi </label>
+                    <div class="col-sm-8">
+                    <textarea class="form-control"name="deskripsi" type="text" ></textarea>
+                    </div>
+                </div>
+
+                <div class="row form-group">
+                    <label class="col-sm-4 control-label">Logo</label>
+                    <div class="col-sm-8">        
+                        <input type="file" name="logo" class="form-control" id="inputGroupFile01">
+                    </div>
                 </div>
                 <div class="modal-footer">
                   <button type="submit" class="btn btn-primary">Tambah Perusahaan</button>
@@ -116,8 +158,6 @@
             <form action="{{route('perusahaan.update', $perusahaan->id_perusahaan)}}" class="form-horizontal tasi-form" method="post" enctype="multipart/form-data">
                 @csrf
                 @method('PATCH')
-                
-
                 <div class="row form-group">
                     <label class="col-sm-4 control-label">Nama Perusahaan</label>
                     <div class="col-sm-8">        
@@ -149,7 +189,7 @@
                 <div class="row form-group">
                     <label class="col-sm-4 control-label">Deskripsi </label>
                     <div class="col-sm-8">
-                    <input class="form-control"name="deskripsi" type="text" value="{{$perusahaan->deskripsi}}"></input></br>
+                    <textarea class="form-control"name="deskripsi" type="text">{{$perusahaan->deskripsi}}</textarea>
                     </div>
                 </div>
 
@@ -163,6 +203,69 @@
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
                     <button type="submit" class="btn btn-primary">Confirm</button>
+                </div>             
+            </form>
+            </div>        
+        </div>
+    </div>
+</div>
+@endforeach
+
+@foreach ($perusahaans as $perusahaan)
+<!-- Modal Ubah Data  -->
+<div id="detail{{$perusahaan->id_perusahaan}}" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+        <!-- konten modal-->
+        <div class="modal-content">
+            <!-- heading modal -->
+            <div class="modal-header">
+              <img  align:center; src="{{URL::to('/')}}/logo/{{$perusahaan->logo}}" class="fa-image" width="100px" href="URL::to('/')}}/logo/{{$perusahaan->logo}}" >
+            </div>
+            <!-- body modal -->
+            <div class="modal-body">
+            <form action="{{route('perusahaan.update', $perusahaan->id_perusahaan)}}" class="form-horizontal tasi-form" method="post" enctype="multipart/form-data">                
+                <div class="row form-group">
+                    <label class="col-sm-4 control-label">ID Perusahaan</label>
+                    <div class="col-sm-8">        
+                        <input type="text" name="nama" class="form-control" value="{{ $perusahaan->id_perusahaan}}" readonly>
+                    </div>
+                </div>
+                <div class="row form-group">
+                    <label class="col-sm-4 control-label">Nama Perusahaan</label>
+                    <div class="col-sm-8">        
+                        <input type="text" name="nama" class="form-control" value="{{ $perusahaan->nama}}" readonly>
+                    </div>
+                </div>
+
+                <div class="row form-group">
+                    <label class="col-sm-4 control-label">Email</label>
+                    <div class="col-sm-8">
+                        <input type="text" name="email" class="form-control" value="{{ $perusahaan->email }}" readonly>
+                    </div>
+                </div>
+
+                <div class="row form-group">
+                    <label class="col-sm-4 control-label">Link Website</label>
+                    <div class="col-sm-8">
+                        <input type="text" name="website" class="form-control" value="{{ $perusahaan->website }}" readonly>
+                    </div>
+                </div>
+
+                <div class="row form-group">
+                    <label class="col-sm-4 control-label">Alamat </label>
+                    <div class="col-sm-8">
+                        <input type="text" name="alamat" class="form-control" value="{{ $perusahaan->alamat }}" readonly>
+                    </div>
+                </div>
+
+                <div class="row form-group">
+                    <label class="col-sm-4 control-label">Deskripsi </label>
+                    <div class="col-sm-8">
+                    <textarea class="form-control"name="deskripsi" readonly>{{$perusahaan->deskripsi}}</textarea>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
                 </div>             
             </form>
             </div>        
