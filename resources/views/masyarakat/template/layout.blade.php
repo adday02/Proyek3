@@ -6,6 +6,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="../assets/img/favicon.png" rel="icon">
     <title>@yield('title')</title>
     <!-- Datatables -->
     <link href="../vendors/datatables.net-bs/css/dataTables.bootstrap.min.css" rel="stylesheet">
@@ -100,7 +101,7 @@
                   <ul class="dropdown-menu dropdown-usermenu pull-right">
                     <li><a href="javascript:;"><i class="fa fa-user pull-right"></i> Profile</a></li>
                     <li><a href="javascript:;"><i class="fa fa-edit pull-right"></i> Ubah Password</a></li>
-                    <li><a href="login.html"><i class="fa fa-sign-out pull-right"></i> Log Out</a></li>
+                    <li><a href="{{URL('/keluar')}}"><i class="fa fa-sign-out pull-right"></i> Log Out</a></li>
                   </ul>
                 </li>
               </ul>

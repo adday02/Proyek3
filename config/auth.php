@@ -46,6 +46,39 @@ return [
             'provider' => 'users',
             'hash' => false,
         ],
+
+        'admin' => [
+            'driver' => 'session',
+            'provider' => 'admin',
+        ],
+
+        'apiadmin' => [
+            'driver' => 'token',
+            'provider' => 'admin',
+            'hash' => false,
+        ],
+
+        'perusahaan' => [
+            'driver' => 'session',
+            'provider' => 'perusahaan',
+        ],
+
+        'apiperusahaan' => [
+            'driver' => 'token',
+            'provider' => 'perusahaan',
+            'hash' => false,
+        ],
+
+        'masyarakat' => [
+            'driver' => 'session',
+            'provider' => 'masyarakat',
+        ],
+
+        'apimasyarakat' => [
+            'driver' => 'token',
+            'provider' => 'masyarakat',
+            'hash' => false,
+        ],
     ],
 
     /*
@@ -69,6 +102,21 @@ return [
         'users' => [
             'driver' => 'eloquent',
             'model' => App\Models\User::class,
+        ],
+
+        'admin' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\Login_admin::class,
+        ],
+
+        'perusahaan' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\Login_perusahaan::class,
+        ],
+
+        'masyarakat' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\Login_masyarakat::class,
         ],
 
         // 'users' => [
