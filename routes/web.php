@@ -16,33 +16,36 @@ use App\Http\Controllers\login;
 */
 
 
-Route::prefix('admin')->group(function () {
-    Route::get('dashboard', function () {
-        return view('admin/dashboard');
-    })->middleware('auth:admin');
-    Route::resource('perusahaan',Admin_perusahaanController::class)->middleware('auth:admin');
-    Route::get('masyarakat', function () {
-        return view('admin/masyarakat');
-    })->middleware('auth:admin');
-    
-    Route::get('lowongan', function () {
-        return view('admin/lowongan');
-    })->middleware('auth:admin');
-    
-    Route::get('lamaran', function () {
-        return view('admin/lamaran');
-    })->middleware('auth:admin');
-    
-    Route::get('pelatihan', function () {
-        return view('admin/pelatihan');
-    })->middleware('auth:admin');
-    
-    Route::get('pengajuan', function () {
-        return view('admin/pengajuan');
-    })->middleware('auth:admin');
+Route::group(['prefix'=> 'admin',  'middleware'=> 'auth:admin'], function()
+{
+        Route::get('dashboard', function () {
+            return view('admin/dashboard');
+        });
+        Route::resource('perusahaan',Admin_perusahaanController::class);
+        Route::get('masyarakat', function () {
+            return view('admin/masyarakat');
+        });
+        
+        Route::get('lowongan', function () {
+            return view('admin/lowongan');
+        });
+        
+        Route::get('lamaran', function () {
+            return view('admin/lamaran');
+        });
+        
+        Route::get('pelatihan', function () {
+            return view('admin/pelatihan');
+        });
+        
+        Route::get('pengajuan', function () {
+            return view('admin/pengajuan');
+        });
+
 });
 
-Route::prefix('perusahaan')->group(function () {
+Route::group(['prefix'=> 'perusahaan',  'middleware'=> 'auth:perusahaan'], function()
+{
     Route::get('dashboard', function () {
         return view('perusahaan/dashboard');
     })->middleware('auth:perusahaan');
@@ -56,7 +59,8 @@ Route::prefix('perusahaan')->group(function () {
     
 });
 
-Route::prefix('masyarakat')->group(function () {
+Route::group(['prefix'=> 'masyarakat',  'middleware'=> 'auth:masyarakat'], function()
+{
     Route::get('homeuser', function () {
         return view('masyarakat/homeuser');
     })->middleware('auth:masyarakat');
@@ -82,7 +86,7 @@ Route::get('login', function () {
 
 Route::get('/', function () {
     return view('utama');
-})->middleware('guest');;
+});
 
 Route::get('/pertamina', function () {
     return view('detailLoker');
