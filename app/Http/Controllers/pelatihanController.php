@@ -5,8 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Pelatihan;
 
-
-class Admin_pelatihanController extends Controller
+class pelatihanController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,7 +15,7 @@ class Admin_pelatihanController extends Controller
     public function index()
     {
         $pelatihans = Pelatihan::all();
-        return view('admin.pelatihan',compact('pelatihans'))->with('i');
+        return view('admin/pelatihan',compact('pelatihans'))->with('i');
     }
 
     /**
@@ -46,7 +45,7 @@ class Admin_pelatihanController extends Controller
            
         );
         Pelatihan::create($data);
-        return redirect('admin.pelatihan')->with('success','Pelatihan berhasil ditambah');
+        return redirect('admin/pelatihan')->with('success','Pelatihan berhasil ditambah');
     }
 
     /**
@@ -88,7 +87,7 @@ class Admin_pelatihanController extends Controller
             
         );
     Pelatihan::whereid_pelatihan($id)->update($data);
-    return redirect('admin.pelatihan');
+    return redirect('admin/pelatihan');
     }
 
     /**
@@ -102,9 +101,9 @@ class Admin_pelatihanController extends Controller
         try{
             $datas = Pelatihan::findOrfail($id);
             $datas->delete();
-            return redirect('admin.pelatihan')->with('success','Pelatihan Berhasil Dihapus');
+            return redirect('admin/pelatihan')->with('success','Pelatihan Berhasil Dihapus');
         }catch(\Throwable $th){
-            return redirect('admin.pelatihan')->withErrors('Data gagal dihapus. Harap hapus data yang terkait');
+            return redirect('admin/pelatihan')->withErrors('Data gagal dihapus. Harap hapus data yang terkait');
         }
     }
 }

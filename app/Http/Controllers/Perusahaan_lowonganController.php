@@ -3,10 +3,10 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Pelatihan;
+use App\Models\Lowongan;
+use App\Models\Perusahaan;
 
-
-class Admin_pelatihanController extends Controller
+class Perusahaan_lowonganController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,8 +15,9 @@ class Admin_pelatihanController extends Controller
      */
     public function index()
     {
-        $pelatihans = Pelatihan::all();
-        return view('admin.pelatihan',compact('pelatihans'))->with('i');
+        $lowongans = Lowongan::all();
+        $perusahaans = Perusahaan::all();
+        return view('perusahaan/lowongan',compact('lowongans', 'perusahaans'))->with('i');
     }
 
     /**
@@ -38,15 +39,18 @@ class Admin_pelatihanController extends Controller
     public function store(Request $request)
     {
         $data = array(
-            'id_pelatihan'=>$request->id_pelatihan,
-            'bidang_kejuruan'=>$request->bidang_kejuruan,
-            'deskripsi'=>$request->deskripsi,
-            'persyaratan'=>$request->persyaratan,
-            'kuota'=>$request->kuota,
+           
+            'id_lowongan'=>$request->id_lowongan,
+            'id_perusahaan'=>$request->id_perusahaan,
+            'jenis_kerja'=>$request->jenis_kerja,
+            'deskripsi_kerja'=>$request->deskripsi_kerja,
+            'lokasi_kerja'=>$request->lokasi_kerja,
+            'gaji'=>$request->gaji,
+            'kontak'=>$request->kontak,
            
         );
-        Pelatihan::create($data);
-        return redirect('admin.pelatihan')->with('success','Pelatihan berhasil ditambah');
+        Lowongan::create($data);
+        return redirect('perusahaan/lowongan')->with('success','Lowongan berhasil ditambah');
     }
 
     /**
@@ -81,14 +85,17 @@ class Admin_pelatihanController extends Controller
     public function update(Request $request, $id)
     {
         $data = array(
-            'bidang_kejuruan'=>$request->bidang_kejuruan,
-            'deskripsi'=>$request->deskripsi,
-            'persyaratan'=>$request->persyaratan,
-            'kuota'=>$request->kuota,
+            
+            'id_perusahaan'=>$request->id_perusahaan,
+            'jenis_kerja'=>$request->jenis_kerja,
+            'deskripsi_kerja'=>$request->deskripsi_kerja,
+            'lokasi_kerja'=>$request->lokasi_kerja,
+            'gaji'=>$request->gaji,
+            'kontak'=>$request->kontak,
             
         );
-    Pelatihan::whereid_pelatihan($id)->update($data);
-    return redirect('admin.pelatihan');
+    Lowongan::whereid_lowongan($id)->update($data);
+    return redirect('perusahaan/lowongan');
     }
 
     /**
@@ -100,11 +107,11 @@ class Admin_pelatihanController extends Controller
     public function destroy($id)
     {
         try{
-            $datas = Pelatihan::findOrfail($id);
+            $datas = Lowongan::findOrfail($id);
             $datas->delete();
-            return redirect('admin.pelatihan')->with('success','Pelatihan Berhasil Dihapus');
+            return redirect('perusahaan/lowongan')->with('success','Lowongan Berhasil Dihapus');
         }catch(\Throwable $th){
-            return redirect('admin.pelatihan')->withErrors('Data gagal dihapus. Harap hapus data yang terkait');
+            return redirect('perusahaan/lowongan')->withErrors('Data gagal dihapus. Harap hapus data yang terkait');
         }
     }
 }

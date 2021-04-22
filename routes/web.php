@@ -2,6 +2,9 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin_perusahaanController;
+use App\Http\Controllers\pelatihanController;
+use App\Http\Controllers\Perusahaan_lowonganController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -19,7 +22,10 @@ Route::prefix('admin')->group(function () {
     Route::get('dashboard', function () {
         return view('admin/dashboard');
     });
+    
     Route::resource('perusahaan',Admin_perusahaanController::class);
+  
+
     Route::get('masyarakat', function () {
         return view('admin/masyarakat');
     });
@@ -32,22 +38,21 @@ Route::prefix('admin')->group(function () {
         return view('admin/lamaran');
     });
     
-    Route::get('pelatihan', function () {
-        return view('admin/pelatihan');
-    });
+    
     
     Route::get('pengajuan', function () {
         return view('admin/pengajuan');
     });
+
+    Route::resource('pelatihan',pelatihanController::class);
 });
 
 Route::prefix('perusahaan')->group(function () {
     Route::get('dashboard', function () {
         return view('perusahaan/dashboard');
     });
-    Route::get('lowongan', function () {
-        return view('perusahaan/lowongan');
-    });
+
+    Route::resource('lowongan',Perusahaan_lowonganController::class);
     
     Route::get('lamaran', function () {
         return view('perusahaan/lamaran');
