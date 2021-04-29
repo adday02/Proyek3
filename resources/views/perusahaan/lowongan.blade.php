@@ -141,17 +141,9 @@
                 @csrf
                 @method('PATCH')
 
-                 <div class="form-group row">
- 				            <label for="id_perusahaan" class="col-sm-2 col-form-label">Nama Perusahaan</label>
-                	<div class="col-sm-5">
-                    	<select name="id_perusahaan" id="id_perusahaan" class="form-control">
-                			<option value="">== Pilih Perusahaan ==</option>
-                			@foreach ($perusahaans as $perusahaan)
-                    		<option value="{{ $perusahaan->id_perusahaan }}">{{ $perusahaan->id_perusahaan }}-{{ $perusahaan->nama }}</option>
-                			@endforeach
-                 		</select>
-                 	</div>
-                   </div>
+                <div class="col-sm-5">
+                <input type="hidden" name="id_perusahaan" class="form-control" id="id_perusahaan" required="" value="{{auth()->user()->id_perusahaan}}" readonly>
+            </div>
                    
                    
                   
