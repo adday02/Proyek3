@@ -2,9 +2,9 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin_perusahaanController;
-use App\Http\Controllers\pelatihanController;
+use App\Http\Controllers\Admin_pelatihanController;
+use App\Http\Controllers\LoginController;
 use App\Http\Controllers\Perusahaan_lowonganController;
-
 
 /*
 |--------------------------------------------------------------------------
@@ -16,41 +16,43 @@ use App\Http\Controllers\Perusahaan_lowonganController;
 | contains the "web" middleware group. Now create something great!
 |
 */
-
-
-Route::prefix('admin')->group(function () {
-    Route::get('dashboard', function () {
-        return view('admin/dashboard');
-    });
-    
-    Route::resource('perusahaan',Admin_perusahaanController::class);
-  
-
-    Route::get('masyarakat', function () {
-        return view('admin/masyarakat');
-    });
-    
-    Route::get('lowongan', function () {
-        return view('admin/lowongan');
-    });
-    
-    Route::get('lamaran', function () {
-        return view('admin/lamaran');
-    });
-    
-    
-    
-    Route::get('pengajuan', function () {
-        return view('admin/pengajuan');
-    });
-
-    Route::resource('pelatihan',pelatihanController::class);
+Route::get('/', function () {
+    return view('utama');
 });
 
-Route::prefix('perusahaan')->group(function () {
+Route::group(['prefix'=> 'admin',  'middleware'=> 'auth:admin'], function()
+{
+        Route::get('dashboard', function () {
+            return view('admin/dashboard');
+        })->middleware('auth:admin');
+
+        Route::resource('perusahaan',Admin_perusahaanController::class);
+        
+        Route::get('masyarakat', function () {
+            return view('admin/masyarakat');
+        });
+        
+        Route::get('lowongan', function () {
+            return view('admin/lowongan');
+        });
+        
+        Route::get('lamaran', function () {
+            return view('admin/lamaran');
+        });
+        
+        Route::resource('pelatihan',Admin_pelatihanController::class);
+        
+        Route::get('pengajuan', function () {
+            return view('admin/pengajuan');
+        });
+
+});
+
+Route::group(['prefix'=> 'perusahaan',  'middleware'=> 'auth:perusahaan'], function()
+{
     Route::get('dashboard', function () {
         return view('perusahaan/dashboard');
-    });
+    })->middleware('auth:perusahaan');
 
     Route::resource('lowongan',Perusahaan_lowonganController::class);
     
@@ -60,10 +62,12 @@ Route::prefix('perusahaan')->group(function () {
     
 });
 
-Route::prefix('masyarakat')->group(function () {
+Route::group(['prefix'=> 'masyarakat',  'middleware'=> 'auth:masyarakat'], function()
+{
     Route::get('homeuser', function () {
         return view('masyarakat/homeuser');
-    });
+    })->middleware('auth:masyarakat');
+
     Route::get('lamaran', function () {
         return view('masyarakat/lamaran');
     });
@@ -80,14 +84,17 @@ Route::prefix('masyarakat')->group(function () {
     });
 });
 
+
 Route::get('login', function () {
     return view('login');
-});
+})->middleware('guest');
+Route::post('/kirimdata',[LoginController::class,'masuk'])->name('login');
+Route::get('/keluar',[LoginController::class,'keluar']);
 
-Route::get('/', function () {
-    return view('utama');
-});
+
+
 
 Route::get('/pertamina', function () {
     return view('detailLoker');
 });
+

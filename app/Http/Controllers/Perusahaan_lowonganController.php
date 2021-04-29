@@ -16,7 +16,7 @@ class Perusahaan_lowonganController extends Controller
     public function index()
     {
         $lowongans = Lowongan::all();
-        $perusahaans = Perusahaan::all();
+      
         return view('perusahaan/lowongan',compact('lowongans', 'perusahaans'))->with('i');
     }
 
