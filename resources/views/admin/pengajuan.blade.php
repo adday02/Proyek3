@@ -15,7 +15,6 @@
                 <div class="x_panel">
                   <div class="x_title">
                     <h2>Pengajuan Pelatihan</h2>
-                    <div style="float:right;"><button type="danger" class="btn btn-success btn-sm" data-toggle="modal" data-target="#" >Tambah  Pengajuan Pelatihan</button></div> 
                     <div class="clearfix"></div>
                   </div>
                   <div class="x_content">
@@ -26,7 +25,7 @@
                           <th>Nama Masyarakat</th>
                           <th>Bidang Kejuruan</th>
                           <th>Status</th>
-                          <th width="25%">Aksi</th>
+                          <th width="20%">Aksi</th>
                         </tr>
                       </thead>
                       <tbody>
@@ -36,7 +35,6 @@
                             <td>Menjahit</td>
                             <td>Diterima</td>
                             <td>
-                                <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#" >Edit</button>
                                 <button type="danger" class="btn btn-warning btn-sm" data-toggle="modal" data-target="#" >Detail</button>
                                 <button type="danger" class="btn btn-dark btn-sm" data-toggle="modal" data-target="#" >Unduh</button>
                                 <div style="float:right;">

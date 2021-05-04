@@ -1,7 +1,14 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Admin_dashboardController;
 use App\Http\Controllers\Admin_perusahaanController;
+use App\Http\Controllers\Admin_masyarakatController;
+use App\Http\Controllers\Admin_lowonganController;
+use App\Http\Controllers\Admin_lamaranController;
+use App\Http\Controllers\Admin_pelatihanController;
+use App\Http\Controllers\Admin_PenPelatihanController;
+use App\Http\Controllers\UtamaController;
 use App\Http\Controllers\login;
 
 /*
@@ -18,44 +25,27 @@ use App\Http\Controllers\login;
 
 Route::group(['prefix'=> 'admin',  'middleware'=> 'auth:admin'], function()
 {
-        Route::get('dashboard', function () {
-            return view('admin/dashboard');
-        });
+        Route::resource('dashboard',Admin_dashboardController::class);
         Route::resource('perusahaan',Admin_perusahaanController::class);
-        Route::get('masyarakat', function () {
-            return view('admin/masyarakat');
-        });
-        
-        Route::get('lowongan', function () {
-            return view('admin/lowongan');
-        });
-        
-        Route::get('lamaran', function () {
-            return view('admin/lamaran');
-        });
-        
-        Route::get('pelatihan', function () {
-            return view('admin/pelatihan');
-        });
-        
-        Route::get('pengajuan', function () {
-            return view('admin/pengajuan');
-        });
-
+        Route::resource('masyarakat',Admin_masyarakatController::class);
+        Route::resource('lowongan',Admin_lowonganController::class);
+        Route::resource('lamaran',Admin_lamaranController::class);
+        Route::resource('pelatihan',Admin_pelatihanController::class);
+        Route::resource('pengajuan',Admin_penPelatihanController::class);
 });
 
 Route::group(['prefix'=> 'perusahaan',  'middleware'=> 'auth:perusahaan'], function()
 {
     Route::get('dashboard', function () {
         return view('perusahaan/dashboard');
-    })->middleware('auth:perusahaan');
+    });
     Route::get('lowongan', function () {
         return view('perusahaan/lowongan');
-    })->middleware('auth:perusahaan');
+    });
     
     Route::get('lamaran', function () {
         return view('perusahaan/lamaran');
-    })->middleware('auth:perusahaan');
+    });
     
 });
 
@@ -63,30 +53,28 @@ Route::group(['prefix'=> 'masyarakat',  'middleware'=> 'auth:masyarakat'], funct
 {
     Route::get('homeuser', function () {
         return view('masyarakat/homeuser');
-    })->middleware('auth:masyarakat');
+    });
     Route::get('lamaran', function () {
         return view('masyarakat/lamaran');
-    })->middleware('auth:masyarakat');
+    });
     
     Route::get('lowongan', function () {
         return view('masyarakat/lowongan');
-    })->middleware('auth:masyarakat');
+    });
 
     Route::get('pelatihan', function () {
         return view('masyarakat/pelatihan');
-    })->middleware('auth:masyarakat');
+    });
     Route::get('daftarpelatihan', function () {
         return view('masyarakat/daftarpelatihan');
-    })->middleware('auth:masyarakat');
+    });
 });
 
 Route::get('login', function () {
     return view('login');
 })->middleware('guest');
 
-Route::get('/', function () {
-    return view('utama');
-});
+Route::resource('/',UtamaController::class);
 
 Route::get('/pertamina', function () {
     return view('detailLoker');
