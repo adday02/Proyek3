@@ -16,7 +16,7 @@
                   <div class="x_title">
                         <!-- Button trigger modal -->
                     <h2>Lowongan Pekerjaan</h2>
-                    <div style="float:right;"><button type="danger" class="btn btn-success btn-sm" data-toggle="modal" data-target="#addModal" >Tambah Lowongan Pekerjaan</button></div> 
+                    <div style="float:right;"><button type="danger" class="btn btn-success btn-sm" data-toggle="modal" data-target="#tambah" >Tambah Lowongan Pekerjaan</button></div> 
                     <div class="clearfix"></div>
                   </div>
                   <div class="x_content">
@@ -34,15 +34,30 @@
                         </tr>
                       </thead>
                       <tbody>
+                      @foreach ($lowongans as $lowongan)
                         <tr>
-                          <td></td>
-                          <td></td> 
-                          <td></td> 
-                          <td></td> 
-                          <td></td> 
-                          <td></td>     
-                          <td></td> 
-                          <td></td> 
+
+                          <td>{{++$i}}</td>
+                         
+                            <td>{{$lowongan->id_perusahaan}}</td>
+                            <td>{{$lowongan->jenis_kerja}}</td>
+                            <td>{{$lowongan->deskripsi_kerja}}</td>
+                            <td>{{$lowongan->lokasi_kerja}}</td>
+                            <td>{{$lowongan->gaji}}</td>
+                            <td>{{$lowongan->kontak}}</td>
+                            <td>
+                                <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#edit{{$lowongan->id_lowongan}}" >Edit</button>
+                                <button type="danger" class="btn btn-warning btn-sm" data-toggle="modal" data-target="#detail-data{{$lowongan->id_lowongan}}" >Detail</button>
+                                <div style="float:right;">
+                                <form action="{{route('lowongan.destroy', $lowongan->id_lowongan)}}" method="POST">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit" class="btn btn-danger btn-sm">Hapus</i></a>
+                                </form>
+                                </div>
+                            </td>
+                        </tr>
+                        @endforeach
                       </tbody>
                     </table>
                   </div>
@@ -51,5 +66,226 @@
             </div>
           </div>
         </div>
+        <!-- /page content -->
 
+        <!-- Modal tambah -->
+<div id="tambah" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+        <!-- konten modal-->
+        <div class="modal-content">
+            <!-- heading modal -->
+            <div class="modal-header">
+                <h5 class="modal-title" id="mediumModalLabel">Tambah Lowongan</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <!-- body modal -->
+            
+            <div class="modal-body">
+            
+              @if(count($errors) > 0)
+          <div class="alert alert-danger">
+            @foreach ($errors->all() as $error)
+              {{ $error }} <br/>
+            @endforeach
+          </div>
+        @endif
+              <form action="{{route('lowongan.store')}}" class="form-horizontal tasi-form" method="post" enctype="multipart/form-data">
+                @csrf
+
+                <div class="form-group row">
+ 				            <label for="id_perusahaan" class="col-sm-2 col-form-label">Nama Perusahaan</label>
+                	<div class="col-sm-5">
+                    	<select name="id_perusahaan" id="id_perusahaan" class="form-control">
+                			<option value="">== Pilih Perusahaan ==</option>
+                			@foreach ($perusahaans as $perusahaan)
+                    		<option value="{{ $perusahaan->id_perusahaan }}">{{ $perusahaan->id_perusahaan }}-{{ $perusahaan->nama }}</option>
+                			@endforeach
+                 		</select>
+                 	</div>
+                   </div>
+
+                <input class="form-control" name="jenis_kerja"type="text" placeholder="Jenis Pekerjaan"></br>
+                <textarea class="form-control"name="deskripsi_kerja" type="text" placeholder="Deskripsi Pekerjaan"></textarea></br>
+                <input class="form-control" name="lokasi_kerja"type="text" placeholder="Lokasi kerja"></br>
+                <input class="form-control" name="gaji"type="text" placeholder="Gaji"></br>
+                <input class="form-control" name="kontak"type="text" placeholder="Kontak"></br>
+                
+                <div class="modal-footer">
+                  <button type="submit" class="btn btn-primary">Tambah Lowongan</button>
+                </div>
+              </form>
+            </div>        
+        </div>
+    </div>
+</div>
+<!-- /Modal tambah -->
+
+@foreach ($lowongans as $lowongan)
+<!-- Modal Ubah Data  -->
+<div id="edit{{$lowongan->id_lowongan}}" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+        <!-- konten modal-->
+        <div class="modal-content">
+            <!-- heading modal -->
+            <div class="modal-header">
+                <h5 class="modal-title" id="mediumModalLabel">Edit Lowongan</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <!-- body modal -->
+            <div class="modal-body">
+            <form action="{{route('lowongan.update', $lowongan->id_lowongan)}}" class="form-horizontal tasi-form" method="post" enctype="multipart/form-data">
+                @csrf
+                @method('PATCH')
+
+                <div class="col-sm-5">
+                <input type="hidden" name="id_perusahaan" class="form-control" id="id_perusahaan" required="" value="{{auth()->user()->id_perusahaan}}" readonly>
+            </div>
+                   
+                   
+                  
+
+            <div class="row form-group">
+                    <label class="col-sm-4 control-label">Jenis Pekerjaan</label>
+                    <div class="col-sm-8">        
+                        <input type="text" name="jenis_kerja" class="form-control" value="{{ $lowongan->jenis_kerja}}" required>
+                    </div>
+                    @error('jenis_pekerjaan')
+            <div class="invalid-feedback">{{ $message }}</div>
+                    @enderror
+                </div>
+
+                <div class="row form-group">
+                    <label class="col-sm-4 control-label">Deskripsi Pekerjaan</label>
+                    <div class="col-sm-8">
+                    <input class="form-control"name="deskripsi_kerja" type="text" value="{{$lowongan->deskripsi_kerja}}"></input></br>
+                    </div>
+                    @error('deskripsi_kerja')
+            <div class="invalid-feedback">{{ $message }}</div>
+                    @enderror
+                </div>
+               
+
+                <div class="row form-group">
+                    <label class="col-sm-4 control-label">Lokasi Kerja</label>
+                    <div class="col-sm-8">
+                        <input type="text" name="lokasi_kerja" class="form-control" value="{{ $lowongan->lokasi_kerja }}" required>
+                    </div>
+                    @error('lokasi_kerja')
+            <div class="invalid-feedback">{{ $message }}</div>
+                    @enderror
+                </div>
+
+                <div class="row form-group">
+                    <label class="col-sm-4 control-label">Gaji</label>
+                    <div class="col-sm-8">
+                        <input type="text" name="gaji" class="form-control" value="{{ $lowongan->gaji }}" required>
+                    </div>
+                    @error('gaji')
+            <div class="invalid-feedback">{{ $message }}</div>
+                    @enderror
+                </div>
+
+                <div class="row form-group">
+                    <label class="col-sm-4 control-label">Kontak</label>
+                    <div class="col-sm-8">
+                        <input type="text" name="kontak" class="form-control" value="{{ $lowongan->kontak }}" required>
+                    </div>
+                    @error('kontak')
+            <div class="invalid-feedback">{{ $message }}</div>
+                    @enderror
+                </div>
+
+                
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                    <button type="submit" class="btn btn-primary">Confirm</button>
+                </div>             
+            </form>
+            </div>        
+        </div>
+    </div>
+</div>
+<!-- Modal Edit -->
+
+
+foreach ($lowongans as $lowongan)
+             <!--modal Detail-->
+    <div class="modal fade" id="detail-data{{$lowongan->id_lowongan}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+      aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Detail Pelatihan</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+          <div class="card">
+          <div class="row form-group">
+                    <label class="col-sm-4 control-label">ID Lowongan</label>
+                    <div class="col-sm-8">        
+                        <input type="text" name="id_lowongan" class="form-control" value="{{ $lowongan->id_lowongan}}" readonly>
+                    </div>
+                </div>
+
+                 <div class="row form-group">
+                    <label class="col-sm-4 control-label">Nama Perusahaan</label>
+                    <div class="col-sm-8">        
+                        <input type="text" name="id_perusahaan" class="form-control" value="{{ $lowongan->id_perusahaan}}" readonly>
+                    </div>
+                </div>
+                <div class="row form-group">
+                    <label class="col-sm-4 control-label">Jenis Pekerjaan</label>
+                    <div class="col-sm-8">        
+                        <input type="text" name="jenis_kerja" class="form-control" value="{{ $lowongan->jenis_kerja}}" readonly>
+                    </div>
+                </div>
+
+                <div class="row form-group">
+                    <label class="col-sm-4 control-label">Deskripsi Pekerjaan</label>
+                    <div class="col-sm-8">
+                    <textarea class="form-control"name="deskripsi_kerja" readonly>{{$lowongan->deskripsi_kerja}}</textarea>
+                    </div>
+                </div>
+
+                <div class="row form-group">
+                    <label class="col-sm-4 control-label">Lokasi Kerja</label>
+                    <div class="col-sm-8">
+                        <input type="text" name="lokasi_kerja" class="form-control" value="{{ $lowongan->lokasi_kerja }}" readonly>
+                    </div>
+                </div>
+
+                <div class="row form-group">
+                    <label class="col-sm-4 control-label">Gaji</label>
+                    <div class="col-sm-8">
+                        <input type="text" name="gaji" class="form-control" value="{{ $lowongan->gaji }}" readonly>
+                    </div>
+                </div>
+
+                <div class="row form-group">
+                    <label class="col-sm-4 control-label">Kontak</label>
+                    <div class="col-sm-8">
+                        <input type="text" name="kontak" class="form-control" value="{{ $lowongan->kontak }}" readonly>
+                    </div>
+                </div>
+              
+               
+            <br>
+              
+          </div>
+        </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+          </div>
+
+        </div>
+      </div>
+    </div>
+@endforeach
 @endsection
