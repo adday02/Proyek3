@@ -13,7 +13,7 @@ class CreatePendaftarPelatihansTable extends Migration
      */
     public function up()
     {
-        Schema::create('pendaftar__pelatihans', function (Blueprint $table) {
+        Schema::create('pendaftar_pelatihans', function (Blueprint $table) {
             $table->Increments('id_penPelatihan');
             $table->string('nik')->index();
             $table->foreign('nik')->references('nik')->on('masyarakats');

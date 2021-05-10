@@ -7,27 +7,27 @@
           <div class="row tile_count">
             <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
               <span class="count_top"><i class="fa fa-user"></i> Masyarakat</span>
-              <div class="count">2500</div>
+              <div class="count">{{$masyarakats}}</div>
             </div>
             <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
               <span class="count_top"><i class="fa fa-user"></i> Perusahaan</span>
-              <div class="count">2500</div>
+              <div class="count">{{$perusahaans}}</div>
             </div>
             <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
               <span class="count_top"><i class="fa fa-user"></i> Lowoganan Pekerjaan</span>
-              <div class="count">2500</div>
+              <div class="count">{{$lowongans}}</div>
             </div>
             <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
               <span class="count_top"><i class="fa fa-user"></i> Lamaran Pekerjaan</span>
-              <div class="count">2500</div>
+              <div class="count">{{$lamarans}}</div>
             </div>
             <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
               <span class="count_top"><i class="fa fa-user"></i> Jenis Pelatihan</span>
-              <div class="count">2500</div>
+              <div class="count">{{$pelatihans}}</div>
             </div>
             <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
               <span class="count_top"><i class="fa fa-user"></i> Pengajuan Pelatihan</span>
-              <div class="count">2500</div>
+              <div class="count">{{$pen_pelatihans}}</div>
             </div>
           </div>
           <!-- /top tiles -->

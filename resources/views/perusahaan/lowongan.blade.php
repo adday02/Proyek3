@@ -38,11 +38,8 @@
                       <tbody>
                       @foreach ($lowongans as $lowongan)
                         <tr>
-
-                          <td>{{++$i}}</td>
-                         
-                            <td>{{$lowongan->perusahaan->nama}}</td>
-                            <td>{{$lowongan->nama}}</td>
+                          <td>{{++$i}}</td>s
+                            <td>{{$lowongan->id_perusahaan}}</td>
                             <td>{{$lowongan->jenis_kerja}}</td>
                             <td>{{$lowongan->deskripsi_kerja}}</td>
                             <td>{{$lowongan->lokasi_kerja}}</td>
@@ -97,31 +94,12 @@
         @endif
               <form action="{{route('lowongan.store')}}" class="form-horizontal tasi-form" method="post" enctype="multipart/form-data">
                 @csrf
-
-                <div class="col-sm-5">
-                <input type="hidden" name="id_perusahaan" class="form-control" id="id_perusahaan" required="" value="{{auth()->user()->id_perusahaan}}" readonly>
-            </div>
-
-                <input class="form-control" name="nama"type="text" placeholder="Nama Pekerjaan"></br>
-
-              
-                <select class="form-control" name="jenis_kerja" required>
-                        <option disabled="" selected="" value="">Pilih Jenis Pekerjaan</option>
-                        <option>Magang</option>
-                        <option>Kontrak</option>
-                        <option>Paruh Waktu</option>
-                        <option>Penuh Waktu</option>
-                        <option>Temporer</option>
-                       
-                      </select>
-                      </br>
-                <textarea class="form-control"name="deskripsi_kerja" type="text" placeholder="Deskripsi Pekerjaan"></textarea></br>
+                <input class="form-control" name="jenis_kerja"type="text" placeholder="Jenis Pekerjaan"></br>
                 <input class="form-control" name="lokasi_kerja"type="text" placeholder="Lokasi kerja"></br>
                 <input class="form-control" name="gaji"type="text" placeholder="Gaji"></br>
                 <input class="form-control" name="kontak"type="text" placeholder="Kontak"></br>
-                <div class="col-sm-5">
-                
-                
+                <textarea class="form-control"name="deskripsi_kerja" type="text" placeholder="Deskripsi Pekerjaan"></textarea></br>
+                <input hidden="" name="id_perusahaan" value="{{auth()->user()->id_perusahaan}}">
                 <div class="modal-footer">
                   <button type="submit" class="btn btn-primary">Tambah Lowongan</button>
                 </div>
@@ -150,51 +128,15 @@
             <form action="{{route('lowongan.update', $lowongan->id_lowongan)}}" class="form-horizontal tasi-form" method="post" enctype="multipart/form-data">
                 @csrf
                 @method('PATCH')
-
-                <div class="col-sm-5">
-                <input type="hidden" name="id_perusahaan" class="form-control" id="id_perusahaan" required="" value="{{auth()->user()->id_perusahaan}}" readonly>
-            </div>
-                   
-                   
             <div class="row form-group">
-                    <label class="col-sm-4 control-label">Nama Pekerjaan</label>
-                    <div class="col-sm-8">        
-                        <input type="text" name="nama" class="form-control" value="{{ $lowongan->nama}}" required>
-                    </div>
-                    @error('nama')
+              <label class="col-sm-4 control-label">Jenis Pekerjaan</label>
+              <div class="col-sm-8">        
+                  <input type="text" name="jenis_kerja" class="form-control" value="{{ $lowongan->jenis_kerja}}" required>
+              </div>
+              @error('jenis_pekerjaan')
             <div class="invalid-feedback">{{ $message }}</div>
                     @enderror
                 </div>
-
-            <div class="row form-group">
-                    <label class="col-sm-4 control-label">Jenis Pekerjaan</label>
-                    <div class="col-sm-8">        
-                        <input type="text" name="jenis_kerja" class="form-control"  required>
-                        <select class="form-control" name="jenis_kerja" required>
-                        <option disabled="" selected="" value="">Pilih Jenis Pekerjaan</option>
-                        <option>Magang</option>
-                        <option>Kontrak</option>
-                        <option>Paruh Waktu</option>
-                        <option>Penuh Waktu</option>
-                        <option>Temporer</option>
-                       
-                      </select>
-                    </div>
-                    @error('jenis_kerja')
-            <div class="invalid-feedback">{{ $message }}</div>
-                    @enderror
-                </div>
-
-                <div class="row form-group">
-                    <label class="col-sm-4 control-label">Deskripsi Pekerjaan</label>
-                    <div class="col-sm-8">
-                    <input class="form-control"name="deskripsi_kerja" type="text" value="{{$lowongan->deskripsi_kerja}}"></input></br>
-                    </div>
-                    @error('deskripsi_kerja')
-            <div class="invalid-feedback">{{ $message }}</div>
-                    @enderror
-                </div>
-               
 
                 <div class="row form-group">
                     <label class="col-sm-4 control-label">Lokasi Kerja</label>
@@ -226,7 +168,15 @@
                     @enderror
                 </div>
 
-                
+                <div class="row form-group">
+                    <label class="col-sm-4 control-label">Deskripsi Pekerjaan</label>
+                    <div class="col-sm-8">
+                    <input class="form-control"name="deskripsi_kerja" type="text" value="{{$lowongan->deskripsi_kerja}}"></input></br>
+                    </div>
+                    @error('deskripsi_kerja')
+            <div class="invalid-feedback">{{ $message }}</div>
+                    @enderror
+                </div>
 
                 
 

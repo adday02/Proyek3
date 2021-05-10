@@ -35,7 +35,7 @@
             {{csrf_field()}}
               <h1>Login</h1>
               <div>
-                <input type="text" class="form-control" name="username" placeholder="Username" required="" />
+                <input type="text" class="form-control" name="username" placeholder="NIK" required="" />
               </div>
               <div>
                 <input type="password" class="form-control" name="password" placeholder="Password" required="" />

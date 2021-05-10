@@ -25,22 +25,10 @@ class Perusahaan_lowonganController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
-    {
-        //
-    }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
         $data = array(
-           
-            
             'id_perusahaan'=>$request->id_perusahaan,
             'nama'=>$request->nama,
             'jenis_kerja'=>$request->jenis_kerja,
@@ -48,8 +36,7 @@ class Perusahaan_lowonganController extends Controller
             'lokasi_kerja'=>$request->lokasi_kerja,
             'gaji'=>$request->gaji,
             'kontak'=>$request->kontak,
-            'status'=>'Dalam pengajuan',
-           
+            'status'=>"Dalam Pengajuan"
         );
         Lowongan::create($data);
         return redirect('perusahaan/lowongan')->with('success','Lowongan berhasil ditambah');

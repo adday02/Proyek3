@@ -1,15 +1,18 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Admin_dashboardController;
 use App\Http\Controllers\Admin_perusahaanController;
+use App\Http\Controllers\Admin_masyarakatController;
+use App\Http\Controllers\Admin_lowonganController;
+use App\Http\Controllers\Admin_lamaranController;
 use App\Http\Controllers\Admin_pelatihanController;
+use App\Http\Controllers\Admin_PenPelatihanController;
+use App\Http\Controllers\UtamaController;
+use App\Http\Controllers\login;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\Perusahaan_lowonganController;
-use App\Http\Controllers\Perusahaan_lamaranController;
-use App\Http\Controllers\Perusahaan_dasboardController;
-use App\Http\Controllers\Masyarakat_pendaftarPelatihanController;
-
-/*   
+/*
 |--------------------------------------------------------------------------
 | Web Routes
 |--------------------------------------------------------------------------
@@ -56,12 +59,13 @@ Route::group(['prefix'=> 'admin',  'middleware'=> 'auth:admin'], function()
 
 Route::group(['prefix'=> 'perusahaan',  'middleware'=> 'auth:perusahaan'], function()
 {
-    
-    Route::resource('dashboard',Perusahaan_dasboardController::class);
-    Route::resource('lowongan',Perusahaan_lowonganController::class);
-    Route::resource('lamaran',Perusahaan_lamaranController::class);
-    
-    
+    Route::get('dashboard', function () {
+        return view('perusahaan/dashboard');
+    })->middleware('auth:perusahaan');
+    Route::resource('lowongan',Perusahaan_lowonganController::class);    
+    Route::get('lamaran', function () {
+        return view('perusahaan/lamaran');
+    }); 
 });
 
 Route::group(['prefix'=> 'masyarakat',  'middleware'=> 'auth:masyarakat'], function()
@@ -69,7 +73,6 @@ Route::group(['prefix'=> 'masyarakat',  'middleware'=> 'auth:masyarakat'], funct
     Route::get('homeuser', function () {
         return view('masyarakat/homeuser');
     });
-
     Route::get('lamaran', function () {
         return view('masyarakat/lamaran');
     });
