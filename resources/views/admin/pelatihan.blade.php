@@ -1,5 +1,5 @@
 @extends('admin.template.layout')
-@section('title','List Pelatihan' )
+@section('title','Admin - List Pelatihan' )
 @section('content')
         <!-- page content -->
         <div class="right_col" role="main">
@@ -28,6 +28,7 @@
                           <th>Deskripsi Pelatihan</th>
                           <th>Persyaratan</th>
                           <th>Kuota</th>
+                          <th>Waktu</th>
                           <th width="18.5%">Aksi</th>
                         </tr>
                       </thead>
@@ -38,7 +39,8 @@
                             <td>{{$pelatihan->bidang_kejuruan}}</td>
                             <td>{{$pelatihan->deskripsi}}</td>
                             <td>{{$pelatihan->persyaratan}}</td>
-                            <td>{{$pelatihan->kuota}}</td>
+                            <td>{{$pelatihan->kuota}} Orang</td>
+                            <td>{{$pelatihan->waktu}} Bulan</td>
                             <td>
                                 <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#edit{{$pelatihan->id_pelatihan}}" >Edit</button>
                                 <button type="danger" class="btn btn-warning btn-sm" data-toggle="modal" data-target="#detail-data{{$pelatihan->id_pelatihan}}" >Detail</button>
@@ -92,6 +94,8 @@
                 <textarea class="form-control"name="deskripsi" type="text" placeholder="Deskripsi Pelatihan"></textarea></br>
                 <input class="form-control" name="persyaratan"type="text" placeholder="Persyaratan"></br>
                 <input class="form-control" name="kuota"type="text" placeholder="Kuota"></br>
+                <input class="form-control" name="waktu"type="text" placeholder="Waktu"></br>
+
                 
                 <div class="modal-footer">
                   <button type="submit" class="btn btn-primary">Tambah Pelatihan</button>
@@ -164,6 +168,16 @@
                     @enderror
                 </div>
 
+                <div class="row form-group">
+                    <label class="col-sm-4 control-label">Waktu</label>
+                    <div class="col-sm-8">
+                        <input type="text" name="waktu" class="form-control" value="{{ $pelatihan->waktu }}" required>
+                    </div>
+                    @error('waktu')
+            <div class="invalid-feedback">{{ $message }}</div>
+                    @enderror
+                </div>
+
                 
 
                 <div class="modal-footer">
@@ -224,6 +238,13 @@ foreach ($pelatihans as $pelatihan)
                     <label class="col-sm-4 control-label">Kuota</label>
                     <div class="col-sm-8">
                         <input type="text" name="kuota" class="form-control" value="{{ $pelatihan->kuota }}" readonly>
+                    </div>
+                </div>
+
+                <div class="row form-group">
+                    <label class="col-sm-4 control-label">waktu</label>
+                    <div class="col-sm-8">
+                        <input type="text" name="waktu" class="form-control" value="{{ $pelatihan->waktu }}" readonly>
                     </div>
                 </div>
 

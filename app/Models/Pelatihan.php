@@ -9,6 +9,6 @@ class Pelatihan extends Model
 {
     protected $table='pelatihans';
     protected $primaryKey = 'id_pelatihan';
-    protected $fillable = ['id_pelatihan','bidang_kejuruan','deskripsi','persyaratan','kuota']; //field tabel
+    protected $fillable = ['id_pelatihan','bidang_kejuruan','deskripsi','persyaratan','kuota','waktu']; //field tabel
     public $timestamps = false;
 }

@@ -3,10 +3,11 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Lamaran;
+use App\Models\Masyarakat;
 use App\Models\Lowongan;
-use App\Models\Perusahaan;
 
-class Perusahaan_lowonganController extends Controller
+class Perusahaan_lamaranController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,9 +16,8 @@ class Perusahaan_lowonganController extends Controller
      */
     public function index()
     {
-        $lowongans = Lowongan::all();
-      
-        return view('perusahaan/lowongan',compact('lowongans'))->with('i');
+        $lamarans = Lamaran::all();
+        return view('perusahaan/lamaran',compact('lamarans'))->with('i');
     }
 
     /**
@@ -38,21 +38,7 @@ class Perusahaan_lowonganController extends Controller
      */
     public function store(Request $request)
     {
-        $data = array(
-           
-            
-            'id_perusahaan'=>$request->id_perusahaan,
-            'nama'=>$request->nama,
-            'jenis_kerja'=>$request->jenis_kerja,
-            'deskripsi_kerja'=>$request->deskripsi_kerja,
-            'lokasi_kerja'=>$request->lokasi_kerja,
-            'gaji'=>$request->gaji,
-            'kontak'=>$request->kontak,
-            'status'=>'Dalam pengajuan',
-           
-        );
-        Lowongan::create($data);
-        return redirect('perusahaan/lowongan')->with('success','Lowongan berhasil ditambah');
+        //
     }
 
     /**
@@ -86,20 +72,19 @@ class Perusahaan_lowonganController extends Controller
      */
     public function update(Request $request, $id)
     {
+        
+        
         $data = array(
             
-            'id_perusahaan'=>$request->id_perusahaan,
-            'nama'=>$request->nama,
-            'jenis_kerja'=>$request->jenis_kerja,
-            'deskripsi_kerja'=>$request->deskripsi_kerja,
-            'lokasi_kerja'=>$request->lokasi_kerja,
-            'gaji'=>$request->gaji,
-            'kontak'=>$request->kontak,
+            'status'=>$request->status,
             
             
+            
+          
+           
         );
-    Lowongan::whereid_lowongan($id)->update($data);
-    return redirect('perusahaan/lowongan');
+        Lamaran::whereid_lamaran($id)->update($data);
+    return redirect('perusahaan/lamaran');
     }
 
     /**
@@ -111,11 +96,11 @@ class Perusahaan_lowonganController extends Controller
     public function destroy($id)
     {
         try{
-            $datas = Lowongan::findOrfail($id);
+            $datas = Lamaran::findOrfail($id);
             $datas->delete();
-            return redirect('perusahaan/lowongan')->with('success','Lowongan Berhasil Dihapus');
+            return redirect('perusahaan/lamaran')->with('success','Lamaran Berhasil Dihapus');
         }catch(\Throwable $th){
-            return redirect('perusahaan/lowongan')->withErrors('Data gagal dihapus. Harap hapus data yang terkait');
+            return redirect('perusahaan/lamaran')->withErrors('Data gagal dihapus. Harap hapus data yang terkait');
         }
     }
 }

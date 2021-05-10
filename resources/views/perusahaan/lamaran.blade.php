@@ -1,5 +1,5 @@
 @extends('perusahaan.template.layout')
-@section('title','Lamaran Pekerjaan' )
+@section('title','Perusahaan - Lamaran Pekerjaan' )
 @section('content')
         <!-- page content -->
         <div class="right_col" role="main">
@@ -15,37 +15,37 @@
                 <div class="x_panel">
                   <div class="x_title">
                     <h2>Lamaran Pekerjaan</h2>
-                    <div style="float:right;"><button type="danger" class="btn btn-success btn-sm" data-toggle="modal" data-target="#" >Tambah Lamaran Pekerjaan</button></div> 
+                    
                     <div class="clearfix"></div>
                   </div>
                   <div class="x_content">
                     <table id="datatable" class="table table-striped table-bordered">
                       <thead>
                         <tr>
-                          <th>No</th>
+                        <th>No</th>
                           <th>Nama Masyarakat</th>
-                          <th>Nama Perusahaan</th>
-                          <th>Nama Pekerjaan</th>
+                         
+                          <th>Jenis Pekerjaan</th>
                           <th>Status</th>
-                          <th>Email</th>
+                          <th width="14%">Aksi</th>
                           
-                          <th width="25%">Aksi</th>
                         </tr>
                       </thead>
                       <tbody>
+                      @foreach($lamarans as $lamaran)
+                        @if(auth()->user()->id_perusahaan == $lamaran->lowongan->perusahaan->id_perusahaan)
                         <tr>
-                            <td>1</td>
-                            <td>Budi</td>
-                            <td>PT Mencari Cinta Sejati</td>
-                            <td>Administrasi</td>
-                            <td>Tahap Pengajuan</td>
-                            <td>budi@gmail.com</td>
+                            <td>{{++$i}}</td>
+                            <td>{{$lamaran->masyarakat->nama}}</td>
+                            
+                            <td>{{$lamaran->lowongan->jenis_kerja}}</td>
+                            <td>{{$lamaran->status}}</td>
                             <td>
-                                <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#" >Edit</button>
-                                <button type="danger" class="btn btn-warning btn-sm" data-toggle="modal" data-target="#" >Detail</button>
-                                <button type="danger" class="btn btn-dark btn-sm" data-toggle="modal" data-target="#" >Unduh</button>
+                                <button type="danger" class="btn btn-warning btn-sm" data-toggle="modal" data-target="#edit{{$lamaran->id_lamaran}}" >Edit</button>
+                                <button type="danger" class="btn btn-warning btn-sm" data-toggle="modal" data-target="#detail-data{{$lamaran->id_lamaran}}" >Detail</button>
+                                <a href="{{URL::to('/')}}/file/Aliyah.rar"><button type="danger" class="btn btn-dark btn-sm">Unduh</button></a>
                                 <div style="float:right;">
-                                <form action="#" method="POST">
+                                <form action="{{route('lamaran.destroy', $lamaran->id_lamaran)}}" method="POST">
                                     @csrf
                                     @method('DELETE')
                                     <button type="submit" class="btn btn-danger btn-sm">Hapus</i></a>
@@ -53,6 +53,8 @@
                                 </div>
                             </td>
                         </tr>
+                        @endif
+                        @endforeach
                       </tbody>
                     </table>
                   </div>
@@ -62,4 +64,152 @@
           </div>
         </div>
         <!-- /page content -->
+
+        @foreach ($lamarans as $lamaran)
+<!-- Modal Ubah Data  -->
+<div id="edit{{$lamaran->id_lamaran}}" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+        <!-- konten modal-->
+        <div class="modal-content">
+            <!-- heading modal -->
+            <div class="modal-header">
+                <h5 class="modal-title" id="mediumModalLabel">Edit Lamaran</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <!-- body modal -->
+            <div class="modal-body">
+            <form action="{{route('lamaran.update', $lamaran->id_lamaran)}}" class="form-horizontal tasi-form" method="post" enctype="multipart/form-data">
+                @csrf
+                @method('PATCH')
+
+               
+                   
+            <div class="row form-group">
+                    <label class="col-sm-4 control-label">Nama Masyarakat</label>
+                    <div class="col-sm-8">        
+                        <input type="text"  class="form-control" value="{{ $lamaran->masyarakat->nama}}" required="required" readonly>
+                    </div>
+                    @error('nama')
+            <div class="invalid-feedback">{{ $message }}</div>
+                    @enderror
+                </div>
+
+                <div class="row form-group">
+                    <label class="col-sm-4 control-label">Nama Perusahaan</label>
+                    <div class="col-sm-8">
+                    <input class="form-control" type="text" value="{{$lamaran->lowongan->perusahaan->nama}}" readonly></input></br>
+                    </div>
+                    @error('nama')
+            <div class="invalid-feedback">{{ $message }}</div>
+                    @enderror
+                </div>
+               
+
+                <div class="row form-group">
+                    <label class="col-sm-4 control-label">Jenis Pekerjaan</label>
+                    <div class="col-sm-8">
+                        <input type="text"  class="form-control" value="{{ $lamaran->lowongan->jenis_kerja }}" required="required" readonly>
+                    </div>
+                    @error('jenis_kerja')
+            <div class="invalid-feedback">{{ $message }}</div>
+                    @enderror
+                </div>
+
+                
+
+                <div class="row form-group">
+                    <label class="col-sm-4 control-label">Status</label>
+                    <div class="col-sm-8">        
+                    <select class="input100" type="text" name="status" required>
+                            <option disabled="" selected="" value="">--Pilih Jenis Status--</option>
+                            <option value="Diterima">Diterima</option>
+                            <option value="Ditolak">Ditolak</option>
+                        </select>
+                    </div>
+                </div>
+
+                
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                    <button type="submit" class="btn btn-primary">Confirm</button>
+                </div>             
+            </form>
+            </div>        
+        </div>
+    </div>
+</div>
+<!-- Modal Edit -->
+@endforeach
+
+@foreach ($lamarans as $lamaran)
+<!-- Modal Detail Data  -->
+<div id="detail-data{{$lamaran->id_lamaran}}" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+        <!-- konten modal-->
+        <div class="modal-content">
+            <!-- heading modal -->
+            <div class="modal-header">
+              <img  align:center; src="{{URL::to('/')}}/logo/{{$lamaran->lowongan->perusahaan->logo}}" class="fa-image" width="100px" href="URL::to('/')}}/logo/{{$lamaran->logo}}" >
+            </div>
+            <!-- body modal -->
+            <div class="modal-body">
+            <form  class="form-horizontal tasi-form" method="post" enctype="multipart/form-data">                
+                <div class="row form-group">
+                    <label class="col-sm-4 control-label">Nama Masyarakat</label>
+                    <div class="col-sm-8">        
+                        <input type="text"  class="form-control" value="{{ $lamaran->masyarakat->nama}}" readonly>
+                    </div>
+                </div>
+                <div class="row form-group">
+                    <label class="col-sm-4 control-label">Nama Perusahaan</label>
+                    <div class="col-sm-8">        
+                        <input type="text"  class="form-control" value="{{ $lamaran->lowongan->perusahaan->nama}}" readonly>
+                    </div>
+                </div>
+                <div class="row form-group">
+                    <label class="col-sm-4 control-label">Jenis Kerja</label>
+                    <div class="col-sm-8">        
+                        <input type="text" class="form-control" value="{{ $lamaran->lowongan->jenis_kerja}}" readonly>
+                    </div>
+                </div>
+
+                <div class="row form-group">
+                    <label class="col-sm-4 control-label">Gaji</label>
+                    <div class="col-sm-8">
+                        <input type="text"  class="form-control" value="{{ $lamaran->lowongan->gaji }}" readonly>
+                    </div>
+                </div>
+
+                <div class="row form-group">
+                    <label class="col-sm-4 control-label">Lokasi</label>
+                    <div class="col-sm-8">
+                        <input type="text"  class="form-control" value="{{ $lamaran->lowongan->lokasi_kerja }}" readonly>
+                    </div>
+                </div>
+
+                <div class="row form-group">
+                    <label class="col-sm-4 control-label">Kontak </label>
+                    <div class="col-sm-8">
+                        <input type="text" class="form-control" value="{{ $lamaran->lowongan->kontak }}" readonly>
+                    </div>
+                </div>
+
+                <div class="row form-group">
+                    <label class="col-sm-4 control-label">Deskripsi </label>
+                    <div class="col-sm-8">
+                    <textarea class="form-control" readonly>{{ $lamaran->lowongan->deskripsi_kerja }}</textarea>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                </div>             
+            </form>
+            </div>        
+        </div>
+    </div>
+</div>
+@endforeach  
 @endsection

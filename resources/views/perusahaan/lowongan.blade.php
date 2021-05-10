@@ -25,11 +25,13 @@
                         <tr>
                           <th>No</th>
                           <th>Nama Perusahaan</th>
+                          <th>Nama Pekerjaan</th>
                           <th>Lokasi Kerja</th>
                           <th>Gaji</th>
                           <th>Tanggal Info</th>
                           <th>Jenis Kerja</th>
                           <th>Kontak</th> 
+                          <th>Status Lowongan</th>
                           <th width="18.5%">Aksi</th>
                         </tr>
                       </thead>
@@ -39,22 +41,24 @@
 
                           <td>{{++$i}}</td>
                          
-                            <td>{{$lowongan->id_perusahaan}}</td>
+                            <td>{{$lowongan->perusahaan->nama}}</td>
+                            <td>{{$lowongan->nama}}</td>
                             <td>{{$lowongan->jenis_kerja}}</td>
                             <td>{{$lowongan->deskripsi_kerja}}</td>
                             <td>{{$lowongan->lokasi_kerja}}</td>
                             <td>{{$lowongan->gaji}}</td>
                             <td>{{$lowongan->kontak}}</td>
+                            <td>{{$lowongan->status}}</td>
                             <td>
                                 <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#edit{{$lowongan->id_lowongan}}" >Edit</button>
                                 <button type="danger" class="btn btn-warning btn-sm" data-toggle="modal" data-target="#detail-data{{$lowongan->id_lowongan}}" >Detail</button>
-                                <div style="float:right;">
-                                <form action="{{route('lowongan.destroy', $lowongan->id_lowongan)}}" method="POST">
-                                    @csrf
-                                    @method('DELETE')
-                                    <button type="submit" class="btn btn-danger btn-sm">Hapus</i></a>
-                                </form>
-                                </div>
+                                  <div style="float:right;">
+                                  <form action="{{route('lowongan.destroy', $lowongan->id_lowongan)}}" method="POST">
+                                      @csrf
+                                      @method('DELETE')
+                                      <button type="submit" class="btn btn-danger btn-sm">Hapus</i></a>
+                                  </form>
+                                  </div>
                             </td>
                         </tr>
                         @endforeach
@@ -94,23 +98,29 @@
               <form action="{{route('lowongan.store')}}" class="form-horizontal tasi-form" method="post" enctype="multipart/form-data">
                 @csrf
 
-                <div class="form-group row">
- 				            <label for="id_perusahaan" class="col-sm-2 col-form-label">Nama Perusahaan</label>
-                	<div class="col-sm-5">
-                    	<select name="id_perusahaan" id="id_perusahaan" class="form-control">
-                			<option value="">== Pilih Perusahaan ==</option>
-                			@foreach ($perusahaans as $perusahaan)
-                    		<option value="{{ $perusahaan->id_perusahaan }}">{{ $perusahaan->id_perusahaan }}-{{ $perusahaan->nama }}</option>
-                			@endforeach
-                 		</select>
-                 	</div>
-                   </div>
+                <div class="col-sm-5">
+                <input type="hidden" name="id_perusahaan" class="form-control" id="id_perusahaan" required="" value="{{auth()->user()->id_perusahaan}}" readonly>
+            </div>
 
-                <input class="form-control" name="jenis_kerja"type="text" placeholder="Jenis Pekerjaan"></br>
+                <input class="form-control" name="nama"type="text" placeholder="Nama Pekerjaan"></br>
+
+              
+                <select class="form-control" name="jenis_kerja" required>
+                        <option disabled="" selected="" value="">Pilih Jenis Pekerjaan</option>
+                        <option>Magang</option>
+                        <option>Kontrak</option>
+                        <option>Paruh Waktu</option>
+                        <option>Penuh Waktu</option>
+                        <option>Temporer</option>
+                       
+                      </select>
+                      </br>
                 <textarea class="form-control"name="deskripsi_kerja" type="text" placeholder="Deskripsi Pekerjaan"></textarea></br>
                 <input class="form-control" name="lokasi_kerja"type="text" placeholder="Lokasi kerja"></br>
                 <input class="form-control" name="gaji"type="text" placeholder="Gaji"></br>
                 <input class="form-control" name="kontak"type="text" placeholder="Kontak"></br>
+                <div class="col-sm-5">
+                
                 
                 <div class="modal-footer">
                   <button type="submit" class="btn btn-primary">Tambah Lowongan</button>
@@ -146,14 +156,31 @@
             </div>
                    
                    
-                  
+            <div class="row form-group">
+                    <label class="col-sm-4 control-label">Nama Pekerjaan</label>
+                    <div class="col-sm-8">        
+                        <input type="text" name="nama" class="form-control" value="{{ $lowongan->nama}}" required>
+                    </div>
+                    @error('nama')
+            <div class="invalid-feedback">{{ $message }}</div>
+                    @enderror
+                </div>
 
             <div class="row form-group">
                     <label class="col-sm-4 control-label">Jenis Pekerjaan</label>
                     <div class="col-sm-8">        
-                        <input type="text" name="jenis_kerja" class="form-control" value="{{ $lowongan->jenis_kerja}}" required>
+                        <input type="text" name="jenis_kerja" class="form-control"  required>
+                        <select class="form-control" name="jenis_kerja" required>
+                        <option disabled="" selected="" value="">Pilih Jenis Pekerjaan</option>
+                        <option>Magang</option>
+                        <option>Kontrak</option>
+                        <option>Paruh Waktu</option>
+                        <option>Penuh Waktu</option>
+                        <option>Temporer</option>
+                       
+                      </select>
                     </div>
-                    @error('jenis_pekerjaan')
+                    @error('jenis_kerja')
             <div class="invalid-feedback">{{ $message }}</div>
                     @enderror
                 </div>
@@ -201,6 +228,8 @@
 
                 
 
+                
+
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
                     <button type="submit" class="btn btn-primary">Confirm</button>
@@ -210,6 +239,7 @@
         </div>
     </div>
 </div>
+
 <!-- Modal Edit -->
 
 
@@ -238,6 +268,12 @@ foreach ($lowongans as $lowongan)
                     <label class="col-sm-4 control-label">Nama Perusahaan</label>
                     <div class="col-sm-8">        
                         <input type="text" name="id_perusahaan" class="form-control" value="{{ $lowongan->id_perusahaan}}" readonly>
+                    </div>
+                </div>
+                <div class="row form-group">
+                    <label class="col-sm-4 control-label">Nama Pekerjaan</label>
+                    <div class="col-sm-8">        
+                        <input type="text" name="nama" class="form-control" value="{{ $lowongan->nama}}" readonly>
                     </div>
                 </div>
                 <div class="row form-group">
@@ -275,6 +311,8 @@ foreach ($lowongans as $lowongan)
                     </div>
                 </div>
               
+                <input type="text" name="status" class="form-control" id="status" required="" value="{{ $lowongan->status }}" readonly>
+                </div>
                
             <br>
               

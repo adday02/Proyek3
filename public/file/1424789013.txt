@@ -1,0 +1,41 @@
+DB
+==========
+Pelatihan
+- waktu
+lowongan
+-status
+masyarakat
+-status
+Tambah DB Kontak (id_kontak, nama, email, tujuan, pesan)
+
+Page
+==============
+Halaman Utama 
+- Data dari DB
+- Tambah kontak
+- Halaman Lowongan
+Halaman Daftar
+Admin
+-CRUD Pengajuan Pelatihan
+Masyarat
+-Hapus Dashboard
+-Edit Hapus Lamaran
+-Edit Hapus Pengajuan
+-Edit Profile
+Perusahaan
+-CRUD Lamaran (+Unduh)
+
+Validasi Form
+==============
+- Semua Form 
+
+Status (Dalam Pengajuan, Ditolak, Diterima)
+===========================================
+
+Mobile
+==============
+Login
+Tampil data Perusahaan
+Tampil Lowongan
+Tampil Riwayat Lamaran
+Profile

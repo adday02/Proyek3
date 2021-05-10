@@ -3,9 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\models\Admin;
-use App\models\Perusahaan;
-use App\models\Masyarakat;
+use App\Models\Admin;
+use App\Models\Perusahaan;
+use App\Models\Masyarakat;
 use Auth;
 
 class LoginController extends Controller

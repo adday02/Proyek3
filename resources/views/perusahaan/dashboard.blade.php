@@ -1,5 +1,5 @@
 @extends('perusahaan.template.layout')
-@section('title','Dashboard' )
+@section('title','Perusahaan - Dashboard' )
 @section('content')
     <!-- page content -->
     <div class="right_col" role="main">
@@ -7,11 +7,11 @@
           <div class="row tile_count">
             <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
               <span class="count_top"><i class="fa fa-user"></i> Lowongan Pekerjaan</span>
-              <div class="count">2500</div>
+              <div class="count">{{$lowongan}}</div>
             </div>
             <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
               <span class="count_top"><i class="fa fa-user"></i> Lamaran Pekerjaan</span>
-              <div class="count">2500</div>
+              <div class="count">{{$lamaran}}</div>
             </div>
             
             

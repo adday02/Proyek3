@@ -5,8 +5,11 @@ use App\Http\Controllers\Admin_perusahaanController;
 use App\Http\Controllers\Admin_pelatihanController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\Perusahaan_lowonganController;
+use App\Http\Controllers\Perusahaan_lamaranController;
+use App\Http\Controllers\Perusahaan_dasboardController;
+use App\Http\Controllers\Masyarakat_pendaftarPelatihanController;
 
-/*
+/*   
 |--------------------------------------------------------------------------
 | Web Routes
 |--------------------------------------------------------------------------
@@ -24,9 +27,11 @@ Route::group(['prefix'=> 'admin',  'middleware'=> 'auth:admin'], function()
 {
         Route::get('dashboard', function () {
             return view('admin/dashboard');
-        })->middleware('auth:admin');
+        });
 
         Route::resource('perusahaan',Admin_perusahaanController::class);
+
+        Route::resource('pelatihan',Admin_pelatihanController::class);
         
         Route::get('masyarakat', function () {
             return view('admin/masyarakat');
@@ -40,7 +45,7 @@ Route::group(['prefix'=> 'admin',  'middleware'=> 'auth:admin'], function()
             return view('admin/lamaran');
         });
         
-        Route::resource('pelatihan',Admin_pelatihanController::class);
+     
         
         Route::get('pengajuan', function () {
             return view('admin/pengajuan');
@@ -48,17 +53,14 @@ Route::group(['prefix'=> 'admin',  'middleware'=> 'auth:admin'], function()
 
 });
 
+
 Route::group(['prefix'=> 'perusahaan',  'middleware'=> 'auth:perusahaan'], function()
 {
-    Route::get('dashboard', function () {
-        return view('perusahaan/dashboard');
-    })->middleware('auth:perusahaan');
-
-    Route::resource('lowongan',Perusahaan_lowonganController::class);
     
-    Route::get('lamaran', function () {
-        return view('perusahaan/lamaran');
-    });
+    Route::resource('dashboard',Perusahaan_dasboardController::class);
+    Route::resource('lowongan',Perusahaan_lowonganController::class);
+    Route::resource('lamaran',Perusahaan_lamaranController::class);
+    
     
 });
 
@@ -66,7 +68,7 @@ Route::group(['prefix'=> 'masyarakat',  'middleware'=> 'auth:masyarakat'], funct
 {
     Route::get('homeuser', function () {
         return view('masyarakat/homeuser');
-    })->middleware('auth:masyarakat');
+    });
 
     Route::get('lamaran', function () {
         return view('masyarakat/lamaran');
@@ -79,22 +81,19 @@ Route::group(['prefix'=> 'masyarakat',  'middleware'=> 'auth:masyarakat'], funct
     Route::get('pelatihan', function () {
         return view('masyarakat/pelatihan');
     });
-    Route::get('daftarpelatihan', function () {
-        return view('masyarakat/daftarpelatihan');
-    });
-});
 
+    Route::resource('daftarpelatihan',Masyarakat_pendaftarPelatihanController::class);
+    
+});
 
 Route::get('login', function () {
     return view('login');
 })->middleware('guest');
-Route::post('/kirimdata',[LoginController::class,'masuk'])->name('login');
-Route::get('/keluar',[LoginController::class,'keluar']);
-
-
 
 
 Route::get('/pertamina', function () {
     return view('detailLoker');
 });
 
+Route::post('/kirimdata',[LoginController::class,'masuk'])->name('login');
+Route::get('/keluar',[LoginController::class,'keluar']);

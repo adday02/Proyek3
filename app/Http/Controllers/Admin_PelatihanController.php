@@ -16,7 +16,7 @@ class Admin_pelatihanController extends Controller
     public function index()
     {
         $pelatihans = Pelatihan::all();
-        return view('admin.pelatihan',compact('pelatihans'))->with('i');
+        return view('admin/pelatihan',compact('pelatihans'))->with('i');
     }
 
     /**
@@ -38,15 +38,17 @@ class Admin_pelatihanController extends Controller
     public function store(Request $request)
     {
         $data = array(
-            'id_pelatihan'=>$request->id_pelatihan,
+            
             'bidang_kejuruan'=>$request->bidang_kejuruan,
             'deskripsi'=>$request->deskripsi,
             'persyaratan'=>$request->persyaratan,
             'kuota'=>$request->kuota,
+            'waktu'=>$request->waktu,
+            
            
         );
         Pelatihan::create($data);
-        return redirect('admin.pelatihan')->with('success','Pelatihan berhasil ditambah');
+        return redirect('admin/pelatihan')->with('success','Pelatihan berhasil ditambah');
     }
 
     /**
@@ -85,10 +87,12 @@ class Admin_pelatihanController extends Controller
             'deskripsi'=>$request->deskripsi,
             'persyaratan'=>$request->persyaratan,
             'kuota'=>$request->kuota,
+            'waktu'=>$request->waktu,
+            
             
         );
     Pelatihan::whereid_pelatihan($id)->update($data);
-    return redirect('admin.pelatihan');
+    return redirect('admin/pelatihan');
     }
 
     /**
@@ -102,9 +106,9 @@ class Admin_pelatihanController extends Controller
         try{
             $datas = Pelatihan::findOrfail($id);
             $datas->delete();
-            return redirect('admin.pelatihan')->with('success','Pelatihan Berhasil Dihapus');
+            return redirect('admin/pelatihan')->with('success','Pelatihan Berhasil Dihapus');
         }catch(\Throwable $th){
-            return redirect('admin.pelatihan')->withErrors('Data gagal dihapus. Harap hapus data yang terkait');
+            return redirect('admin/pelatihan')->withErrors('Data gagal dihapus. Harap hapus data yang terkait');
         }
     }
 }
