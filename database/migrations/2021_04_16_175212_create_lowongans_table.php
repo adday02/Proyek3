@@ -22,6 +22,7 @@ class CreateLowongansTable extends Migration
             $table->string('lokasi_kerja');
             $table->string('gaji');
             $table->string('kontak');
+            $table->string('status');
             $table->timestamps();
         });
     }

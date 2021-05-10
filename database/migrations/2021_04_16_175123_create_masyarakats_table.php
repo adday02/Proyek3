@@ -22,6 +22,7 @@ class CreateMasyarakatsTable extends Migration
             $table->string('pendidikan_terakhir');
             $table->string('alamat');
             $table->string('foto');
+            $table->string('status');
             $table->timestamps();
         });
     }

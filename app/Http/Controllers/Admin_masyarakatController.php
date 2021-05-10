@@ -32,7 +32,8 @@ class Admin_masyarakatController extends Controller
             'no_hp'=>$request->no_hp,
             'pendidikan_terakhir'=>$request->pendidikan_terakhir,
             'alamat'=>$request->alamat,
-            'foto'=>$new_name
+            'foto'=>$new_name,
+            'status'=>"Diterima"
         );
         Masyarakat::create($data);
         return redirect('admin\masyarakat')->with('success','masyarakat berhasil ditambah');
@@ -76,6 +77,8 @@ class Admin_masyarakatController extends Controller
                 'nama'=>$request->nama,
                 'no_hp'=>$request->no_hp,
                 'alamat'=>$request->alamat,
+                'status'=>$request->status,
+                
             );
         Masyarakat::wherenik($id)->update($data);
         return redirect('admin\masyarakat');

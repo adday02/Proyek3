@@ -19,6 +19,7 @@ class CreatePelatihansTable extends Migration
             $table->string('deskripsi');
             $table->string('persyaratan');
             $table->integer('kuota');
+            $table->integer('waktu');
             $table->timestamps();
         });
     }

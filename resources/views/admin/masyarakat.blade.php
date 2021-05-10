@@ -28,6 +28,7 @@
                           <th>No HP</th>
                           <th>Pendidikan Terakhir</th>
                           <th>Foto</th>
+                          <th>Status</th>
                           <th width="18.5%">Aksi</th>
                         </tr>
                       </thead>
@@ -38,8 +39,9 @@
                             <td>{{$masyarakat->nama}}</td>
                             <td>{{$masyarakat->jk}}</td>
                             <td>{{$masyarakat->no_hp}}</td>
-                            <td>{{{$masyarakat->pendidikan_terakhir}}}</td>
+                            <td>{{$masyarakat->pendidikan_terakhir}}</td>
                             <td><img width="30 px" src="{{URL::to('/')}}/foto/{{$masyarakat->foto}}" class="fa-image" width="100px" href="URL::to('/')}}/foto/{{$masyarakat->foto}}" ></td></td>
+                            <td>{{$masyarakat->status}}</td>
                             <td>
                                 <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#edit{{$masyarakat->nik}}" " >Edit</button>
                                 <button type="danger" class="btn btn-warning btn-sm" data-toggle="modal" data-target="#" >Detail</button>
@@ -62,8 +64,6 @@
           </div>
         </div>
         <!-- /page content -->
-  
-
 <div id="tambah" class="modal fade" role="dialog">
     <div class="modal-dialog">
         <!-- konten modal-->
@@ -109,7 +109,6 @@
                     </div>
                 </div>
                 
-
                 <div class="row form-group">
                     <label class="col-sm-4 control-label">No HP</label>
                     <div class="col-sm-8">
@@ -240,6 +239,19 @@
                         <input type="text" name="alamat" class="form-control" value ="{{$masyarakat->alamat}}" required>
                     </div>
                 </div>
+
+                @if($masyarakat == "Dalam Pengajuan")
+                <div class="row form-group">
+                    <label class="col-sm-4 control-label">Pendidikan Terakhir</label>
+                    <div class="col-sm-8">        
+                      <select class="form-control" name="pendidikan_terakhir">
+                        <option disabled="" selected="" value="" >Pilih Pendidikan Terakhir</option>
+                        <option>Diterima</option>
+                        <option>Ditolak</option>
+                      </select>
+                    </div>
+                </div>
+                @endif
 
                 <div class="row form-group">
                     <label class="col-sm-4 control-label">Foto</label>
