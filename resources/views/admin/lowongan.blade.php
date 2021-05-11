@@ -83,12 +83,17 @@
                     </div>
                 </div>
                 <div class="row form-group">
+                    <label class="col-sm-4 control-label">Nama Pekerjaan</label>
+                    <div class="col-sm-8">        
+                        <input type="text"  class="form-control" value="{{ $lowongan->nama}}" readonly>
+                    </div>
+                </div>
+                <div class="row form-group">
                     <label class="col-sm-4 control-label">Jenis Kerja</label>
                     <div class="col-sm-8">        
                         <input type="text"  class="form-control" value="{{ $lowongan->jenis_kerja}}" readonly>
                     </div>
                 </div>
-
                 <div class="row form-group">
                     <label class="col-sm-4 control-label">Gaji</label>
                     <div class="col-sm-8">
@@ -119,7 +124,7 @@
                 <div class="row form-group">
                     <label class="col-sm-4 control-label">Perizinan Lowongan</label>
                     <div class="col-sm-8">        
-                      <select class="form-control" name="status" required>
+                      <select class="form-control" name="status">
                         <option disabled="" selected="" value="">Pilih Perizinan</option>
                         <option value="Diterima">Diterima</option>
                         <option value="Ditolak">Ditolak</option>

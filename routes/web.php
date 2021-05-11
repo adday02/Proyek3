@@ -37,16 +37,11 @@ Route::group(['prefix'=> 'admin',  'middleware'=> 'auth:admin'], function()
     Route::resource('pengajuan',Admin_penPelatihanController::class);
 });
 
-
 Route::group(['prefix'=> 'perusahaan',  'middleware'=> 'auth:perusahaan'], function()
 {
-    Route::get('dashboard', function () {
-        return view('perusahaan/dashboard');
-    })->middleware('auth:perusahaan');
-    Route::resource('lowongan',Perusahaan_lowonganController::class);    
-    Route::get('lamaran', function () {
-        return view('perusahaan/lamaran');
-    }); 
+    Route::resource('dashboard',Perusahaan_dashboardController::class);    
+    Route::resource('lowongan-Perusaahaan',Perusahaan_lowonganController::class);    
+    Route::resource('lamaran',Perusahaan_lamaranController::class);    
 });
 
 Route::group(['prefix'=> 'masyarakat',  'middleware'=> 'auth:masyarakat'], function()

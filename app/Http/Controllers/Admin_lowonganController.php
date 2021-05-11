@@ -15,14 +15,14 @@ class Admin_lowonganController extends Controller
 
     public function update(Request $request, $id)
     {
+        if($request->has('status'))
+        {
             $data = array(
                 'status'=>$request->status,
             );
         Lowongan::whereid_lowongan($id)->update($data);
         return redirect('admin\lowongan');
     }
-
-
     public function destroy($id)
     {
         try{

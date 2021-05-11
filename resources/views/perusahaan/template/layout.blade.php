@@ -66,7 +66,7 @@
                   
                   <li><a><i class="fa fa-building"></i> Pekerjaan <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
-                      <li><a href="{{URL('perusahaan/lowongan')}}">Lowongan Pekerjaan</a></li>
+                      <li><a href="{{URL('perusahaan/lowongan-Perusahaan')}}">Lowongan Pekerjaan</a></li>
                       <li><a href="{{URL('perusahaan/lamaran')}}">Lamaran Pekerjaan</a></li>
                     </ul>
                   </li>
