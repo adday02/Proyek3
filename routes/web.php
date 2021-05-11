@@ -28,32 +28,13 @@ Route::get('/', function () {
 
 Route::group(['prefix'=> 'admin',  'middleware'=> 'auth:admin'], function()
 {
-        Route::get('dashboard', function () {
-            return view('admin/dashboard');
-        });
-
-        Route::resource('perusahaan',Admin_perusahaanController::class);
-
-        Route::resource('pelatihan',Admin_pelatihanController::class);
-        
-        Route::get('masyarakat', function () {
-            return view('admin/masyarakat');
-        });
-        
-        Route::get('lowongan', function () {
-            return view('admin/lowongan');
-        });
-        
-        Route::get('lamaran', function () {
-            return view('admin/lamaran');
-        });
-        
-     
-        
-        Route::get('pengajuan', function () {
-            return view('admin/pengajuan');
-        });
-
+    Route::resource('dashboard',Admin_dashboardController::class);
+    Route::resource('perusahaan',Admin_perusahaanController::class);
+    Route::resource('masyarakat',Admin_masyarakatController::class);
+    Route::resource('lowongan',Admin_lowonganController::class);
+    Route::resource('lamaran',Admin_lamaranController::class);
+    Route::resource('pelatihan',Admin_pelatihanController::class);
+    Route::resource('pengajuan',Admin_penPelatihanController::class);
 });
 
 

@@ -60,7 +60,6 @@
           </div>
         </div>
         <!-- /page content -->
-
 <!-- Modal tambah -->
 <div id="tambah" class="modal fade" role="dialog">
     <div class="modal-dialog">
@@ -80,54 +79,54 @@
                 <div class="row form-group">
                     <label class="col-sm-4 control-label">ID Perusahaan</label>
                     <div class="col-sm-8">        
-                        <input type="text" name="id_perusahaan" class="form-control" required>
+                        <input type="text" name="id_perusahaan" class="form-control" required pattern="[0-9]{7,12}" title="Format harus berupa angka, min 7 dan max 11">
                     </div>
                 </div>
                 <div class="row form-group">
                     <label class="col-sm-4 control-label">Password</label>
                     <div class="col-sm-8">        
-                        <input type="password" name="password" class="form-control" required>
+                        <input type="password" name="password" class="form-control" required pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Masukkan Password dengan huruf besar dan kecil, Min 8 Karakter">
                     </div>
                 </div>
                 <div class="row form-group">
                     <label class="col-sm-4 control-label">Nama Perusahaan</label>
                     <div class="col-sm-8">        
-                        <input type="text" name="nama" class="form-control" required>
+                        <input type="text" name="nama" class="form-control" required pattern="[A-Za-z\s]{,255}" title="Masukkan Nama Perusahaan hanya dengan huruf">
                     </div>
                 </div>
 
                 <div class="row form-group">
                     <label class="col-sm-4 control-label">Email</label>
                     <div class="col-sm-8">
-                        <input type="email" name="email" class="form-control" required>
+                        <input type="email" name="email" class="form-control" required pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$">
                     </div>
                 </div>
 
                 <div class="row form-group">
                     <label class="col-sm-4 control-label">Link Website</label>
                     <div class="col-sm-8">
-                        <input type="text" name="website" class="form-control" required>
+                        <input type="text" name="website" class="form-control" required pattern=".{,255}" title="Link Website Max 255 Karakter">
                     </div>
                 </div>
 
                 <div class="row form-group">
                     <label class="col-sm-4 control-label">Alamat </label>
                     <div class="col-sm-8">
-                        <input type="text" name="alamat" class="form-control" required>
+                        <input type="text" name="alamat" class="form-control" required pattern=".{,255}" title="Alamat Max 255 Karakter">
                     </div>
                 </div>
 
                 <div class="row form-group">
                     <label class="col-sm-4 control-label">Deskripsi </label>
                     <div class="col-sm-8">
-                    <textarea class="form-control"name="deskripsi" type="text" ></textarea>
+                    <textarea class="form-control"name="deskripsi" type="text" required pattern=".{,255}" title="Deskripsi Max 255 Karakter"></textarea>
                     </div>
                 </div>
 
                 <div class="row form-group">
                     <label class="col-sm-4 control-label">Logo</label>
                     <div class="col-sm-8">        
-                        <input type="file" name="logo" class="form-control" id="inputGroupFile01">
+                        <input type="file" name="logo" class="form-control" id="inputGroupFile01" required>
                     </div>
                 </div>
                 <div class="modal-footer">
@@ -161,35 +160,35 @@
                 <div class="row form-group">
                     <label class="col-sm-4 control-label">Nama Perusahaan</label>
                     <div class="col-sm-8">        
-                        <input type="text" name="nama" class="form-control" value="{{ $perusahaan->nama}}" required>
+                        <input type="text" name="nama" class="form-control" value="{{ $perusahaan->nama}}" required pattern="[A-Za-z\s]{,255}" title="Masukkan Nama Perusahaan hanya dengan huruf">
                     </div>
                 </div>
 
                 <div class="row form-group">
                     <label class="col-sm-4 control-label">Email</label>
                     <div class="col-sm-8">
-                        <input type="text" name="email" class="form-control" value="{{ $perusahaan->email }}" required>
+                        <input type="text" name="email" class="form-control" value="{{ $perusahaan->email }}" required pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$">
                     </div>
                 </div>
 
                 <div class="row form-group">
                     <label class="col-sm-4 control-label">Link Website</label>
                     <div class="col-sm-8">
-                        <input type="text" name="website" class="form-control" value="{{ $perusahaan->website }}" required>
+                        <input type="text" name="website" class="form-control" value="{{ $perusahaan->website }}" required pattern=".{,255}" title="Link website Max 255 Karakter">
                     </div>
                 </div>
 
                 <div class="row form-group">
                     <label class="col-sm-4 control-label">Alamat </label>
                     <div class="col-sm-8">
-                        <input type="text" name="alamat" class="form-control" value="{{ $perusahaan->alamat }}" required>
+                        <input type="text" name="alamat" class="form-control" value="{{ $perusahaan->alamat }}" required pattern=".{,255}" title="Alamat Max 255 Karakter">
                     </div>
                 </div>
 
                 <div class="row form-group">
                     <label class="col-sm-4 control-label">Deskripsi </label>
                     <div class="col-sm-8">
-                    <textarea class="form-control"name="deskripsi" type="text">{{$perusahaan->deskripsi}}</textarea>
+                    <textarea class="form-control"name="deskripsi" type="text" required pattern=".{,255}" title="Deskripsi Max 255 Karakter">{{$perusahaan->deskripsi}}</textarea>
                     </div>
                 </div>
 

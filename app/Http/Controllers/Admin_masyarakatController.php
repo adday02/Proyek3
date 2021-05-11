@@ -72,13 +72,18 @@ class Admin_masyarakatController extends Controller
             );
         Masyarakat::wherenik($id)->update($data);
         }
+        if($request->has('status'))
+        {
+            $data = array(
+                'status'=>$request->status,
+            );
+        Masyarakat::wherenik($id)->update($data);
+        }
             $data = array(
                 'password'=>$request->password,
                 'nama'=>$request->nama,
                 'no_hp'=>$request->no_hp,
                 'alamat'=>$request->alamat,
-                'status'=>$request->status,
-                
             );
         Masyarakat::wherenik($id)->update($data);
         return redirect('admin\masyarakat');

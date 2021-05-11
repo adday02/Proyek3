@@ -82,19 +82,19 @@
                 <div class="row form-group">
                     <label class="col-sm-4 control-label">NIK</label>
                     <div class="col-sm-8">        
-                        <input type="text" name="nik" class="form-control" required>
+                        <input type="text" name="nik" class="form-control" required pattern="[0-9]{16}" title="Masukkan NIK dengan angka dan 16 karakter">
                     </div>
                 </div>
                 <div class="row form-group">
                     <label class="col-sm-4 control-label">Password</label>
                     <div class="col-sm-8">        
-                        <input type="password" name="password" class="form-control" required>
+                        <input type="password" name="password" class="form-control" required pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Masukkan Password dengan huruf besar dan kecil, Min 8 Karakter">
                     </div>
                 </div>
                 <div class="row form-group">
                     <label class="col-sm-4 control-label">Nama Lengkap</label>
                     <div class="col-sm-8">        
-                        <input type="text" name="nama" class="form-control" required>
+                        <input type="text" name="nama" class="form-control" required pattern="[A-Za-z\s]{3,255}" title="Masukkan Nama Masyarakat hanya dengan huruf, Min 3 dan Max 255">
                     </div>
                 </div>
                 
@@ -112,7 +112,7 @@
                 <div class="row form-group">
                     <label class="col-sm-4 control-label">No HP</label>
                     <div class="col-sm-8">
-                        <input type="text" name="no_hp" class="form-control" required>
+                        <input type="text" name="no_hp" class="form-control" required pattern="[0-9]{11,13}" title="Masukkan No HP dengan angka, Min 11 dan Max 13">
                     </div>
                 </div>
                 
@@ -138,14 +138,14 @@
                 <div class="row form-group">
                     <label class="col-sm-4 control-label">Alamat </label>
                     <div class="col-sm-8">
-                        <input type="text" name="alamat" class="form-control" required>
+                        <input type="text" name="alamat" class="form-control" required pattern=".{,255}" title="Alamat Max 255 Karakter"">
                     </div>
                 </div>
 
                 <div class="row form-group">
                     <label class="col-sm-4 control-label">Foto</label>
                     <div class="col-sm-8">        
-                        <input type="file" name="foto" class="form-control" id="inputGroupFile01">
+                        <input type="file" name="foto" class="form-control" id="inputGroupFile01" required>
                     </div>
                 </div>
                 <div class="modal-footer">
@@ -179,19 +179,19 @@
                 <div class="row form-group">
                     <label class="col-sm-4 control-label">NIK</label>
                     <div class="col-sm-8">        
-                        <input type="text" name="nik" class="form-control" value ="{{$masyarakat->nik}}" required>
+                        <input type="text" name="nik" class="form-control" value ="{{$masyarakat->nik}}" readonly>
                     </div>
                 </div>
                 <div class="row form-group">
                     <label class="col-sm-4 control-label">Password</label>
                     <div class="col-sm-8">        
-                        <input type="password" name="password" class="form-control" value ="{{$masyarakat->password}}" required>
+                        <input type="password" name="password" class="form-control" value ="{{$masyarakat->password}}" required pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Masukkan Password dengan huruf besar dan kecil, Min 8 Karakter">
                     </div>
                 </div>
                 <div class="row form-group">
                     <label class="col-sm-4 control-label">Nama Lengkap</label>
                     <div class="col-sm-8">        
-                        <input type="text" name="nama" class="form-control" value ="{{$masyarakat->nama}}" required>
+                        <input type="text" name="nama" class="form-control" value ="{{$masyarakat->nama}}" required pattern="[A-Za-z\s]{3,255}" title="Masukkan Nama Masyarakat hanya dengan huruf, Min 3 dan Max 255">
                     </div>
                 </div>
                 
@@ -210,7 +210,7 @@
                 <div class="row form-group">
                     <label class="col-sm-4 control-label">No HP</label>
                     <div class="col-sm-8">
-                        <input type="text" name="no_hp" class="form-control" value ="{{$masyarakat->no_hp}}" required>
+                        <input type="text" name="no_hp" class="form-control" value ="{{$masyarakat->no_hp}}" required pattern="[0-9]{11,13}" title="Masukkan No HP dengan angka, Min 11 dan Max 13">
                     </div>
                 </div>
                 
@@ -252,7 +252,6 @@
                     </div>
                 </div>
                 @endif
-
                 <div class="row form-group">
                     <label class="col-sm-4 control-label">Foto</label>
                     <div class="col-sm-8">        
