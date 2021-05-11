@@ -25,8 +25,6 @@
                         <tr>
                         <th>No</th>
                           <th>Bidang Kejuruan</th>
-                          <th>Deskripsi Pelatihan</th>
-                          <th>Persyaratan</th>
                           <th>Kuota</th>
                           <th>Waktu</th>
                           <th width="18.5%">Aksi</th>
@@ -37,8 +35,6 @@
                         <tr>
                         <td>{{++$i}}</td>
                             <td>{{$pelatihan->bidang_kejuruan}}</td>
-                            <td>{{$pelatihan->deskripsi}}</td>
-                            <td>{{$pelatihan->persyaratan}}</td>
                             <td>{{$pelatihan->kuota}} Orang</td>
                             <td>{{$pelatihan->waktu}} Bulan</td>
                             <td>
@@ -90,11 +86,11 @@
               <form action="{{route('pelatihan.store')}}" class="form-horizontal tasi-form" method="post" enctype="multipart/form-data">
                 @csrf
                
-                <input class="form-control" name="bidang_kejuruan"type="text" placeholder="Bidang Kejuruan"></br>
-                <textarea class="form-control"name="deskripsi" type="text" placeholder="Deskripsi Pelatihan"></textarea></br>
-                <input class="form-control" name="persyaratan"type="text" placeholder="Persyaratan"></br>
-                <input class="form-control" name="kuota"type="text" placeholder="Kuota"></br>
-                <input class="form-control" name="waktu"type="text" placeholder="Waktu"></br>
+                <input class="form-control" name="bidang_kejuruan"type="text" placeholder="Bidang Kejuruan" pattern="[A-Za-z\s]{3,255}" title="Masukkan Bidang kejuruan hanya dengan huruf, Min 3 dan Max 255"></br>
+                <input class="form-control" name="waktu"type="text" placeholder="Waktu" pattern="[0-9]{,2}" title="Masukkan Waktu dengan angka, Max karakter"></br>
+                <input class="form-control" name="kuota"type="text" placeholder="Kuota" pattern="[0-9]{,2}" title="Masukkan Kuota dengan angka, Max 2 karakter"></br>
+                <textarea class="form-control"name="deskripsi" type="text" placeholder="Deskripsi Pelatihan" required pattern=".{,255}" title="Deskripsi Max 255 Karakter"></textarea></br>
+                <textarea class="form-control"name="persyaratan" type="text" placeholder="Persayratan Pelatihan" required pattern=".{,255}" title="Persayratan Max 255 Karakter"></textarea></br>
 
                 
                 <div class="modal-footer">
@@ -125,12 +121,10 @@
             <form action="{{route('pelatihan.update', $pelatihan->id_pelatihan)}}" class="form-horizontal tasi-form" method="post" enctype="multipart/form-data">
                 @csrf
                 @method('PATCH')
-                
-
                 <div class="row form-group">
                     <label class="col-sm-4 control-label">Bidang Kejuruan</label>
                     <div class="col-sm-8">        
-                        <input type="text" name="bidang_kejuruan" class="form-control" value="{{ $pelatihan->bidang_kejuruan}}" required>
+                        <input type="text" name="bidang_kejuruan" class="form-control" value="{{ $pelatihan->bidang_kejuruan}}" required title="Masukkan Bidang kejuruan hanya dengan huruf, Min 3 dan Max 255">
                     </div>
                     @error('bidang_kejuruan')
             <div class="invalid-feedback">{{ $message }}</div>
@@ -138,30 +132,9 @@
                 </div>
 
                 <div class="row form-group">
-                    <label class="col-sm-4 control-label">Deskripsi Pelatihan</label>
-                    <div class="col-sm-8">
-                    <input class="form-control"name="deskripsi" type="text" value="{{$pelatihan->deskripsi}}"></input></br>
-                    </div>
-                    @error('deskripsi')
-            <div class="invalid-feedback">{{ $message }}</div>
-                    @enderror
-                </div>
-               
-
-                <div class="row form-group">
-                    <label class="col-sm-4 control-label">Persyaratan</label>
-                    <div class="col-sm-8">
-                        <input type="text" name="persyaratan" class="form-control" value="{{ $pelatihan->persyaratan }}" required>
-                    </div>
-                    @error('persyaratan')
-            <div class="invalid-feedback">{{ $message }}</div>
-                    @enderror
-                </div>
-
-                <div class="row form-group">
                     <label class="col-sm-4 control-label">Kuota</label>
                     <div class="col-sm-8">
-                        <input type="text" name="kuota" class="form-control" value="{{ $pelatihan->kuota }}" required>
+                        <input type="text" name="kuota" class="form-control" value="{{ $pelatihan->kuota }}" required pattern="[0-9]{,2}" title="Masukkan Kuota dengan angka, Max 2 karakter">
                     </div>
                     @error('kuota')
             <div class="invalid-feedback">{{ $message }}</div>
@@ -171,14 +144,32 @@
                 <div class="row form-group">
                     <label class="col-sm-4 control-label">Waktu</label>
                     <div class="col-sm-8">
-                        <input type="text" name="waktu" class="form-control" value="{{ $pelatihan->waktu }}" required>
+                        <input type="text" name="waktu" class="form-control" value="{{ $pelatihan->waktu }}" required pattern="[0-9]{,2}" title="Masukkan Waktu dengan angka, Max 2 karakter">
                     </div>
                     @error('waktu')
             <div class="invalid-feedback">{{ $message }}</div>
                     @enderror
                 </div>
 
+                <div class="row form-group">
+                    <label class="col-sm-4 control-label">Persyaratan</label>
+                    <div class="col-sm-8">
+                    <textarea class="form-control"name="deskripsi" type="text" required pattern=".{,255}" title="Deskripsi Max 255 Karakter">{{ $pelatihan->persyaratan }}</textarea>
+                    </div>
+                    @error('persyaratan')
+            <div class="invalid-feedback">{{ $message }}</div>
+                    @enderror
+                </div>
                 
+                <div class="row form-group">
+                    <label class="col-sm-4 control-label">Deskripsi Pelatihan</label>
+                    <div class="col-sm-8">
+                    <textarea class="form-control"name="deskripsi" type="text" required pattern=".{,255}" title="Deskripsi Max 255 Karakter">{{ $pelatihan->deskripsi }}</textarea>
+                    </div>
+                    @error('deskripsi')
+            <div class="invalid-feedback">{{ $message }}</div>
+                    @enderror
+                </div>
 
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
@@ -220,19 +211,6 @@ foreach ($pelatihans as $pelatihan)
                     </div>
                 </div>
 
-                <div class="row form-group">
-                    <label class="col-sm-4 control-label">Deskripsi Pelatihan</label>
-                    <div class="col-sm-8">
-                    <textarea class="form-control"name="deskripsi" readonly>{{$pelatihan->deskripsi}}</textarea>
-                    </div>
-                </div>
-
-                <div class="row form-group">
-                    <label class="col-sm-4 control-label">Persyaratan</label>
-                    <div class="col-sm-8">
-                        <input type="text" name="persyaratan" class="form-control" value="{{ $pelatihan->persyaratan }}" readonly>
-                    </div>
-                </div>
 
                 <div class="row form-group">
                     <label class="col-sm-4 control-label">Kuota</label>
@@ -248,11 +226,20 @@ foreach ($pelatihans as $pelatihan)
                     </div>
                 </div>
 
-                
+                <div class="row form-group">
+                    <label class="col-sm-4 control-label">Deskripsi Pelatihan</label>
+                    <div class="col-sm-8">
+                    <textarea class="form-control">{{ $pelatihan->deskripsi }}</textarea>
+                    </div>
+                </div>
 
-               
-            <br>
-            
+                <div class="row form-group">
+                    <label class="col-sm-4 control-label">Persyaratan</label>
+                    <div class="col-sm-8">
+                        <textarea class="form-control">{{ $pelatihan->persyaratan }}</textarea>
+                    </div>
+                </div>
+            <br>          
           </div>
         </div>
           <div class="modal-footer">

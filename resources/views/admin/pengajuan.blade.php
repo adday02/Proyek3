@@ -25,18 +25,20 @@
                           <th>Nama Masyarakat</th>
                           <th>Bidang Kejuruan</th>
                           <th>Status</th>
-                          <th width="20%">Aksi</th>
+                          <th width="25%">Aksi</th>
                         </tr>
                       </thead>
                       <tbody>
+                      @foreach($pengajuans as $pengajuan)
                         <tr>
-                            <td>1</td>
-                            <td>Budi</td>
-                            <td>Menjahit</td>
-                            <td>Diterima</td>
+                            <td>{{++$i}}</td>
+                            <td>{{$pengajuan->masyarakat->nama}}</td>
+                            <td>{{$pengajuan->pelatihan->bidang_kejuruan}}</td>
+                            <td>{{$pengajuan->status}}</td>
                             <td>
-                                <button type="danger" class="btn btn-warning btn-sm" data-toggle="modal" data-target="#" >Detail</button>
-                                <button type="danger" class="btn btn-dark btn-sm" data-toggle="modal" data-target="#" >Unduh</button>
+                                <a href="{{URL::to('/')}}/file/{{$pengajuan->file}}"><button type="danger" class="btn btn-dark btn-sm">Unduh</button></a>
+                                <button type="danger" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#edit{{$pengajuan->id_pen_pelatihan}}" >Edit</button>
+                                <button type="danger" class="btn btn-warning btn-sm" data-toggle="modal" data-target="#detail{{$pengajuan->id_pen_pelatihan}}" >Detail</button>
                                 <div style="float:right;">
                                 <form action="#" method="POST">
                                     @csrf
@@ -46,6 +48,7 @@
                                 </div>
                             </td>
                         </tr>
+                        @endforeach
                       </tbody>
                     </table>
                   </div>
@@ -55,4 +58,83 @@
           </div>
         </div>
         <!-- /page content -->
+
+@foreach ($pengajuans as $pengajuan)
+<!-- Modal Ubah Data  -->
+<div id="edit{{$pengajuan->id_pen_pelatihan}}" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+        <!-- konten modal-->
+        <div class="modal-content">
+            <!-- heading modal -->
+            <div class="modal-header">
+              Perizinan Pendaftar Pelatihan
+            </div>
+            <!-- body modal -->
+            <div class="modal-body">
+            <form action="{{route('pengajuan.update', $pengajuan->id_pen_pelatihan)}}" class="form-horizontal tasi-form" method="post" enctype="multipart/form-data">                
+                @csrf
+                @method('PATCH')
+                <div class="row form-group">
+                    <label class="col-sm-4 control-label">Perizinan Pendaftar Pelatihan</label>
+                    <div class="col-sm-8">        
+                      <select class="form-control" name="status">
+                        <option disabled="" selected="" value="">Pilih Perizinan</option>
+                        <option value="Diterima">Diterima</option>
+                        <option value="Ditolak">Ditolak</option>
+                      </select>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-primary">Simpan</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                </div>             
+            </form>
+            </div>        
+        </div>
+    </div>
+</div>
+@endforeach  
+
+@foreach ($pengajuans as $pengajuan)
+<!-- Modal Ubah Data  -->
+<div id="detail{{$pengajuan->id_pen_pelatihan}}" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+        <!-- konten modal-->
+        <div class="modal-content">
+            <!-- heading modal -->
+            <div class="modal-header">
+              Perizinan Pendaftar Pelatihan
+            </div>
+            <!-- body modal -->
+            <div class="modal-body">
+            <form action="#" class="form-horizontal tasi-form" method="post" enctype="multipart/form-data">                
+                @csrf
+                @method('PATCH')
+                <div class="row form-group">
+                    <label class="col-sm-4 control-label">Nama Lengkap</label>
+                    <div class="col-sm-8">        
+                        <input class="form-control" value="{{$pengajuan->masyarakat->nama}}" readonly>
+                    </div>
+                </div>
+                <div class="row form-group">
+                    <label class="col-sm-4 control-label">Bidang Kejuruan</label>
+                    <div class="col-sm-8">        
+                        <input class="form-control" value="{{$pengajuan->pelatihan->bidang_kejuruan}}" readonly>
+                    </div>
+                </div>
+                <div class="row form-group">
+                    <label class="col-sm-4 control-label">Status</label>
+                    <div class="col-sm-8">        
+                        <input class="form-control" value="{{$pengajuan->status}}"readonly>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                </div>             
+            </form>
+            </div>        
+        </div>
+    </div>
+</div>
+@endforeach        
 @endsection

@@ -138,7 +138,7 @@
                 <div class="row form-group">
                     <label class="col-sm-4 control-label">Alamat </label>
                     <div class="col-sm-8">
-                        <input type="text" name="alamat" class="form-control" required pattern=".{,255}" title="Alamat Max 255 Karakter"">
+                        <input type="text" name="alamat" class="form-control" required pattern=".{,255}" title="Alamat Max 255 Karakter">
                     </div>
                 </div>
 

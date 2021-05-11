@@ -18,9 +18,10 @@ class Admin_pelatihanController extends Controller
     {
         $data = array(
             'bidang_kejuruan'=>$request->bidang_kejuruan,
-            'persyarakat'=>$request->persyarakat,
+            'persyaratan'=>$request->persyaratan,
             'kuota'=>$request->kuota,
             'deskripsi'=>$request->deskripsi,
+            'waktu'=>$request->waktu,
         );
         Pelatihan::create($data);
         return redirect('admin\pelatihan')->with('success','pelatihan berhasil ditambah');
