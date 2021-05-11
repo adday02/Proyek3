@@ -24,11 +24,9 @@
                       <thead>
                         <tr>
                           <th>No</th>
-                          <th>Nama Perusahaan</th>
                           <th>Nama Pekerjaan</th>
                           <th>Lokasi Kerja</th>
                           <th>Gaji</th>
-                          <th>Tanggal Info</th>
                           <th>Jenis Kerja</th>
                           <th>Kontak</th> 
                           <th>Status Lowongan</th>
@@ -39,18 +37,17 @@
                       @foreach ($lowongans as $lowongan)
                         <tr>
                           <td>{{++$i}}</td>s
-                            <td>{{$lowongan->id_perusahaan}}</td>
-                            <td>{{$lowongan->jenis_kerja}}</td>
-                            <td>{{$lowongan->deskripsi_kerja}}</td>
+                            <td>{{$lowongan->nama}}</td>
                             <td>{{$lowongan->lokasi_kerja}}</td>
                             <td>{{$lowongan->gaji}}</td>
+                            <td>{{$lowongan->jenis_kerja}}</td>
                             <td>{{$lowongan->kontak}}</td>
                             <td>{{$lowongan->status}}</td>
                             <td>
                                 <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#edit{{$lowongan->id_lowongan}}" >Edit</button>
                                 <button type="danger" class="btn btn-warning btn-sm" data-toggle="modal" data-target="#detail-data{{$lowongan->id_lowongan}}" >Detail</button>
                                   <div style="float:right;">
-                                  <form action="{{route('lowongan.destroy', $lowongan->id_lowongan)}}" method="POST">
+                                  <form action="{{route('lowongan-Perusahaan.destroy', $lowongan->id_lowongan)}}" method="POST">
                                       @csrf
                                       @method('DELETE')
                                       <button type="submit" class="btn btn-danger btn-sm">Hapus</i></a>
@@ -92,13 +89,21 @@
             @endforeach
           </div>
         @endif
-              <form action="{{route('lowongan.store')}}" class="form-horizontal tasi-form" method="post" enctype="multipart/form-data">
+              <form action="{{route('lowongan-Perusahaan.store')}}" class="form-horizontal tasi-form" method="post" enctype="multipart/form-data">
                 @csrf
-                <input class="form-control" name="jenis_kerja"type="text" placeholder="Jenis Pekerjaan"></br>
-                <input class="form-control" name="lokasi_kerja"type="text" placeholder="Lokasi kerja"></br>
-                <input class="form-control" name="gaji"type="text" placeholder="Gaji"></br>
-                <input class="form-control" name="kontak"type="text" placeholder="Kontak"></br>
-                <textarea class="form-control"name="deskripsi_kerja" type="text" placeholder="Deskripsi Pekerjaan"></textarea></br>
+                <input class="form-control" name="nama"type="text" placeholder="Nama Pekerjaan" pattern="[A-Za-z\s]{3,255}" title="Masukkan Nama Pekerjaan hanya dengan huruf, Min 3 dan Max 255"></br>
+                <select class="form-control" name="jenis_kerja" required>
+                  <option disabled="" selected="" value="">Pilih Jenis Kerja</option>
+                  <option>Penuh Waktu</option>
+                  <option>Paruh Waktu</option>
+                  <option>Kontak</option>
+                  <option>Magang</option>
+                </select>
+                <br>
+                <input class="form-control" name="lokasi_kerja"type="text" placeholder="Lokasi kerja" required pattern=".{,255}" title="Lokasi Max 255 Karakter"></br>
+                <input class="form-control" name="gaji"type="text" placeholder="Gaji" required pattern="[0-9]{5,8}" title="Masukkan Gaji dengan angka, Min 5 Digit dan Max 8 Digit"></br>
+                <input class="form-control" name="kontak"type="text" placeholder="Kontak" required pattern="[0-9]{11,13}" title="Masukkan Kontak dengan angka, Min 11 dan Max 13"></br>
+                <textarea class="form-control"name="deskripsi_kerja" type="text" placeholder="Deskripsi Pekerjaan" required pattern=".{,255}" title="Deskripsi Max 255 Karakter"></textarea></br>
                 <input hidden="" name="id_perusahaan" value="{{auth()->user()->id_perusahaan}}">
                 <div class="modal-footer">
                   <button type="submit" class="btn btn-primary">Tambah Lowongan</button>
@@ -125,13 +130,28 @@
             </div>
             <!-- body modal -->
             <div class="modal-body">
-            <form action="{{route('lowongan.update', $lowongan->id_lowongan)}}" class="form-horizontal tasi-form" method="post" enctype="multipart/form-data">
+            <form action="{{route('lowongan-Perusahaan.update', $lowongan->id_lowongan)}}" class="form-horizontal tasi-form" method="post" enctype="multipart/form-data">
                 @csrf
                 @method('PATCH')
             <div class="row form-group">
+              <label class="col-sm-4 control-label">Nama Pekerjaan</label>
+              <div class="col-sm-8">        
+                  <input type="text" name="nama" class="form-control" value="{{ $lowongan->nama}}" required pattern="[A-Za-z\s]{3,255}" title="Masukkan Nama Pekerjaan hanya dengan huruf, Min 3 dan Max 255">
+              </div>
+              @error('jenis_pekerjaan')
+            <div class="invalid-feedback">{{ $message }}</div>
+                    @enderror
+                </div>
+            <div class="row form-group">
               <label class="col-sm-4 control-label">Jenis Pekerjaan</label>
               <div class="col-sm-8">        
-                  <input type="text" name="jenis_kerja" class="form-control" value="{{ $lowongan->jenis_kerja}}" required>
+              <select class="form-control" name="jenis_kerja">
+                  <option disabled="" selected="" value="">Pilih Jenis Kerja</option>
+                  <option>Penuh Waktu</option>
+                  <option>Paruh Waktu</option>
+                  <option>Kontak</option>
+                  <option>Magang</option>
+                </select>
               </div>
               @error('jenis_pekerjaan')
             <div class="invalid-feedback">{{ $message }}</div>
@@ -141,7 +161,7 @@
                 <div class="row form-group">
                     <label class="col-sm-4 control-label">Lokasi Kerja</label>
                     <div class="col-sm-8">
-                        <input type="text" name="lokasi_kerja" class="form-control" value="{{ $lowongan->lokasi_kerja }}" required>
+                        <input type="text" name="lokasi_kerja" class="form-control" value="{{ $lowongan->lokasi_kerja }}" required pattern=".{,255}" title="Lokasi Max 255 Karakter">
                     </div>
                     @error('lokasi_kerja')
             <div class="invalid-feedback">{{ $message }}</div>
@@ -151,7 +171,7 @@
                 <div class="row form-group">
                     <label class="col-sm-4 control-label">Gaji</label>
                     <div class="col-sm-8">
-                        <input type="text" name="gaji" class="form-control" value="{{ $lowongan->gaji }}" required>
+                        <input type="text" name="gaji" class="form-control" value="{{ $lowongan->gaji }}" required pattern="[0-9]{5,8}" title="Masukkan Gaji dengan angka, Min 5 Digit dan Max 8 Digit">
                     </div>
                     @error('gaji')
             <div class="invalid-feedback">{{ $message }}</div>
@@ -161,7 +181,7 @@
                 <div class="row form-group">
                     <label class="col-sm-4 control-label">Kontak</label>
                     <div class="col-sm-8">
-                        <input type="text" name="kontak" class="form-control" value="{{ $lowongan->kontak }}" required>
+                        <input type="text" name="kontak" class="form-control" value="{{ $lowongan->kontak }}" required pattern="[0-9]{11,13}" title="Masukkan Kontak dengan angka, Min 11 dan Max 13">
                     </div>
                     @error('kontak')
             <div class="invalid-feedback">{{ $message }}</div>
@@ -171,8 +191,8 @@
                 <div class="row form-group">
                     <label class="col-sm-4 control-label">Deskripsi Pekerjaan</label>
                     <div class="col-sm-8">
-                    <input class="form-control"name="deskripsi_kerja" type="text" value="{{$lowongan->deskripsi_kerja}}"></input></br>
-                    </div>
+                      <textarea class="form-control"name="deskripsi_kerja" type="text" placeholder="Deskripsi Pekerjaan" required pattern=".{,255}" title="Deskripsi Max 255 Karakter">{{ $lowongan->deskripsi_kerja }}</textarea></br>
+                  </div>
                     @error('deskripsi_kerja')
             <div class="invalid-feedback">{{ $message }}</div>
                     @enderror
@@ -192,7 +212,6 @@
 
 <!-- Modal Edit -->
 
-
 foreach ($lowongans as $lowongan)
              <!--modal Detail-->
     <div class="modal fade" id="detail-data{{$lowongan->id_lowongan}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
@@ -208,65 +227,52 @@ foreach ($lowongans as $lowongan)
           <div class="modal-body">
           <div class="card">
           <div class="row form-group">
-                    <label class="col-sm-4 control-label">ID Lowongan</label>
-                    <div class="col-sm-8">        
-                        <input type="text" name="id_lowongan" class="form-control" value="{{ $lowongan->id_lowongan}}" readonly>
-                    </div>
-                </div>
-
-                 <div class="row form-group">
-                    <label class="col-sm-4 control-label">Nama Perusahaan</label>
-                    <div class="col-sm-8">        
-                        <input type="text" name="id_perusahaan" class="form-control" value="{{ $lowongan->id_perusahaan}}" readonly>
-                    </div>
-                </div>
-                <div class="row form-group">
-                    <label class="col-sm-4 control-label">Nama Pekerjaan</label>
-                    <div class="col-sm-8">        
-                        <input type="text" name="nama" class="form-control" value="{{ $lowongan->nama}}" readonly>
-                    </div>
-                </div>
-                <div class="row form-group">
-                    <label class="col-sm-4 control-label">Jenis Pekerjaan</label>
-                    <div class="col-sm-8">        
-                        <input type="text" name="jenis_kerja" class="form-control" value="{{ $lowongan->jenis_kerja}}" readonly>
-                    </div>
-                </div>
-
-                <div class="row form-group">
-                    <label class="col-sm-4 control-label">Deskripsi Pekerjaan</label>
-                    <div class="col-sm-8">
-                    <textarea class="form-control"name="deskripsi_kerja" readonly>{{$lowongan->deskripsi_kerja}}</textarea>
-                    </div>
-                </div>
-
-                <div class="row form-group">
-                    <label class="col-sm-4 control-label">Lokasi Kerja</label>
-                    <div class="col-sm-8">
-                        <input type="text" name="lokasi_kerja" class="form-control" value="{{ $lowongan->lokasi_kerja }}" readonly>
-                    </div>
-                </div>
-
-                <div class="row form-group">
-                    <label class="col-sm-4 control-label">Gaji</label>
-                    <div class="col-sm-8">
-                        <input type="text" name="gaji" class="form-control" value="{{ $lowongan->gaji }}" readonly>
-                    </div>
-                </div>
-
-                <div class="row form-group">
-                    <label class="col-sm-4 control-label">Kontak</label>
-                    <div class="col-sm-8">
-                        <input type="text" name="kontak" class="form-control" value="{{ $lowongan->kontak }}" readonly>
-                    </div>
-                </div>
-              
-                <input type="text" name="status" class="form-control" id="status" required="" value="{{ $lowongan->status }}" readonly>
-                </div>
-               
-            <br>
-              
+              <label class="col-sm-4 control-label">Nama Pekerjaan</label>
+              <div class="col-sm-8">        
+                  <input type="text" name="nama" class="form-control" value="{{ $lowongan->nama}}" readonly>
+              </div>
           </div>
+          <div class="row form-group">
+              <label class="col-sm-4 control-label">Jenis Pekerjaan</label>
+              <div class="col-sm-8">        
+                  <input type="text" name="jenis_kerja" class="form-control" value="{{ $lowongan->jenis_kerja}}" readonly>
+              </div>
+          </div>
+
+          <div class="row form-group">
+              <label class="col-sm-4 control-label">Deskripsi Pekerjaan</label>
+              <div class="col-sm-8">
+              <textarea class="form-control"name="deskripsi_kerja" readonly>{{$lowongan->deskripsi_kerja}}</textarea>
+              </div>
+          </div>
+
+          <div class="row form-group">
+              <label class="col-sm-4 control-label">Lokasi Kerja</label>
+              <div class="col-sm-8">
+                  <input type="text" name="lokasi_kerja" class="form-control" value="{{ $lowongan->lokasi_kerja }}" readonly>
+              </div>
+          </div>
+
+          <div class="row form-group">
+              <label class="col-sm-4 control-label">Gaji</label>
+              <div class="col-sm-8">
+                  <input type="text" name="gaji" class="form-control" value="{{ $lowongan->gaji }}" readonly>
+              </div>
+          </div>
+
+          <div class="row form-group">
+              <label class="col-sm-4 control-label">Kontak</label>
+              <div class="col-sm-8">
+                  <input type="text" name="kontak" class="form-control" value="{{ $lowongan->kontak }}" readonly>
+              </div>
+          </div>
+          <div class="row form-group">
+              <label class="col-sm-4 control-label">Status</label>
+              <div class="col-sm-8">
+                  <input type="text" name="kontak" class="form-control" value="{{ $lowongan->status }}" readonly>
+              </div>
+          </div>
+        </div>
         </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>

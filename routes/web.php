@@ -11,7 +11,9 @@ use App\Http\Controllers\Admin_PenPelatihanController;
 use App\Http\Controllers\UtamaController;
 use App\Http\Controllers\login;
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\Perusahaan_dasboardController;
 use App\Http\Controllers\Perusahaan_lowonganController;
+use App\Http\Controllers\Perusahaan_lamaranController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -39,8 +41,8 @@ Route::group(['prefix'=> 'admin',  'middleware'=> 'auth:admin'], function()
 
 Route::group(['prefix'=> 'perusahaan',  'middleware'=> 'auth:perusahaan'], function()
 {
-    Route::resource('dashboard',Perusahaan_dashboardController::class);    
-    Route::resource('lowongan-Perusaahaan',Perusahaan_lowonganController::class);    
+    Route::resource('dashboard',Perusahaan_dasboardController::class);    
+    Route::resource('lowongan-Perusahaan',Perusahaan_lowonganController::class);    
     Route::resource('lamaran',Perusahaan_lamaranController::class);    
 });
 
