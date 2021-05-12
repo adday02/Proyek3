@@ -15,6 +15,18 @@
                 <div class="x_panel">
                   <div class="x_title">
                     <h2>Data Perusahaan</h2>
+                    @if($errors->any())
+                <div class="alert alert-danger" role="alert">
+                  <button type="button" class="close" data-dismiss="alert"aria-label="close">
+                    <span aria-hidden= "true"></span>
+                  </button>
+                  <div>
+                    @foreach ($errors->all() as $error)
+                        {{$error}} <br>
+                        @endforeach
+                  </div>
+                </div>
+                @endif
                     <div style="float:right;"><button type="danger" class="btn btn-success btn-sm" data-toggle="modal" data-target="#tambah" >Tambah Perusahaan</button></div> 
                     <div class="clearfix"></div>
                   </div>
@@ -68,14 +80,27 @@
             <!-- heading modal -->
             <div class="modal-header">
                 <h5 class="modal-title" id="mediumModalLabel">Tambah Perusahaan</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
+               
+          <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>        
             </div>
+   
             <!-- body modal -->
             <div class="modal-body">
+            @if(Session::has('success'))
+                        <div class="alert alert-success">
+                            {{ Session::get('success') }}
+                            @php
+                                Session::forget('success');
+                            @endphp
+                        </div>
+                        @endif
               <form action="{{route('perusahaan.store')}}" class="form-horizontal tasi-form" method="post" enctype="multipart/form-data">
                 @csrf
+                
+      
+               
                 <div class="row form-group">
                     <label class="col-sm-4 control-label">ID Perusahaan</label>
                     <div class="col-sm-8">        
@@ -126,7 +151,10 @@
                 <div class="row form-group">
                     <label class="col-sm-4 control-label">Logo</label>
                     <div class="col-sm-8">        
-                        <input type="file" name="logo" class="form-control" id="inputGroupFile01" required>
+                        <input type="file" name="logo" class="form-control-file  @error('logo') is-invalid @enderror" value="{{ old('logo') }}" id="inputGroupFile01"   required>
+                        @if ($errors->has('logo'))
+                                    <span class="text-danger">{{ $errors->first('logo') }}</span>
+                                @endif
                     </div>
                 </div>
                 <div class="modal-footer">
@@ -196,6 +224,9 @@
                     <label class="col-sm-4 control-label">Foto</label>
                     <div class="col-sm-8">        
                         <input type="file" name="foto" select="{{$perusahaan->logo}}">
+                        @if ($errors->has('logo'))
+                                    <span class="text-danger">{{ $errors->first('logo') }}</span>
+                                @endif
                     </div>
                 </div>
 

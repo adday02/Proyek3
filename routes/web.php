@@ -14,6 +14,14 @@ use App\Http\Controllers\LoginController;
 use App\Http\Controllers\Perusahaan_dasboardController;
 use App\Http\Controllers\Perusahaan_lowonganController;
 use App\Http\Controllers\Perusahaan_lamaranController;
+use App\Http\Controllers\Masyarakat_pendaftarPelatihanController;
+use App\Http\Controllers\Masyarakat_lamaranController;
+use App\Http\Controllers\Masyarakat_lowonganController;
+use App\Http\Controllers\Masyarakat_pelatihanController;
+use App\Http\Controllers\Masyarakat_pendaftranPelatihanController;
+use App\Http\Controllers\Masyarakat_profilController;
+use App\Http\Controllers\Masyarakat_homeUserController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -48,21 +56,11 @@ Route::group(['prefix'=> 'perusahaan',  'middleware'=> 'auth:perusahaan'], funct
 
 Route::group(['prefix'=> 'masyarakat',  'middleware'=> 'auth:masyarakat'], function()
 {
-    Route::get('homeuser', function () {
-        return view('masyarakat/homeuser');
-    });
-    Route::get('lamaran', function () {
-        return view('masyarakat/lamaran');
-    });
-    
-    Route::get('lowongan', function () {
-        return view('masyarakat/lowongan');
-    });
-
-    Route::get('pelatihan', function () {
-        return view('masyarakat/pelatihan');
-    });
-
+    Route::resource('homeuser',Masyarakat_homeUserController::class);
+    Route::resource('profil',Masyarakat_profilController::class);
+    Route::resource('lamaran',Masyarakat_lamaranController::class);
+    Route::resource('lowongan',Masyarakat_lowonganController::class);
+    Route::resource('pelatihan',Masyarakat_pelatihanController::class);
     Route::resource('daftarpelatihan',Masyarakat_pendaftarPelatihanController::class);
     
 });

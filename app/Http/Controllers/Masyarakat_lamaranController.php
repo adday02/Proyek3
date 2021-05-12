@@ -3,10 +3,10 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Pendaftar_Pelatihan;
-use App\Models\Pelatihan;
+use App\Models\Lamaran;
+use App\Models\Lowongan;
 
-class Masyarakat_pendaftarPelatihanController extends Controller
+class Masyarakat_lamaranController extends Controller
 {
      /**
      * Display a listing of the resource.
@@ -15,9 +15,9 @@ class Masyarakat_pendaftarPelatihanController extends Controller
      */
     public function index()
     {
-        $pendaftar_pelatihans = Pendaftar_Pelatihan::all();
-        $pelatihans = Pelatihan::all();
-        return view('masyarakat/daftarpelatihan',compact('pendaftar_pelatihans','pelatihans'))->with('i');
+        $lamarans = Lamaran::all();
+        $lowongans = Lowongan::all();
+        return view('masyarakat/Lamaran',compact('lamarans','lowongans'))->with('i');
     }
 
     /**
@@ -44,13 +44,14 @@ class Masyarakat_pendaftarPelatihanController extends Controller
         $file->move(public_path('file'), $new_name);
 
         $data = array(
+            'id_lowongan'=>$request->id_lowongan,
             'nik'=>$request->nik,
-            'id_pelatihan'=>$request->id_pelatihan,
             'file'=>$new_name,
-            'status'=>'dalam proses',
+            'status'=>'dalam_proses',
+            
         );
-        Pendaftar_Pelatihan::create($data);
-        return redirect('masyarakat\daftarpelatihan')->with('success','masyarakat berhasil ditambah');
+        Lamaran::create($data);
+        return redirect('masyarakat\lamaran')->with('success','lamaran berhasil ditambah');
     }
 
     /**
@@ -70,15 +71,13 @@ class Masyarakat_pendaftarPelatihanController extends Controller
             $data = array(            
                 'file'=>$new_name,
             );
-        Pendaftar_Pelatihan::whereid_pen_pelatihan($id)->update($data);
+        Lamaran::whereid_lamaran($id)->update($data);
         }
             $data = array(
                 'file'=>$new_name,
-   
             );
-        
-        Pendaftar_Pelatihan::whereid_pen_pelatihan($id)->update($data);
-        return redirect('masyarakat\daftarpelatihan');
+        Lamaran::whereid_lamaran($id)->update($data);
+        return redirect('masyarakat\lamaran');
     }
 
     /**
@@ -90,11 +89,11 @@ class Masyarakat_pendaftarPelatihanController extends Controller
     public function destroy($id)
     {
         try{
-            $datas = Pendaftar_Pelatihan::findOrfail($id);
+            $datas = Lamaran::findOrfail($id);
             $datas->delete();
-            return redirect('masyarakat\daftarpelatihan')->with('success','daftarpelatihan Berhasil Dihapus');
+            return redirect('masyarakat\lamaran')->with('success','lamaran Berhasil Dihapus');
         }catch(\Throwable $th){
-            return redirect('masyarakat\daftarpelatihan')->withErrors('Data gagal dihapus. Harap hapus data yang terkait');
+            return redirect('masyarakat\lamaran')->withErrors('Data gagal dihapus. Harap hapus data yang terkait');
         }
     }
 }
