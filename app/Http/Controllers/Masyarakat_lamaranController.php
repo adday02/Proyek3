@@ -27,6 +27,21 @@ class Masyarakat_lamaranController extends Controller
      */
     public function store(Request $request)
     {
+<<<<<<< HEAD
+=======
+        $validatedData = $request->validate([
+            
+            'file'             => 'required|mimetypes:application/pdf|max:10000',
+            
+        ],
+        [
+            
+            'file.mimetypes'       => 'Upload file dengan format pdf !',
+            
+            
+        ]);
+
+>>>>>>> f415f2af1f83b34f735c4e20ca44e0dc1533dc79
         $file = $request->file('file');
         $new_name = rand().'.'.$file->getClientOriginalExtension();
         $file->move(public_path('file'), $new_name);

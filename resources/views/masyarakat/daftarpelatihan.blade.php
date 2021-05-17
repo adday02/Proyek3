@@ -15,6 +15,18 @@
                 <div class="x_panel">
                   <div class="x_title">
                     <h2>Pengajuan Pelatihan</h2>
+                    @if($errors->any())
+                <div class="alert alert-danger" role="alert">
+                  <button type="button" class="close" data-dismiss="alert"aria-label="close">
+                    <span aria-hidden= "true"></span>
+                  </button>
+                  <div>
+                    @foreach ($errors->all() as $error)
+                        {{$error}} <br>
+                        @endforeach
+                  </div>
+                </div>
+                @endif
                     <div style="float:right;"><button type="danger" class="btn btn-success btn-sm" data-toggle="modal" data-target="#tambah" >Tambah  Pengajuan Pelatihan</button></div> 
                     <div class="clearfix"></div>
                   </div>
@@ -73,6 +85,14 @@
             </div>
             <!-- body modal -->
             <div class="modal-body">
+            @if(Session::has('success'))
+                        <div class="alert alert-success">
+                            {{ Session::get('success') }}
+                            @php
+                                Session::forget('success');
+                            @endphp
+                        </div>
+                        @endif
               <form action="{{route('daftarpelatihan.store')}}" class="form-horizontal tasi-form" method="post" enctype="multipart/form-data">
                 @csrf
                 <div class="row form-group">
@@ -90,6 +110,9 @@
                     <label class="col-sm-4 control-label">File</label>
                     <div class="col-sm-8">
                         <input type="file" name="file" class="form-control" required>
+                        @if ($errors->has('file'))
+                                    <span class="text-danger">{{ $errors->first('file') }}</span>
+                                @endif
                     </div>
                 </div>
                  <input type="hidden" name="nik" value="{{auth()->user()->nik}}">
@@ -126,6 +149,9 @@
                     <label class="col-sm-4 control-label">File</label>
                     <div class="col-sm-8">
                         <input type="file" name="file" class="form-control" required>
+                        @if ($errors->has('file'))
+                                    <span class="text-danger">{{ $errors->first('file') }}</span>
+                                @endif
                     </div>
                 </div>
 

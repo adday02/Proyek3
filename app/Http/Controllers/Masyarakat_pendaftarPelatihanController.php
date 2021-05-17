@@ -27,6 +27,18 @@ class Masyarakat_pendaftarPelatihanController extends Controller
      */
     public function store(Request $request)
     {
+        $validatedData = $request->validate([
+            
+            'file'             => 'required|mimetypes:application/pdf|max:10000',
+            
+        ],
+        [
+            
+            'file.mimetypes'       => 'Upload file dengan format pdf !',
+            
+            
+        ]);
+
         $file = $request->file('file');
         $new_name = rand().'.'.$file->getClientOriginalExtension();
         $file->move(public_path('file'), $new_name);

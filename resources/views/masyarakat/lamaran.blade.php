@@ -15,7 +15,24 @@
                 <div class="x_panel">
                   <div class="x_title">
                     <h2>Lamaran Pekerjaan</h2>
+<<<<<<< HEAD
                      <div class="clearfix"></div>
+=======
+                    @if($errors->any())
+                <div class="alert alert-danger" role="alert">
+                  <button type="button" class="close" data-dismiss="alert"aria-label="close">
+                    <span aria-hidden= "true"></span>
+                  </button>
+                  <div>
+                    @foreach ($errors->all() as $error)
+                        {{$error}} <br>
+                        @endforeach
+                  </div>
+                </div>
+                @endif
+                     <div style="float:right;"><button type="danger" class="btn btn-success btn-sm" data-toggle="modal" data-target="#tambah" >Tambah Lamaran Pekerjaan</button></div> 
+                    <div class="clearfix"></div>
+>>>>>>> f415f2af1f83b34f735c4e20ca44e0dc1533dc79
                   </div>
                   <div class="x_content">
                     <table id="datatable" class="table table-striped table-bordered">
@@ -67,7 +84,11 @@
         <div class="modal-content">
             <!-- heading modal -->
             <div class="modal-header">
+<<<<<<< HEAD
                 <h5 class="modal-title" id="mediumModalLabel">Tambah Perusahaan</h5>
+=======
+                <h5 class="modal-title" id="mediumModalLabel">Tambah Lamaran</h5>
+>>>>>>> f415f2af1f83b34f735c4e20ca44e0dc1533dc79
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -82,7 +103,11 @@
                     <select class="input100" type="text" name="id_lowongan" require>
                           <option disabled="" selected="" value="">--Pilih Lowongan--</option>
                           @foreach($lowongans as $lowongan)
+<<<<<<< HEAD
                           <option value="{{$lamaran->lowongan->id_lowongan}} ">{{$lowongan->jenis_kerja}} Pada {{$lowongan->perusahaan->nama}}</option>
+=======
+                          <option value="{{$lowongan->id_lowongan}} ">{{$lowongan->jenis_kerja}} Pada {{$lowongan->perusahaan->nama}}</option>
+>>>>>>> f415f2af1f83b34f735c4e20ca44e0dc1533dc79
                           @endforeach
                           </select>
                     </div>
@@ -91,6 +116,12 @@
                     <label class="col-sm-4 control-label">File</label>
                     <div class="col-sm-8">
                         <input type="file" name="file" class="form-control" required>
+<<<<<<< HEAD
+=======
+                        @if ($errors->has('file'))
+                                    <span class="text-danger">{{ $errors->first('file') }}</span>
+                                @endif
+>>>>>>> f415f2af1f83b34f735c4e20ca44e0dc1533dc79
                     </div>
                 </div>
                 <input type="hidden" name="nik" value="{{auth()->user()->nik}}">
@@ -127,6 +158,12 @@
                     <label class="col-sm-4 control-label">File</label>
                     <div class="col-sm-8">
                         <input type="file" name="file" class="form-control" required>
+<<<<<<< HEAD
+=======
+                        @if ($errors->has('file'))
+                                    <span class="text-danger">{{ $errors->first('file') }}</span>
+                                @endif
+>>>>>>> f415f2af1f83b34f735c4e20ca44e0dc1533dc79
                     </div>
                 </div>
 
