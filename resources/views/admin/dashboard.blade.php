@@ -43,7 +43,7 @@
                 </div>
 
                 <div class="col-md-9 col-sm-9 col-xs-12">
-                  <div id="chart_plot_01" class="demo-placeholder"></div>
+                  <div id="graph_bar" class="demo-placeholder"></div>
                 </div>
                 <div class="col-md-3 col-sm-3 col-xs-12 bg-white">
                   <div class="x_title">
@@ -91,4 +91,7 @@
                 <div class="clearfix"></div>
             </div>
           </div>
+        </div>
+      </div>
+    </div>
 @endsection

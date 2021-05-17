@@ -22,6 +22,8 @@ class Admin_lowonganController extends Controller
             );
         Lowongan::whereid_lowongan($id)->update($data);
         return redirect('admin\lowongan');
+        }
+        return redirect('admin\lowongan');
     }
 
 

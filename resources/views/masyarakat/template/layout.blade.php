@@ -40,19 +40,16 @@
         <div class="col-md-3 left_col">
           <div class="left_col scroll-view">
             <div class="navbar nav_title" style="border: 0;">
-              <a href="index.html" class="site_title"><span>Kab. Indramayu</span></a>
+              <a href="index.html" class="site_title"><span>Loker Indramayu</span></a>
             </div>
 
             <div class="clearfix"></div>
 
             <!-- menu profile quick info -->
-            <div class="profile clearfix">
-              <div class="profile_pic">
-                <img src="../images/img.jpg" alt="..." class="img-circle profile_img">
-              </div>
+            <div class="profile clearfix main_menu_side hidden-print main_menu">
               <div class="profile_info">
                 <span>Welcome,</span>
-                <h2>Budi</h2>
+                <h2>{{auth()->user()->nama}}</h2>
               </div>
             </div>
             <!-- /menu profile quick info -->
@@ -66,14 +63,14 @@
                   
                   <li><a><i class="fa fa-building"></i> Pekerjaan <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
-                      <li><a href="{{URL('masyarakat/lowongan')}}">Lowongan Pekerjaan</a></li>
-                      <li><a href="{{URL('masyarakat/lamaran')}}">Lamaran Pekerjaan</a></li>
+                      <li><a href="{{URL('masyarakat/lowongan-masyarakat')}}">Lowongan Pekerjaan</a></li>
+                      <li><a href="{{URL('masyarakat/lamaran-masyarakat')}}">Lamaran Pekerjaan</a></li>
                     </ul>
                   </li>
                   <li><a><i class="fa fa-line-chart"></i> Pelatihan <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
-                      <li><a href="{{URL('masyarakat/pelatihan')}}">Info  Pelatihan</a></li>
-                      <li><a href="{{URL('masyarakat/daftarpelatihan')}}">Daftar Pelatihan</a></li>
+                      <li><a href="{{URL('masyarakat/pelatihan-masyarakat')}}">Info  Pelatihan</a></li>
+                      <li><a href="{{URL('masyarakat/daftarpelatihan-masyarakat')}}">Daftar Pelatihan</a></li>
                     </ul>
                   </li>
                 </ul>
@@ -95,7 +92,7 @@
               <ul class="nav navbar-nav navbar-right">
                 <li class="">
                   <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-                    <img src="../images/img.jpg" alt="">Budi
+                    <img src="{{URL::to('/')}}/foto/{{auth()->user()->foto}}" alt="">{{auth()->user()->nama}}
                     <span class=" fa fa-angle-down"></span>
                   </a>
                   <ul class="dropdown-menu dropdown-usermenu pull-right">

@@ -142,7 +142,7 @@
 
         @foreach ($pendaftar_pelatihans as $daftar_pelatihan)
 <!-- Modal detail Data  -->
-<div id="detail{{$daftar_pelatihan->id_penPelatihan}}" class="modal fade" role="dialog">
+<div id="detail{{$daftar_pelatihan->id_pen_pelatihan}}" class="modal fade" role="dialog">
     <div class="modal-dialog">
         <!-- konten modal-->
         <div class="modal-content">
