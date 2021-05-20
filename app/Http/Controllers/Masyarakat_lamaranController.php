@@ -41,7 +41,7 @@ class Masyarakat_lamaranController extends Controller
             'id_lowongan'=>$request->id_lowongan,
             'nik'=>$request->nik,
             'file'=>$new_name,
-            'status'=>'dalam_proses',
+            'status'=>'Dalam Proses',
         );
         Lamaran::create($data);
         return redirect('masyarakat\lamaran-masyarakat')->with('success','lamaran berhasil ditambah');

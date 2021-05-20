@@ -34,13 +34,13 @@
                         @foreach($lowongans as $lowongan)
                           <tr>
                             <td>{{++$i}}</td>
-                            <td>{{$lowongan->perusahaan->nama}}</td>
+                            <td>{{$lowongan->nama}}</td>
                             <td>{{$lowongan->jenis_kerja}}</td>
                             <td>{{$lowongan->gaji}}</td>
                             <td>1. Minimal Pendidikan SMA, 2. KTP, 3. dll.</td>
                             <td>
                             <button type="danger" class="btn btn-warning btn-sm" data-toggle="modal" data-target="#detail{{$lowongan->id_lowongan}}" >Detail</button>
-                            <button type="danger" class="btn btn-success btn-sm" data-toggle="modal" data-target="#detail{{$lowongan->id_lowongan}}" >Lamar</button>
+                            <button type="danger" class="btn btn-success btn-sm" data-toggle="modal" data-target="#lamar{{$lowongan->id_lowongan}}" >Lamar</button>
                             </td>
                           </tr>
                         @endforeach
@@ -53,7 +53,7 @@
           </div>
         </div>
         <!-- /page content -->
-        @foreach ($lowongans as $lowongan)
+@foreach ($lowongans as $lowongan)
 <!-- Modal Ubah Data  -->
 <div id="detail{{$lowongan->id_lowongan}}" class="modal fade" role="dialog">
     <div class="modal-dialog">
@@ -64,7 +64,7 @@
               </div>
             <!-- body modal -->
             <div class="modal-body">
-            <form action="{{route('lowongan.update', $lowongan->id_lowongan)}}" class="form-horizontal tasi-form" method="post" enctype="multipart/form-data">                
+            <form action="{{route('lowongan-masyarakat.update', $lowongan->id_lowongan)}}" class="form-horizontal tasi-form" method="post" enctype="multipart/form-data">                
                 <div class="row form-group">
                     <label class="col-sm-4 control-label">Nama Perusahaan</label>
                     <div class="col-sm-8">        
@@ -129,6 +129,38 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                </div>             
+            </form>
+            </div>        
+        </div>
+    </div>
+</div>
+@endforeach
+
+@foreach ($lowongans as $lowongan)
+<div id="lamar{{$lowongan->id_lowongan}}" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+        <!-- konten modal-->
+        <div class="modal-content">
+            <!-- heading modal -->
+            <div class="modal-header">
+            <h5 class="modal-title" id="mediumModalLabel">Tambah Lamaran Ke {{$lowongan->perusahaan->nama}}</h5>
+              </div>
+            <!-- body modal -->
+            <div class="modal-body">
+            <form action="{{route('lowongan-masyarakat.store')}}" class="form-horizontal tasi-form" method="post" enctype="multipart/form-data">                
+            @csrf
+            <div class="row form-group">
+                    <label class="col-sm-4 control-label">File (.pdf)</label>
+                    <div class="col-sm-8">
+                        <input type="file" name="file" class="form-control" required>
+                    </div>
+                    <input type="hidden" name="nik" value="{{auth()->user()->nik}}">
+                    <input type="hidden" name="id_lowongan" value="{{$lowongan->id_lowongan}}">
+                </div>
+                <div class="modal-footer">
+                  <button type="submit" class="btn btn-primary">Tambah Lamaran</button>
+                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
                 </div>             
             </form>
             </div>        

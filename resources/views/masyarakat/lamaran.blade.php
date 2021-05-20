@@ -35,7 +35,7 @@
                       <thead>
                         <tr>
                           <th>No</th>
-                          <th>Nama Masyarakat</th>
+                          <th>Nama Pekerjaan</th>
                           <th>Nama Perusahaan</th>
                           <th>Jenis Pekerjaan</th>
                           <th>Status</th>
@@ -46,7 +46,7 @@
                         @foreach($lamarans as $lamaran)
                           <tr>
                             <td>{{++$i}}</td>
-                            <td>{{$lamaran->masyarakat->nama}}</td>
+                            <td>{{$lamaran->lowongan->nama}}</td>
                             <td>{{$lamaran->lowongan->perusahaan->nama}}</td>
                             <td>{{$lamaran->lowongan->jenis_kerja}}</td>
                             <td>{{$lamaran->status}}</td>
@@ -54,7 +54,7 @@
                             <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#edit{{$lamaran->id_lamaran}}" >Edit</button>
                             <button type="danger" class="btn btn-warning btn-sm" data-toggle="modal" data-target="#detail{{$lamaran->id_lamaran}}" >Detail</button>
                             <div style="float:right;">
-                                <form form action="{{route('lamaran.destroy', $lamaran->id_lamaran)}}" method="POST">
+                                <form form action="{{route('lamaran-masyarakat.destroy', $lamaran->id_lamaran)}}" method="POST">
                                     @csrf
                                     @method('DELETE')
                                     <button type="submit" class="btn btn-danger btn-sm">Hapus</i></a>
@@ -160,7 +160,7 @@
 </div>
 @endforeach
 
-        @foreach ($lamarans as $lamaran)
+@foreach ($lamarans as $lamaran)
 <!-- Modal Ubah Data  -->
 <div id="detail{{$lamaran->id_lamaran}}" class="modal fade" role="dialog">
     <div class="modal-dialog">
