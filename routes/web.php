@@ -20,7 +20,6 @@ use App\Http\Controllers\Masyarakat_lowonganController;
 use App\Http\Controllers\Masyarakat_pelatihanController;
 use App\Http\Controllers\Masyarakat_pendaftranPelatihanController;
 use App\Http\Controllers\Masyarakat_profilController;
-use App\Http\Controllers\Masyarakat_homeUserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -59,6 +58,7 @@ Route::group(['prefix'=> 'masyarakat',  'middleware'=> 'auth:masyarakat'], funct
     Route::resource('lowongan-masyarakat',Masyarakat_lowonganController::class);
     Route::resource('pelatihan-masyarakat',Masyarakat_pelatihanController::class);
     Route::resource('daftarpelatihan-masyarakat',Masyarakat_pendaftarPelatihanController::class);
+    Route::resource('profile-masyarakat',Masyarakat_profilController::class);
 });
 
 Route::post('/kirimdata',[LoginController::class,'masuk'])->name('login');

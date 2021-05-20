@@ -92,11 +92,7 @@
               <ul class="nav navbar-nav navbar-right">
                 <li class="">
                   <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-<<<<<<< HEAD
-                    <img src="../images/img.jpg" alt="">{{auth()->user()->nama}}
-=======
                     <img src="{{URL::to('/')}}/foto/{{auth()->user()->foto}}" alt="">{{auth()->user()->nama}}
->>>>>>> 50ef156d750ce7983fb19d08c744844bd00d4ffb
                     <span class=" fa fa-angle-down"></span>
                   </a>
                   <ul class="dropdown-menu dropdown-usermenu pull-right">
