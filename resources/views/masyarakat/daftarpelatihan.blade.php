@@ -6,16 +6,7 @@
           <div class="">
             <div class="page-title">
               <div class="title_left">
-                <h3>Pelatihan</h3>
-              </div>
-            </div>
-            <div class="clearfix"></div>
-            <div class="row">
-              <div class="col-md-12 col-sm-12 col-xs-12">
-                <div class="x_panel">
-                  <div class="x_title">
-                    <h2>Pengajuan Pelatihan</h2>
-                    @if($errors->any())
+              @if($errors->any())
                 <div class="alert alert-danger" role="alert">
                   <button type="button" class="close" data-dismiss="alert"aria-label="close">
                     <span aria-hidden= "true"></span>
@@ -27,6 +18,15 @@
                   </div>
                 </div>
                 @endif
+                <h3>Pelatihan</h3>
+              </div>
+            </div>
+            <div class="clearfix"></div>
+            <div class="row">
+              <div class="col-md-12 col-sm-12 col-xs-12">
+                <div class="x_panel">
+                  <div class="x_title">
+                    <h2>Pengajuan Pelatihan</h2>
                     <div style="float:right;"><button type="danger" class="btn btn-success btn-sm" data-toggle="modal" data-target="#tambah" >Tambah  Pengajuan Pelatihan</button></div> 
                     <div class="clearfix"></div>
                   </div>
@@ -38,7 +38,7 @@
                           <th>Nama Masyarakat</th>
                           <th>Bidang Kejuruan</th>
                           <th>Status</th>
-                          <th width="25%">Aksi</th>
+                          <th width="19%">Aksi</th>
                         </tr>
                       </thead>
                       <tbody>
@@ -52,7 +52,7 @@
                             <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#edit{{$daftar_pelatihan->id_pen_pelatihan}}" >Edit</button>
                             <button type="danger" class="btn btn-warning btn-sm" data-toggle="modal" data-target="#detail{{$daftar_pelatihan->id_pen_pelatihan}}" >Detail</button>
                                 <div style="float:right;">
-                                <form action="{{route('daftarpelatihan.destroy', $daftar_pelatihan->id_pen_pelatihan)}}" method="POST">
+                                <form action="{{route('daftarpelatihan-masyarakat.destroy', $daftar_pelatihan->id_pen_pelatihan)}}" method="POST">
                                     @csrf
                                     @method('DELETE')
                                     <button type="submit" class="btn btn-danger btn-sm">Hapus</i></a>
@@ -93,12 +93,12 @@
                             @endphp
                         </div>
                         @endif
-              <form action="{{route('daftarpelatihan.store')}}" class="form-horizontal tasi-form" method="post" enctype="multipart/form-data">
+              <form action="{{route('daftarpelatihan-masyarakat.store')}}" class="form-horizontal tasi-form" method="post" enctype="multipart/form-data">
                 @csrf
                 <div class="row form-group">
                     <label class="col-sm-4 control-label">Jenis Pelatihan</label>
                     <div class="col-sm-8">        
-                        <select class="input100" type="text" name="id_pelatihan" require>
+                        <select class="form-control" type="text" name="id_pelatihan" require>
                           <option disabled="" selected="" value="">--Pilih Pelatihan--</option>
                           @foreach($pelatihans as $pelatihan)
                           <option value="{{$pelatihan->id_pelatihan}} ">{{$pelatihan->bidang_kejuruan}}</option>
@@ -107,7 +107,7 @@
                     </div>
                 </div>
                 <div class="row form-group">
-                    <label class="col-sm-4 control-label">File</label>
+                    <label class="col-sm-4 control-label">File (.pdf)</label>
                     <div class="col-sm-8">
                         <input type="file" name="file" class="form-control" required>
                         @if ($errors->has('file'))
@@ -142,7 +142,7 @@
             </div>
             <!-- body modal -->
             <div class="modal-body">
-            <form action="{{route('daftarpelatihan.update', $daftar_pelatihan->id_pen_pelatihan)}}" class="form-horizontal tasi-form" method="post" enctype="multipart/form-data">
+            <form action="{{route('daftarpelatihan-masyarakat.update', $daftar_pelatihan->id_pen_pelatihan)}}" class="form-horizontal tasi-form" method="post" enctype="multipart/form-data">
                 @csrf
                 @method('PATCH')
                 <div class="row form-group">
@@ -154,7 +154,6 @@
                                 @endif
                     </div>
                 </div>
-
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
                     <button type="submit" class="btn btn-primary">Confirm</button>
@@ -166,16 +165,15 @@
 </div>
 @endforeach
 
-        @foreach ($pendaftar_pelatihans as $daftar_pelatihan)
+@foreach ($pendaftar_pelatihans as $daftar_pelatihan)
 <!-- Modal detail Data  -->
-<div id="detail{{$daftar_pelatihan->id_penPelatihan}}" class="modal fade" role="dialog">
+<div id="detail{{$daftar_pelatihan->id_pen_pelatihan}}" class="modal fade" role="dialog">
     <div class="modal-dialog">
         <!-- konten modal-->
         <div class="modal-content">
             <!-- heading modal -->
             <div class="modal-header">
-              <img  align:center; src="{{URL::to('/')}}/logo/{{$daftar_pelatihan->logo}}" class="fa-image" width="100px" href="URL::to('/')}}/logo/{{$daftar_pelatihan->logo}}" >
-            </div>
+             </div>
             <!-- body modal -->
             <div class="modal-body">
             <form class="form-horizontal tasi-form" method="post" enctype="multipart/form-data">                

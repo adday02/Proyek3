@@ -28,17 +28,11 @@ class Masyarakat_lamaranController extends Controller
     public function store(Request $request)
     {
         $validatedData = $request->validate([
-            
             'file'             => 'required|mimetypes:application/pdf|max:10000',
-            
         ],
         [
-            
             'file.mimetypes'       => 'Upload file dengan format pdf !',
-            
-            
         ]);
-
         $file = $request->file('file');
         $new_name = rand().'.'.$file->getClientOriginalExtension();
         $file->move(public_path('file'), $new_name);
@@ -48,10 +42,9 @@ class Masyarakat_lamaranController extends Controller
             'nik'=>$request->nik,
             'file'=>$new_name,
             'status'=>'dalam_proses',
-            
         );
         Lamaran::create($data);
-        return redirect('masyarakat\lamaran')->with('success','lamaran berhasil ditambah');
+        return redirect('masyarakat\lamaran-masyarakat')->with('success','lamaran berhasil ditambah');
     }
 
     /**
@@ -62,7 +55,12 @@ class Masyarakat_lamaranController extends Controller
      */
     public function update(Request $request, $id)
     {
-        
+        $validatedData = $request->validate([
+            'file'             => 'required|mimetypes:application/pdf|max:10000',
+        ],
+        [
+            'file.mimetypes'       => 'Upload file dengan format pdf !',
+        ]);
         $file = $request->file('file');
         if($request->hasFile('file'))
         {
@@ -77,7 +75,7 @@ class Masyarakat_lamaranController extends Controller
                 'file'=>$new_name,
             );
         Lamaran::whereid_lamaran($id)->update($data);
-        return redirect('masyarakat\lamaran');
+        return redirect('masyarakat\lamaran-masyarakat');
     }
 
     /**
@@ -91,9 +89,9 @@ class Masyarakat_lamaranController extends Controller
         try{
             $datas = Lamaran::findOrfail($id);
             $datas->delete();
-            return redirect('masyarakat\lamaran')->with('success','lamaran Berhasil Dihapus');
+            return redirect('masyarakat\lamaran-masyarakat')->with('success','lamaran Berhasil Dihapus');
         }catch(\Throwable $th){
-            return redirect('masyarakat\lamaran')->withErrors('Data gagal dihapus. Harap hapus data yang terkait');
+            return redirect('masyarakat\lamaran-masyarakat')->withErrors('Data gagal dihapus. Harap hapus data yang terkait');
         }
     }
 }

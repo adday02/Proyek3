@@ -27,7 +27,7 @@
                          
                           <th>Jenis Pekerjaan</th>
                           <th>Status</th>
-                          <th width="14%">Aksi</th>
+                          <th width="25%">Aksi</th>
                           
                         </tr>
                       </thead>
@@ -41,7 +41,7 @@
                             <td>{{$lamaran->lowongan->jenis_kerja}}</td>
                             <td>{{$lamaran->status}}</td>
                             <td>
-                                <button type="danger" class="btn btn-warning btn-sm" data-toggle="modal" data-target="#edit{{$lamaran->id_lamaran}}" >Edit</button>
+                                <button type="danger" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#edit{{$lamaran->id_lamaran}}" >Edit</button>
                                 <button type="danger" class="btn btn-warning btn-sm" data-toggle="modal" data-target="#detail-data{{$lamaran->id_lamaran}}" >Detail</button>
                                 <a href="{{URL::to('/')}}/file/Aliyah.rar"><button type="danger" class="btn btn-dark btn-sm">Unduh</button></a>
                                 <div style="float:right;">

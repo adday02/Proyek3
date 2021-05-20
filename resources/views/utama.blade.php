@@ -42,17 +42,17 @@
     <div class="container-fluid d-flex">
 
       <div class="logo mr-auto">
-        <h1 class="text-light"><a href="index.html"><span>Loker Disnaker Indramayu</span></a></h1>
+        <h1 class="text-light"><a href="index.html"><img src="assets/img/logo.png"><span>   Loker Disnaker Indramayu</span></a></h1>
         <!-- Uncomment below if you prefer to use an image logo -->
         <!-- <a href="index.html"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>-->
       </div>
 
       <nav class="nav-menu d-none d-lg-block">
         <ul>
-          <li class="active"><a href="{{URL('')}}">Home</a></li>
+          <li class="active"><a href="#hero">Home</a></li>
           <li><a href="#about">Fitur</a></li>
           <li><a href="#services">Pelatihan</a></li>
-          <li><a href="#portfolio">Loker</a></li>
+          <li><a href="#portfolio">Perusahaan</a></li>
           <li><a href="#team">Pegawai</a></li>
           <li><a href="#contact">Kontak</a></li>
 
@@ -83,7 +83,7 @@
           <a href="{{URL('/login')}}" class="btn-get-started scrollto">Login</a>
         </div>
         <div class="col-lg-6 order-1 order-lg-2 hero-img">
-          <img src="assets/img/hero-img.svg" class="img-fluid animated" alt="">
+          <img src="assets/img/logo.png" class="img-fluid animated" alt="">
         </div>
       </div>
     </div>
@@ -131,42 +131,16 @@
           <h2>Pelatihan</h2>
           <p>Daftar Pelatihan Disnaker Indramayu</p>
         </div>
-
         <div class="row">
-          <div class="col-md-6 col-lg-3 d-flex align-items-stretch" data-aos="zoom-in" data-aos-delay="100">
-            <div class="icon-box">
-              <div class="icon"><i class="bx bx-laptop"></i></div>
-              <h4 class="title"><a href="">Komputer</a></h4>
-              <p class="description">Masyarakat akan dilatih mengopersikan sebuah komputer seperti ms. word, ms. exel dll. </p>
+          @foreach($pelatihans as $pelatihan)
+            <div class="col-md-6 col-lg-3 d-flex align-items-stretch" data-aos="zoom-in" data-aos-delay="100">
+              <div class="icon-box">
+                <h4 class="title"><a href="">{{$pelatihan->bidang_kejuruan}}</a></h4>
+                <p class="description">{{$pelatihan->deskripsi}}</p>
+              </div>
             </div>
-          </div>
-
-          <div class="col-md-6 col-lg-3 d-flex align-items-stretch" data-aos="zoom-in" data-aos-delay="200">
-            <div class="icon-box">
-              <div class="icon"><i class="bx bx-paint"></i></div>
-              <h4 class="title"><a href="">Melukis</a></h4>
-              <p class="description">Masyarakat akan dilatih untuk dapat menguasai ilmu seni lukis</p>
-            </div>
-          </div>
-
-          <div class="col-md-6 col-lg-3 d-flex align-items-stretch" data-aos="zoom-in" data-aos-delay="300">
-            <div class="icon-box">
-              <div class="icon"><i class="bx bx-user"></i></div>
-              <h4 class="title"><a href="">Pelatihan 3</a></h4>
-              <p class="description">Deskripsi Pelatihan 3 akan ditulis oleh admin</p>
-            </div>
-          </div>
-
-          <div class="col-md-6 col-lg-3 d-flex align-items-stretch" data-aos="zoom-in" data-aos-delay="400">
-            <div class="icon-box">
-              <div class="icon"><i class="bx bx-user"></i></div>
-              <h4 class="title"><a href="">Pelatihan 4</a></h4>
-              <p class="description">Deskripsi Pelatihan 4  akan ditulis oleh admin</p>
-            </div>
-          </div>
-
+          @endforeach
         </div>
-
       </div>
     </section><!-- End Services Section -->
 
@@ -175,10 +149,8 @@
       <div class="container">
 
         <div class="section-title" data-aos="fade-up">
-          <p>Lowongan Pekerjan</p>
+          <p>Perusahaan</p>
         </div>
-
-        
         <div class="row" data-aos="fade-up" data-aos-delay="100">
           <div class="col-lg-12">
             <div style="float:right;"><button type="danger" class="btn btn-primary btn-sm">Cari</button></div> 
@@ -190,48 +162,20 @@
         <br>
         <br>
         <div class="row portfolio-container" data-aos="fade-up" data-aos-delay="200">
-
-          <div class="col-lg-4 col-md-6 portfolio-item filter-app">
-            <div class="portfolio-wrap">
-              <img src="assets/img/portfolio/portfolio-1.jpg" class="img-fluid" alt="">
-              <div class="portfolio-links">
-                <a href="assets/img/portfolio/portfolio-1.jpg" data-gall="portfolioGallery" class="venobox" title="App 1"><i class="icofont-plus-circle"></i></a>
-                <a href="portfolio-details.html" title="More Details"><i class="icofont-link"></i></a>
-              </div>
-              <div class="portfolio-info">
-                <h4>PT. Pertamina Persero</h4>
-                <p>Administrasi</p>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-lg-4 col-md-6 portfolio-item filter-web">
-            <div class="portfolio-wrap">
-              <img src="assets/img/portfolio/portfolio-2.jpg" class="img-fluid" alt="">
-              <div class="portfolio-links">
-                <a href="assets/img/portfolio/portfolio-2.jpg" data-gall="portfolioGallery" class="venobox" title="Web 3"><i class="icofont-plus-circle"></i></a>
-                <a href="portfolio-details.html" title="More Details"><i class="icofont-link"></i></a>
-              </div>
-              <div class="portfolio-info">
-                <h4>Web 3</h4>
-                <p>Web</p>
+          @foreach($perusahaans as $perusahaan)
+            <div class="col-lg-4 col-md-6 portfolio-item filter-app">
+              <div class="portfolio-wrap">
+                <img src="{{URL::to('/')}}/logo/{{$perusahaan->logo}}" class="img-fluid" alt="" >
+                <div class="portfolio-links">
+                  <a href="assets/img/portfolio/portfolio-1.jpg" data-gall="portfolioGallery" class="venobox" title="App 1"><i class="icofont-plus-circle"></i></a>
+                  <a href="portfolio-details.html" title="More Details"><i class="icofont-link"></i></a>
+                </div>
+                <div class="portfolio-info">
+                  <h4>PT. Pertamina Persero</h4>
+                </div>
               </div>
             </div>
-          </div>
-
-          <div class="col-lg-4 col-md-6 portfolio-item filter-app">
-            <div class="portfolio-wrap">
-              <img src="assets/img/portfolio/portfolio-3.jpg" class="img-fluid" alt="">
-              <div class="portfolio-links">
-                <a href="assets/img/portfolio/portfolio-3.jpg" data-gall="portfolioGallery" class="venobox" title="App 2"><i class="icofont-plus-circle"></i></a>
-                <a href="portfolio-details.html" title="More Details"><i class="icofont-link"></i></a>
-              </div>
-              <div class="portfolio-info">
-                <h4>App 2</h4>
-                <p>App</p>
-              </div>
-            </div>
-          </div>
+          @endforeach
         </div>
       </div>
     </section><!-- End Portfolio Section -->

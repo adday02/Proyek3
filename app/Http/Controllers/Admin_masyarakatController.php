@@ -20,6 +20,14 @@ class Admin_masyarakatController extends Controller
      */
     public function store(Request $request)
     {
+        $validatedData = $request->validate([
+            
+            'foto' => 'required|image:jpeg,jpg,png'
+        ], [
+            'foto.required'         => 'foto wajib diisi.',
+            'foto.image'            => 'foto tidak valid.',
+        ]);
+
         $foto = $request->file('foto');
         $new_name = rand().'.'.$foto->getClientOriginalExtension();
         $foto->move(public_path('foto'), $new_name);
@@ -39,14 +47,16 @@ class Admin_masyarakatController extends Controller
         return redirect('admin\masyarakat')->with('success','masyarakat berhasil ditambah');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function update(Request $request, $id)
     {
+        $validatedData = $request->validate([
+            
+            'foto' => 'required|image:jpeg,jpg,png'
+        ], [
+            'foto.required'         => 'foto wajib diisi.',
+            'foto.image'            => 'foto tidak valid.',
+        ]);
+
         $foto = $request->file('foto');
         if($request->hasFile('foto'))
         {
@@ -89,12 +99,6 @@ class Admin_masyarakatController extends Controller
         return redirect('admin\masyarakat');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function destroy($id)
     {
         try{
