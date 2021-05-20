@@ -34,8 +34,6 @@ class Admin_perusahaanController extends Controller
             'logo.required'         => 'Logo wajib diisi.',
             'logo.image'            => 'Logo tidak valid.',
         ]);
-
-    $validatedData['logo'] = ($validatedData['logo']);
         $logo = $request->file('logo');
         $new_name = rand().'.'.$logo->getClientOriginalExtension();
         $logo->move(public_path('logo'), $new_name);
@@ -53,67 +51,15 @@ class Admin_perusahaanController extends Controller
         Perusahaan::create($data);
         return redirect('admin\perusahaan')->with('success','Perusahaan berhasil ditambah');
     }
-
-
-    /*public function store2(Request $request)
-    {
-        $rules = [
-            'logo'     => 'required|image:jpeg,jpg,png'
-        ];
- 
-        $messages = [
-           
-            'logo.required'         => 'Logo wajib diisi.',
-            'logo.image'            => 'Logo tidak valid.',
-            
-        ];
- 
-        $validator = Validator::make($request->all(), $rules, $messages);
-         
-        if($validator->fails()){
-            return redirect()->back()->withErrors($validator)->withInput($request->all());
-        }
- 
-        $data = array(
-            'id_perusahaan'=>$request->id_perusahaan,
-            'password'=>$request->password,
-            'nama'=>$request->nama,
-            'logo'=>$new_name,
-            'email'=>$request->email,
-            'website'=>$request->website,
-            'alamat'=>$request->alamat,
-            'deskripsi'=>$request->deskripsi
-        );
-        $data->save();
-       
-        return back()->with('success', 'Perusahaan created successfully.');
-    }
-
-    public function store3(CreateAdminPerusahaanRequest $request)
-    {
-        $data = array(
-            'id_perusahaan'=>$request->id_perusahaan,
-            'password'=>$request->password,
-            'nama'=>$request->nama,
-            'logo'=>$new_name,
-            'email'=>$request->email,
-            'website'=>$request->website,
-            'alamat'=>$request->alamat,
-            'deskripsi'=>$request->deskripsi
-        );
-        $data->save();
-       
-        return back()->with('success', 'Perusahaan created successfully.');
-    }*/
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function update(Request $request, $id)
     {
+        $validatedData = $request->validate([
+            
+            'logo' => 'required|image:jpeg,jpg,png'
+        ], [
+            'logo.required'         => 'Logo wajib diisi.',
+            'logo.image'            => 'Logo tidak valid.',
+        ]);
         
         $logo = $request->file('logo');
         if($request->hasFile('logo'))
@@ -135,13 +81,6 @@ class Admin_perusahaanController extends Controller
         Perusahaan::whereid_perusahaan($id)->update($data);
         return redirect('admin\perusahaan');
     }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function destroy($id)
     {
         try{

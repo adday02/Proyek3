@@ -6,6 +6,18 @@
           <div class="">
             <div class="page-title">
               <div class="title_left">
+                @if($errors->any())
+                <div class="alert alert-danger" role="alert">
+                    <button type="button" class="close" data-dismiss="alert"aria-label="close">
+                        <span aria-hidden= "true"></span>
+                    </button>
+                    <div>
+                        @foreach ($errors->all() as $error)
+                            {{$error}} <br>
+                            @endforeach
+                    </div>
+                </div>
+                @endif  
                 <h3>Users</h3>
               </div>
             </div>
@@ -15,18 +27,6 @@
                 <div class="x_panel">
                   <div class="x_title">
                     <h2>Data Perusahaan</h2>
-                    @if($errors->any())
-                <div class="alert alert-danger" role="alert">
-                  <button type="button" class="close" data-dismiss="alert"aria-label="close">
-                    <span aria-hidden= "true"></span>
-                  </button>
-                  <div>
-                    @foreach ($errors->all() as $error)
-                        {{$error}} <br>
-                        @endforeach
-                  </div>
-                </div>
-                @endif
                     <div style="float:right;"><button type="danger" class="btn btn-success btn-sm" data-toggle="modal" data-target="#tambah" >Tambah Perusahaan</button></div> 
                     <div class="clearfix"></div>
                   </div>

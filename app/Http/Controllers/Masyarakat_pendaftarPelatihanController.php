@@ -27,16 +27,12 @@ class Masyarakat_pendaftarPelatihanController extends Controller
      */
     public function store(Request $request)
     {
-        $validatedData = $request->validate([
-            
+        $validatedData = $request->validate([            
             'file'             => 'required|mimetypes:application/pdf|max:10000',
             
         ],
-        [
-            
+        [ 
             'file.mimetypes'       => 'Upload file dengan format pdf !',
-            
-            
         ]);
 
         $file = $request->file('file');
@@ -53,14 +49,15 @@ class Masyarakat_pendaftarPelatihanController extends Controller
         return redirect('masyarakat\daftarpelatihan')->with('success','masyarakat berhasil ditambah');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function update(Request $request, $id)
     {
+        $validatedData = $request->validate([            
+            'file'             => 'required|mimetypes:application/pdf|max:10000',
+            
+        ],
+        [ 
+            'file.mimetypes'       => 'Upload file dengan format pdf !',
+        ]);
         
         $file = $request->file('file');
         if($request->hasFile('file'))

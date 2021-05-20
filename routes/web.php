@@ -14,22 +14,6 @@ use App\Http\Controllers\LoginController;
 use App\Http\Controllers\Perusahaan_dasboardController;
 use App\Http\Controllers\Perusahaan_lowonganController;
 use App\Http\Controllers\Perusahaan_lamaranController;
-<<<<<<< HEAD
-use App\Http\Controllers\Masyarakat_lowonganController;
-use App\Http\Controllers\Masyarakat_lamaranController;
-use App\Http\Controllers\Masyarakat_pelatihanController;
-use App\Http\Controllers\Masyarakat_pendaftarPelatihanController;
-
-Route::resource('/',UtamaController::class);
-
-
-Route::get('login', function () {
-    return view('login');
-})->middleware('guest');
-
-Route::post('/kirimdata',[LoginController::class,'masuk'])->name('login');
-Route::get('/keluar',[LoginController::class,'keluar']);
-=======
 use App\Http\Controllers\Masyarakat_pendaftarPelatihanController;
 use App\Http\Controllers\Masyarakat_lamaranController;
 use App\Http\Controllers\Masyarakat_lowonganController;
@@ -48,10 +32,8 @@ use App\Http\Controllers\Masyarakat_homeUserController;
 | contains the "web" middleware group. Now create something great!
 |
 */
-Route::get('/', function () {
-    return view('utama');
-});
->>>>>>> f415f2af1f83b34f735c4e20ca44e0dc1533dc79
+
+Route::resource('/',UtamaController::class);
 
 Route::group(['prefix'=> 'admin',  'middleware'=> 'auth:admin'], function()
 {
@@ -68,25 +50,22 @@ Route::group(['prefix'=> 'perusahaan',  'middleware'=> 'auth:perusahaan'], funct
 {
     Route::resource('dashboard',Perusahaan_dasboardController::class);    
     Route::resource('lowongan-Perusahaan',Perusahaan_lowonganController::class);    
-    Route::resource('lamaran',Perusahaan_lamaranController::class);    
+    Route::resource('lamaran-perusahaan',Perusahaan_lamaranController::class);    
 });
 
 Route::group(['prefix'=> 'masyarakat',  'middleware'=> 'auth:masyarakat'], function()
 {
-<<<<<<< HEAD
-    Route::resource('lowongan-masyarakat',Masyarakat_lowonganController::class);    
-    Route::resource('lamaran-masyarakat',Masyarakat_lamaranController::class);    
-    Route::resource('pelatihan-masyarakat',Masyarakat_pelatihanController::class);    
-    Route::resource('daftarpelatihan-masyarakat',Masyarakat_pendaftarPelatihanController::class);    
-=======
     Route::resource('homeuser',Masyarakat_homeUserController::class);
     Route::resource('profil',Masyarakat_profilController::class);
-    Route::resource('lamaran',Masyarakat_lamaranController::class);
-    Route::resource('lowongan',Masyarakat_lowonganController::class);
-    Route::resource('pelatihan',Masyarakat_pelatihanController::class);
-    Route::resource('daftarpelatihan',Masyarakat_pendaftarPelatihanController::class);
+    Route::resource('lamaran-masyarakat',Masyarakat_lamaranController::class);
+    Route::resource('lowongan-masyarakat',Masyarakat_lowonganController::class);
+    Route::resource('pelatihan-masyarakat',Masyarakat_pelatihanController::class);
+    Route::resource('daftarpelatihan-masyarakat',Masyarakat_pendaftarPelatihanController::class);
     
 });
+
+Route::post('/kirimdata',[LoginController::class,'masuk'])->name('login');
+Route::get('/keluar',[LoginController::class,'keluar']);
 
 Route::get('login', function () {
     return view('login');
@@ -95,6 +74,5 @@ Route::get('login', function () {
 
 Route::get('/pertamina', function () {
     return view('detailLoker');
->>>>>>> f415f2af1f83b34f735c4e20ca44e0dc1533dc79
 });
 
