@@ -48,33 +48,17 @@ Route::group(['prefix'=> 'admin',  'middleware'=> 'auth:admin'], function()
 
 Route::group(['prefix'=> 'perusahaan',  'middleware'=> 'auth:perusahaan'], function()
 {
-<<<<<<< HEAD
-    Route::resource('dashboard->perusahaan',Perusahaan_dasboardController::class);    
-    Route::resource('lowongan-Perusahaan->perusahaan',Perusahaan_lowonganController::class);    
-    Route::resource('lamaran->perusahaan',Perusahaan_lamaranController::class);    
-=======
     Route::resource('dashboard',Perusahaan_dasboardController::class);    
     Route::resource('lowongan-Perusahaan',Perusahaan_lowonganController::class);    
     Route::resource('lamaran-perusahaan',Perusahaan_lamaranController::class);    
->>>>>>> 50ef156d750ce7983fb19d08c744844bd00d4ffb
 });
 
 Route::group(['prefix'=> 'masyarakat',  'middleware'=> 'auth:masyarakat'], function()
 {
-<<<<<<< HEAD
-=======
-    Route::resource('homeuser',Masyarakat_homeUserController::class);
-    Route::resource('profil',Masyarakat_profilController::class);
->>>>>>> 50ef156d750ce7983fb19d08c744844bd00d4ffb
     Route::resource('lamaran-masyarakat',Masyarakat_lamaranController::class);
     Route::resource('lowongan-masyarakat',Masyarakat_lowonganController::class);
     Route::resource('pelatihan-masyarakat',Masyarakat_pelatihanController::class);
     Route::resource('daftarpelatihan-masyarakat',Masyarakat_pendaftarPelatihanController::class);
-<<<<<<< HEAD
-    Route::resource('profile-masyarakat',Masyarakat_profilController::class);
-=======
->>>>>>> 50ef156d750ce7983fb19d08c744844bd00d4ffb
-    
 });
 
 Route::post('/kirimdata',[LoginController::class,'masuk'])->name('login');
