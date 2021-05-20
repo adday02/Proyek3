@@ -4,28 +4,18 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Masyarakat;
+use Validator;
 
 class Masyarakat_profilController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-        $masyarakat = Masyarakat::all();
-        return view('masyarakat/profil',compact('masyarakats'))->with('i');
-    }
-
-     /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function update(Request $request, $id)
     {
+        $validatedData = $request->validate([
+            
+            'foto' => 'image:jpeg,jpg,png'
+        ], [
+            'foto.image'            => 'Foto tidak valid.',
+        ]);
         
         $foto = $request->file('foto');
         if($request->hasFile('foto'))
@@ -35,17 +25,35 @@ class Masyarakat_profilController extends Controller
             $data = array(            
                 'foto'=>$new_name,
             );
-        Pegawai::wherenip($id)->update($data);
+        Masayarkat::wherenik($id)->update($data);
         }
+        if($request->has('jk'))
+        {
             $data = array(
-                'password'=>$request->password,
-                'nama'=>$request->nama,
-                'no_hp'=>$request->no_hp,
-                'pendidikan_terakhir'=>$request->pendidikan_terakhir,
-                'alamat'=>$request->alamat,
-                'foto'=>$request->foto,
+                'jk'=>$request->jk,
             );
         Masyarakat::wherenik($id)->update($data);
-        return redirect('masyarakat\profil');
+        }
+        if($request->has('pendidikan_terakhir'))
+        {
+            $data = array(
+                'pendidikan_terakhir'=>$request->pendidikan_terakhir,
+            );
+        Masyarakat::wherenik($id)->update($data);
+        }
+        if($request->has('status'))
+        {
+            $data = array(
+                'status'=>$request->status,
+            );
+        Masyarakat::wherenik($id)->update($data);
+        }
+            $data = array(
+                'nama'=>$request->nama,
+                'no_hp'=>$request->no_hp,
+                'alamat'=>$request->alamat,
+            );
+        Masyarakat::wherenik($id)->update($data);
+        return redirect('masyarakat\lowongan-masyarakat');
     }
 }

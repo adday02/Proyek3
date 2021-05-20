@@ -52,7 +52,7 @@
               </div>
               <div class="profile_info">
                 <span>Welcome,</span>
-                <h2>Budi</h2>
+                <h2>{{auth()->user()->nama}}</h2>
               </div>
             </div>
             <!-- /menu profile quick info -->
@@ -66,14 +66,14 @@
                   
                   <li><a><i class="fa fa-building"></i> Pekerjaan <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
-                      <li><a href="{{URL('masyarakat/lowongan')}}">Lowongan Pekerjaan</a></li>
-                      <li><a href="{{URL('masyarakat/lamaran')}}">Lamaran Pekerjaan</a></li>
+                      <li><a href="{{URL('masyarakat/lowongan-masyarakat')}}">Lowongan Pekerjaan</a></li>
+                      <li><a href="{{URL('masyarakat/lamaran-masyarakat')}}">Lamaran Pekerjaan</a></li>
                     </ul>
                   </li>
                   <li><a><i class="fa fa-line-chart"></i> Pelatihan <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
-                      <li><a href="{{URL('masyarakat/pelatihan')}}">Info  Pelatihan</a></li>
-                      <li><a href="{{URL('masyarakat/daftarpelatihan')}}">Daftar Pelatihan</a></li>
+                      <li><a href="{{URL('masyarakat/pelatihan-masyarakat')}}">Info  Pelatihan</a></li>
+                      <li><a href="{{URL('masyarakat/daftarpelatihan-masyarakat')}}">Daftar Pelatihan</a></li>
                     </ul>
                   </li>
                 </ul>
@@ -95,11 +95,11 @@
               <ul class="nav navbar-nav navbar-right">
                 <li class="">
                   <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-                    <img src="../images/img.jpg" alt="">Budi
+                    <img src="../images/img.jpg" alt="">{{auth()->user()->nama}}
                     <span class=" fa fa-angle-down"></span>
                   </a>
                   <ul class="dropdown-menu dropdown-usermenu pull-right">
-                    <li><a href="javascript:;"><i class="fa fa-user pull-right"></i> Profile</a></li>
+                    <li><a data-toggle="modal" data-target="#edit{{auth()->user()->nik}}"><i class="fa fa-user pull-right"></i> Profile</a></li>
                     <li><a href="javascript:;"><i class="fa fa-edit pull-right"></i> Ubah Password</a></li>
                     <li><a href="{{URL('/keluar')}}"><i class="fa fa-sign-out pull-right"></i> Log Out</a></li>
                   </ul>
@@ -179,5 +179,94 @@
     <script src="../vendors/pdfmake/build/vfs_fonts.js"></script>   
     <!-- Custom Theme Scripts -->
     <script src="../build/js/custom.min.js"></script>
+
+    <div id="edit{{auth()->user()->nik}}" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+        <!-- konten modal-->
+        <div class="modal-content">
+            <!-- heading modal -->
+            <div class="modal-header">
+                <h5 class="modal-title" id="mediumModalLabel">Edit Profile</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <!-- body modal -->
+            <div class="modal-body">
+            <form action="{{route('profile-masyarakat.update', auth()->user()->nik)}}" class="form-horizontal tasi-form" method="post" enctype="multipart/form-data">
+                @csrf
+                @method('PATCH')
+                <div class="row form-group">
+                    <label class="col-sm-4 control-label">NIK</label>
+                    <div class="col-sm-8">        
+                        <input type="text" name="nik" class="form-control" value="{{auth()->user()->nik}}" readonly>
+                    </div>
+                </div>
+
+                <div class="row form-group">
+                    <label class="col-sm-4 control-label">Nama</label>
+                    <div class="col-sm-8">
+                        <input type="text" name="nama" class="form-control" value="{{auth()->user()->nama}}" readonly>
+                    </div>
+                </div>
+
+                <div class="row form-group">
+                    <label class="col-sm-4 control-label">Jenis Kelamin</label>
+                    <div class="col-sm-8">
+                        <input type="text" name="jk" class="form-control" value="{{auth()->user()->jk}}" readonly>
+                    </div>
+                </div>
+
+                <div class="row form-group">
+                    <label class="col-sm-4 control-label">Pendidikan Terakhir</label>
+                    <div class="col-sm-8">        
+                      <select class="form-control" name="pendidikan_terakhir">
+                        <option disabled="" selected="" value="">Pilih Pendidikan Terakhir</option>
+                        <option>SD/MI/Sederajat</option>
+                        <option>SMP/MTs/Sederajat</option>
+                        <option>SMA/SMK/MA/Sederajat</option>
+                        <option>D1</option>
+                        <option>D2</option>
+                        <option>D3</option>
+                        <option>D4</option>
+                        <option>S1</option>
+                        <option>S2</option>
+                        <option>S3</option>
+                      </select>
+                    </div>
+                </div>
+
+                <div class="row form-group">
+                    <label class="col-sm-4 control-label">Nomor HP </label>
+                    <div class="col-sm-8">
+                        <input type="text" name="no_hp" class="form-control" value="{{auth()->user()->no_hp}}" required pattern=".{,255}" title="Nomor Max 255 Karakter">
+                    </div>
+                </div>
+
+                <div class="row form-group">
+                    <label class="col-sm-4 control-label">Alamat </label>
+                    <div class="col-sm-8">
+                        <input type="text" name="alamat" class="form-control" value="{{auth()->user()->alamat }}" required pattern=".{,255}" title="Nomor Max 255 Karakter">
+                    </div>
+                </div>
+
+                <div class="row form-group">
+                    <label class="col-sm-4 control-label">Foto</label>
+                    <div class="col-sm-8">        
+                        <input type="file" name="foto"
+                        @if ($errors->has('foto'))
+                                    <span class="text-danger">{{ $errors->first('foto') }}</span>
+                                @endif
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                    <button type="submit" class="btn btn-primary">Confirm</button>
+                </div>             
+            </form>
+            </div>        
+        </div>
+    </div>
+</div>
     </body>
 </html>

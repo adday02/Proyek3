@@ -49,19 +49,18 @@ Route::group(['prefix'=> 'admin',  'middleware'=> 'auth:admin'], function()
 
 Route::group(['prefix'=> 'perusahaan',  'middleware'=> 'auth:perusahaan'], function()
 {
-    Route::resource('dashboard',Perusahaan_dasboardController::class);    
-    Route::resource('lowongan-Perusahaan',Perusahaan_lowonganController::class);    
-    Route::resource('lamaran',Perusahaan_lamaranController::class);    
+    Route::resource('dashboard->perusahaan',Perusahaan_dasboardController::class);    
+    Route::resource('lowongan-Perusahaan->perusahaan',Perusahaan_lowonganController::class);    
+    Route::resource('lamaran->perusahaan',Perusahaan_lamaranController::class);    
 });
 
 Route::group(['prefix'=> 'masyarakat',  'middleware'=> 'auth:masyarakat'], function()
 {
-    Route::resource('homeuser',Masyarakat_homeUserController::class);
-    Route::resource('profil',Masyarakat_profilController::class);
-    Route::resource('lamaran',Masyarakat_lamaranController::class);
-    Route::resource('lowongan',Masyarakat_lowonganController::class);
-    Route::resource('pelatihan',Masyarakat_pelatihanController::class);
-    Route::resource('daftarpelatihan',Masyarakat_pendaftarPelatihanController::class);
+    Route::resource('lamaran-masyarakat',Masyarakat_lamaranController::class);
+    Route::resource('lowongan-masyarakat',Masyarakat_lowonganController::class);
+    Route::resource('pelatihan-masyarakat',Masyarakat_pelatihanController::class);
+    Route::resource('daftarpelatihan-masyarakat',Masyarakat_pendaftarPelatihanController::class);
+    Route::resource('profile-masyarakat',Masyarakat_profilController::class);
     
 });
 
