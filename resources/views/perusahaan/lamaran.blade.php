@@ -43,7 +43,7 @@
                             <td>
                                 <button type="danger" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#edit{{$lamaran->id_lamaran}}" >Edit</button>
                                 <button type="danger" class="btn btn-warning btn-sm" data-toggle="modal" data-target="#detail-data{{$lamaran->id_lamaran}}" >Detail</button>
-                                <a href="{{URL::to('/')}}/file/Aliyah.rar"><button type="danger" class="btn btn-dark btn-sm">Unduh</button></a>
+                                <a href="{{URL::to('/')}}/file/aliyah.pdf"><button type="danger" class="btn btn-dark btn-sm">Unduh</button></a>
                                 <div style="float:right;">
                                 <form action="{{route('lamaran.destroy', $lamaran->id_lamaran)}}" method="POST">
                                     @csrf

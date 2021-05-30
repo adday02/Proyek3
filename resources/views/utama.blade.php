@@ -56,7 +56,8 @@
           <li><a href="#team">Pegawai</a></li>
           <li><a href="#contact">Kontak</a></li>
 
-          <li class="get-started"><a href="{{URL('/login')}}">Login</a></li>
+          <li class="get-started"><a href="{{URL('/daftar')}}">Daftar</a></li>
+          <li class="get-started"><a href="{{URL('/login')}}">Masuk</a></li>
         </ul>
       </nav><!-- .nav-menu -->
 

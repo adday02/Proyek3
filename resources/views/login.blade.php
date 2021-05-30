@@ -33,7 +33,7 @@
           <section class="login_content">
             <form action="/kirimdata" method="Post">
             {{csrf_field()}}
-              <h1>Login</h1>
+              <h1>MASUK</h1>
               <div>
                 <input type="text" class="form-control" name="username" placeholder="NIK" required="" />
               </div>
@@ -41,7 +41,9 @@
                 <input type="password" class="form-control" name="password" placeholder="Password" required="" />
               </div>
               <div>
-                <button  class="btn btn-successt">Log in</button>
+                <button  class="btn btn-successt">MASUK</button>
+                <p>Jika Anda tidak memiliki akun silahkan <a href="{{URL('/daftar')}}">daftar disini</a></p>
+              
               </div>
 
               <div class="clearfix"></div>

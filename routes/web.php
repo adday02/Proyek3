@@ -20,6 +20,7 @@ use App\Http\Controllers\Masyarakat_lowonganController;
 use App\Http\Controllers\Masyarakat_pelatihanController;
 use App\Http\Controllers\Masyarakat_pendaftranPelatihanController;
 use App\Http\Controllers\Masyarakat_profilController;
+use App\Http\Controllers\DaftarController;
 
 /*
 |--------------------------------------------------------------------------
@@ -33,6 +34,7 @@ use App\Http\Controllers\Masyarakat_profilController;
 */
 
 Route::resource('/',UtamaController::class);
+Route::resource('daftar',DaftarController::class);
 
 Route::group(['prefix'=> 'admin',  'middleware'=> 'auth:admin'], function()
 {
@@ -67,9 +69,4 @@ Route::get('/keluar',[LoginController::class,'keluar']);
 Route::get('login', function () {
     return view('login');
 })->middleware('guest');
-
-
-Route::get('/pertamina', function () {
-    return view('detailLoker');
-});
 
