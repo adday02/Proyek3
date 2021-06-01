@@ -44,6 +44,7 @@
                       </thead>
                       <tbody>
                         @foreach($lamarans as $lamaran)
+                        @if(auth()->user()->nik==$lamaran->masyarakat->nik)
                           <tr>
                             <td>{{++$i}}</td>
                             <td>{{$lamaran->lowongan->nama}}</td>
@@ -62,6 +63,7 @@
                               </div>
                             </td>
                           </tr>
+                          @endif
                         @endforeach
                       </tbody>
                     </table>
