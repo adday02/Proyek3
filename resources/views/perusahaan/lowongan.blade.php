@@ -20,6 +20,7 @@
                     <div class="clearfix"></div>
                   </div>
                   <div class="x_content">
+                 
                     <table id="datatable" class="table table-striped table-bordered">
                       <thead>
                         <tr>
@@ -36,7 +37,7 @@
                       <tbody>
                       @foreach ($lowongans as $lowongan)
                         <tr>
-                          <td>{{++$i}}</td>s
+                          <td>{{++$i}}</td>
                             <td>{{$lowongan->nama}}</td>
                             <td>{{$lowongan->lokasi_kerja}}</td>
                             <td>{{$lowongan->gaji}}</td>

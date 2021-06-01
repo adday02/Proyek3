@@ -40,7 +40,7 @@ class Admin_perusahaanController extends Controller
 
         $data = array(
             'id_perusahaan'=>$request->id_perusahaan,
-            'password'=>$request->password,
+            'password'=>bcrypt($request->password),
             'nama'=>$request->nama,
             'logo'=>$new_name,
             'email'=>$request->email,

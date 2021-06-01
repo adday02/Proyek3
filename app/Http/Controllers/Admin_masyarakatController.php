@@ -34,7 +34,7 @@ class Admin_masyarakatController extends Controller
 
         $data = array(
             'nik'=>$request->nik,
-            'password'=>$request->password,
+            'password'=>bcrypt($request->password),
             'nama'=>$request->nama,
             'jk'=>$request->jk,
             'no_hp'=>$request->no_hp,
@@ -90,7 +90,7 @@ class Admin_masyarakatController extends Controller
         Masyarakat::wherenik($id)->update($data);
         }
             $data = array(
-                'password'=>$request->password,
+                'password'=>bcrypt($request->password),
                 'nama'=>$request->nama,
                 'no_hp'=>$request->no_hp,
                 'alamat'=>$request->alamat,

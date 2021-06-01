@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Masyarakat;
+use Validator;
+use Illuminate\Support\Facades\Hash;
 
 class DaftarController extends Controller
 {
@@ -29,7 +31,7 @@ class DaftarController extends Controller
 
         $data = array(
             'nik'=>$request->nik,
-            'password'=>$request->password,
+            'password'=>bcrypt($request->password),
             'nama'=>$request->nama,
             'jk'=>$request->jk,
             'no_hp'=>$request->no_hp,
