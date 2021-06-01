@@ -35,7 +35,6 @@
                       <thead>
                         <tr>
                           <th>No</th>
-                          <th>Nama Masyarakat</th>
                           <th>Bidang Kejuruan</th>
                           <th>Status</th>
                           <th width="19%">Aksi</th>
@@ -43,9 +42,9 @@
                       </thead>
                       <tbody>
                         @foreach($pendaftar_pelatihans as $daftar_pelatihan)
+                        @if(auth()->user()->nik==$daftar_pelatihan->masyarakat->nik)
                           <tr>
                             <td>{{++$i}}</td>
-                            <td>{{$daftar_pelatihan->masyarakat->nama}}</td>
                             <td>{{$daftar_pelatihan->pelatihan->bidang_kejuruan}}</td>
                             <td>{{$daftar_pelatihan->status}}</td>
                             <td>
@@ -60,6 +59,7 @@
                                 </div>
                             </td>
                           </tr>
+                          @endif
                         @endforeach
                       </tbody>
                     </table>

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Pelatihan;
 use App\Models\Perusahaan;
+use App\Models\Kontak;
 use App\Models\Lowongan;
 
 class UtamaController extends Controller

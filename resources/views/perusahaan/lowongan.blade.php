@@ -35,6 +35,7 @@
                       </thead>
                       <tbody>
                       @foreach ($lowongans as $lowongan)
+                      @if((auth()->user()->id_perusahaan)==($lowongan->perusahaan->id_perusahaan))
                         <tr>
                           <td>{{++$i}}</td>s
                             <td>{{$lowongan->nama}}</td>
@@ -55,6 +56,7 @@
                                   </div>
                             </td>
                         </tr>
+                        @endif
                         @endforeach
                       </tbody>
                     </table>

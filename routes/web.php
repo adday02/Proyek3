@@ -11,6 +11,7 @@ use App\Http\Controllers\Admin_PenPelatihanController;
 use App\Http\Controllers\UtamaController;
 use App\Http\Controllers\login;
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\KontakController;
 use App\Http\Controllers\Perusahaan_dasboardController;
 use App\Http\Controllers\Perusahaan_lowonganController;
 use App\Http\Controllers\Perusahaan_lamaranController;
@@ -35,6 +36,7 @@ use App\Http\Controllers\DaftarController;
 
 Route::resource('/',UtamaController::class);
 Route::resource('daftar',DaftarController::class);
+Route::resource('kontak',KontakController::class);
 
 Route::group(['prefix'=> 'admin',  'middleware'=> 'auth:admin'], function()
 {
