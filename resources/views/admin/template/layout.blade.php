@@ -81,6 +81,11 @@
                       <li><a href="{{URL('admin/pengajuan')}}">Pengajuan Pelatihan</a></li>
                     </ul>
                   </li>
+                  <li><a><i class="fa fa-book"></i> Kontak <span class="fa fa-chevron-down"></span></a>
+                    <ul class="nav child_menu">
+                        <li><a href="{{URL('admin/kontak')}}">Kontak</a></li>
+                      </ul>
+                    </li>
                 </ul>
               </div>
 
@@ -183,5 +188,31 @@
     <script src="../vendors/morris.js/morris.min.js"></script>
     <!-- Custom Theme Scripts -->
     <script src="../build/js/custom.min.js"></script>
+    <script src="../chart.js"></script>
+    <script type="text/javascript">
+  // Bar chart
+          new Chart(document.getElementById("bar-chart"), {
+              type: 'bar',
+              data: {
+                labels: ["RPL", "MM", "TKR", "AP"],
+                datasets: [
+                  {
+                    label: "Jumlah siswa",
+                    backgroundColor: ["#3e95cd", "#8e5ea2","#3cba9f","#e8c3b9"],
+                    data: [
+                      {{$perusahaan}}
+                    ,0]
+                  }
+                ]
+              },
+              options: {
+                legend: { display: false },
+                title: {
+                  display: true,
+                  text: 'Peserta didik tahun pelajaran 2019/2020'
+                }
+              }
+          });
+        </script>
     </body>
 </html>

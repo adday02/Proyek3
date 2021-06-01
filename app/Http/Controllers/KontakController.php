@@ -6,6 +6,11 @@ use Illuminate\Http\Request;
 
 class KontakController extends Controller
 {
+    public function index()
+    {
+        $kontaks = Kontak::all();
+        return view('admin/kontak',compact('kontaks'))->with('i');
+    }
     public function store(Request $request)
     {
         $data = array(

@@ -47,6 +47,7 @@ Route::group(['prefix'=> 'admin',  'middleware'=> 'auth:admin'], function()
     Route::resource('lamaran',Admin_lamaranController::class);
     Route::resource('pelatihan',Admin_pelatihanController::class);
     Route::resource('pengajuan',Admin_penPelatihanController::class);
+    Route::resource('kontak',KontakController::class);
 });
 
 Route::group(['prefix'=> 'perusahaan',  'middleware'=> 'auth:perusahaan'], function()

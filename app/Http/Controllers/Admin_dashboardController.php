@@ -22,6 +22,9 @@ class Admin_dashboardController extends Controller
         $lamarans = Lamaran::count();
         $pelatihans = Pelatihan::count();
         $pen_pelatihans = Pendaftar_Pelatihan::count();
-        return view('admin/dashboard',compact('perusahaans','masyarakats','lowongans','lamarans','pelatihans','pen_pelatihans'))->with('i');
+        $semuaperusahaan = Perusahaan::all();
+        $semualowongan = Lowongan::all();
+        
+        return view('admin/dashboard',compact('semualowongan','semuaperusahaan','perusahaans','masyarakats','lowongans','lamarans','pelatihans','pen_pelatihans'))->with('i');
     }
 }
