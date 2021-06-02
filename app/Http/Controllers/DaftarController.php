@@ -4,8 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Masyarakat;
-use Validator;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Validator;
 
 class DaftarController extends Controller
 {
@@ -19,10 +19,16 @@ class DaftarController extends Controller
     {
         $validatedData = $request->validate([
             
-            'foto' => 'required|image:jpeg,jpg,png'
+            
+            
+            'nik'          => 'required|unique:masyarakats|',
+            'foto'          => 'required|image:jpeg,jpg,png'
         ], [
+           
+            'nik.required'           => 'Nik Harus di isi',
+            'nik.unique'           => 'Nik sudah terdaftar',
             'foto.required'         => 'foto wajib diisi.',
-            'foto.image'            => 'foto tidak valid.',
+            'foto.image'            => 'foto tidak valid.'
         ]);
 
         $foto = $request->file('foto');

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Masyarakat;
+use Illuminate\Support\Facades\Validator;
 
 class Admin_masyarakatController extends Controller
 {
@@ -22,10 +23,15 @@ class Admin_masyarakatController extends Controller
     {
         $validatedData = $request->validate([
             
-            'foto' => 'required|image:jpeg,jpg,png'
+            
+            'nik'          => 'required|unique:masyarakats',
+            'foto'          => 'required|image:jpeg,jpg,png'
         ], [
+           
+           
+            'nik.unique'           => 'Nik sudah terdaftar',
             'foto.required'         => 'foto wajib diisi.',
-            'foto.image'            => 'foto tidak valid.',
+            'foto.image'            => 'foto tidak valid.'
         ]);
 
         $foto = $request->file('foto');
@@ -51,10 +57,15 @@ class Admin_masyarakatController extends Controller
     {
         $validatedData = $request->validate([
             
-            'foto' => 'required|image:jpeg,jpg,png'
+           
+            
+            'foto'          => 'required|image:jpeg,jpg,png'
         ], [
+           
+           
+           
             'foto.required'         => 'foto wajib diisi.',
-            'foto.image'            => 'foto tidak valid.',
+            'foto.image'            => 'foto tidak valid.'
         ]);
 
         $foto = $request->file('foto');
