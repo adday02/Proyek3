@@ -32,17 +32,22 @@ class Perusahaan_lowonganController extends Controller
 
     public function update(Request $request, $id)
     {
+
+        if($request->has('jenis_kerja'))
+        {
+            $data = array(
+                'jenis_kerja'=>$request->jenis_kerja,
+            );
+        Lowongan::whereid_lowongan($id)->update($data);
+        }
         $data = array(
             'nama'=>$request->nama,
-            'jenis_kerja'=>$request->jenis_kerja,
             'deskripsi_kerja'=>$request->deskripsi_kerja,
             'lokasi_kerja'=>$request->lokasi_kerja,
             'gaji'=>$request->gaji,
             'kontak'=>$request->kontak,
-            
-            
         );
-    Lowongan::whereid_lowongan($id)->update($data);
+        Lowongan::whereid_lowongan($id)->update($data);
     return redirect('perusahaan/lowongan-Perusahaan ');
     }
 

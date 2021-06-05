@@ -1,6 +1,3 @@
-<?php
-$con = mysqli_connect('localhost', 'root', '', 'proyek3');
-?>
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -10,7 +7,7 @@ $con = mysqli_connect('localhost', 'root', '', 'proyek3');
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="../assets/img/favicon.png" rel="icon">
-    <title>@yield('title')</title>
+    <title>Dashboard</title>
     <!-- Datatables -->
     <link href="../vendors/datatables.net-bs/css/dataTables.bootstrap.min.css" rel="stylesheet">
     <link href="../vendors/datatables.net-buttons-bs/css/buttons.bootstrap.min.css" rel="stylesheet">
@@ -171,12 +168,9 @@ $con = mysqli_connect('localhost', 'root', '', 'proyek3');
                     <h2>Top Campaign Performance</h2>
                     <div class="clearfix"></div>
                   </div>
-
                   <div class="col-md-12 col-sm-12 col-xs-6">
-                  
                   @foreach($semuaperusahaan as $p)
                   <?php
-                  
                   $jml=0;
                   ?>
                     @foreach($semualowongan as $l)
@@ -189,7 +183,6 @@ $con = mysqli_connect('localhost', 'root', '', 'proyek3');
                       $presentase=$jml/$lowongans*100;
                       ?>
                     @endforeach
-
                     <div>
                       <p>{{$p->nama}}<br>({{$jml}} Lowongan)</p>
                       <div class="">
@@ -199,7 +192,6 @@ $con = mysqli_connect('localhost', 'root', '', 'proyek3');
                       </div>
                     </div>
                     @endforeach
-
                   </div>
                 </div>
                 <div class="clearfix"></div>

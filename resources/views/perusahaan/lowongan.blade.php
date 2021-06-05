@@ -41,7 +41,7 @@
                           <td>{{++$i}}</td>
                             <td>{{$lowongan->nama}}</td>
                             <td>{{$lowongan->lokasi_kerja}}</td>
-                            <td>{{$lowongan->gaji}}</td>
+                            <td><?PHP echo "Rp. " . number_format($lowongan->gaji, 0, ".", "."); ?></td>
                             <td>{{$lowongan->jenis_kerja}}</td>
                             <td>{{$lowongan->kontak}}</td>
                             <td>{{$lowongan->status}}</td>
@@ -98,7 +98,6 @@
                 <select class="form-control" name="jenis_kerja" required>
                   <option disabled="" selected="" value="">Pilih Jenis Kerja</option>
                   <option>Penuh Waktu</option>
-                  <option>Paruh Waktu</option>
                   <option>Kontak</option>
                   <option>Magang</option>
                 </select>
@@ -212,11 +211,9 @@
         </div>
     </div>
 </div>
+@endforeach
 
-<!-- Modal Edit -->
-
-foreach ($lowongans as $lowongan)
-             <!--modal Detail-->
+@foreach ($lowongans as $lowongan)
     <div class="modal fade" id="detail-data{{$lowongan->id_lowongan}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
       aria-hidden="true">
       <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable" role="document">
@@ -238,7 +235,7 @@ foreach ($lowongans as $lowongan)
           <div class="row form-group">
               <label class="col-sm-4 control-label">Jenis Pekerjaan</label>
               <div class="col-sm-8">        
-                  <input type="text" name="jenis_kerja" class="form-control" value="{{ $lowongan->jenis_kerja}}" readonly>
+                  <input type="text" name="jenis_kerja" class="form-control" value="{{$lowongan->jenis_kerja}}" readonly>
               </div>
           </div>
 
@@ -259,7 +256,7 @@ foreach ($lowongans as $lowongan)
           <div class="row form-group">
               <label class="col-sm-4 control-label">Gaji</label>
               <div class="col-sm-8">
-                  <input type="text" name="gaji" class="form-control" value="{{ $lowongan->gaji }}" readonly>
+                  <input type="text" name="gaji" class="form-control" value="<?PHP echo "Rp. " . number_format($lowongan->gaji, 0, ".", "."); ?>" readonly>
               </div>
           </div>
 
