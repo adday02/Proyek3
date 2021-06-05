@@ -24,24 +24,23 @@
   </head>
 
   <body class="login">
+  @if($errors->any())
+		<!-- <div class="alert alert-success">success</div> -->
+		<div class="alert alert-danger">
+			<ul>
+			@foreach ($errors->all() as $error)
+				<li>{{ $error }}</li>
+			@endforeach  
+			</ul>  
+		</div> 
+	@endif
     <div>
       <a class="hiddenanchor" id="signup"></a>
       <a class="hiddenanchor" id="signin"></a>
 
       <div class="login_wrapper">
         <div class="animate form login_form">
-        @if($errors->any())
-                <div class="alert alert-danger" role="alert">
-                    <button type="button" class="close" data-dismiss="alert"aria-label="close">
-                        <span aria-hidden= "true"></span>
-                    </button>
-                    <div>
-                        @foreach ($errors->all() as $error)
-                            {{$error}} <br>
-                            @endforeach
-                    </div>
-                </div>
-                @endif  
+        
           <section class="login_content">
           <form action="{{route('daftar.store')}}" class="form-horizontal tasi-form" method="post" enctype="multipart/form-data">
             @csrf
