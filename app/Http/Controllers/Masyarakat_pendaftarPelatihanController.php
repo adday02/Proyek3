@@ -43,17 +43,16 @@ class Masyarakat_pendaftarPelatihanController extends Controller
             'nik'=>$request->nik,
             'id_pelatihan'=>$request->id_pelatihan,
             'file'=>$new_name,
-            'status'=>'dalam proses',
+            'status'=>'Dalam Proses',
         );
         Pendaftar_Pelatihan::create($data);
-        return redirect('masyarakat\daftarpelatihan')->with('success','masyarakat berhasil ditambah');
+        return redirect('masyarakat\daftarpelatihan-masyarakat')->with('success','masyarakat berhasil ditambah');
     }
 
     public function update(Request $request, $id)
     {
         $validatedData = $request->validate([            
             'file'             => 'required|mimetypes:application/pdf|max:10000',
-            
         ],
         [ 
             'file.mimetypes'       => 'Upload file dengan format pdf !',
@@ -73,9 +72,8 @@ class Masyarakat_pendaftarPelatihanController extends Controller
                 'file'=>$new_name,
    
             );
-        
         Pendaftar_Pelatihan::whereid_pen_pelatihan($id)->update($data);
-        return redirect('masyarakat\daftarpelatihan');
+        return redirect('masyarakat\daftarpelatihan-masyarakat');
     }
 
     /**
@@ -89,9 +87,9 @@ class Masyarakat_pendaftarPelatihanController extends Controller
         try{
             $datas = Pendaftar_Pelatihan::findOrfail($id);
             $datas->delete();
-            return redirect('masyarakat\daftarpelatihan')->with('success','daftarpelatihan Berhasil Dihapus');
+            return redirect('masyarakat\daftarpelatihan-masyarakat')->with('success','daftarpelatihan Berhasil Dihapus');
         }catch(\Throwable $th){
-            return redirect('masyarakat\daftarpelatihan')->withErrors('Data gagal dihapus. Harap hapus data yang terkait');
+            return redirect('masyarakat\daftarpelatihan-masyarakat')->withErrors('Data gagal dihapus. Harap hapus data yang terkait');
         }
     }
 }

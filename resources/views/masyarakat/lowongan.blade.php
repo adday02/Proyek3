@@ -1,6 +1,18 @@
 @extends('masyarakat.template.layout')
 @section('title','Lowongan Pekerjaan' )
 @section('content')
+<?php
+$tmb=0;
+?>
+@foreach($lamarans as $lamaran)
+  @if(auth()->user()->nik==$lamaran->masyarakat->nik)
+    @if($lamaran->status=="Diterima"||$lamaran->status=="Dalam Proses")
+  <?php
+  $tmb=1;
+  ?>
+  @endif
+  @endif
+@endforeach
         <!-- page content -->
         <div class="right_col" role="main">
           <div class="">
@@ -40,7 +52,9 @@
                             <td>1. Minimal Pendidikan SMA, 2. KTP, 3. dll.</td>
                             <td>
                             <button type="danger" class="btn btn-warning btn-sm" data-toggle="modal" data-target="#detail{{$lowongan->id_lowongan}}" >Detail</button>
+                            @if($tmb==0)
                             <button type="danger" class="btn btn-success btn-sm" data-toggle="modal" data-target="#lamar{{$lowongan->id_lowongan}}" >Lamar</button>
+                            @endif
                             </td>
                           </tr>
                         @endforeach

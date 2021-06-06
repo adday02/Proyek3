@@ -1,6 +1,19 @@
 @extends('masyarakat.template.layout')
 @section('title','Lamaran Pekerjaan' )
 @section('content')
+
+<?php
+  $tmb=0;
+  ?>
+@foreach($lamarans as $lamaran)
+  @if(auth()->user()->nik==$lamaran->masyarakat->nik)
+    @if($lamaran->status=="Diterima"||$lamaran->status=="Dalam Proses")
+  <?php
+  $tmb=1;
+  ?>
+  @endif
+  @endif
+@endforeach
         <!-- page content -->
         <div class="right_col" role="main">
           <div class="">
@@ -27,7 +40,9 @@
                 <div class="x_panel">
                   <div class="x_title">
                     <h2>Lamaran Pekerjaan</h2>
+                    @if($tmb==0)
                      <div style="float:right;"><button type="danger" class="btn btn-success btn-sm" data-toggle="modal" data-target="#tambah" >Tambah Lamaran Pekerjaan</button></div> 
+                    @endif
                     <div class="clearfix"></div>
                   </div>
                   <div class="x_content">
@@ -52,8 +67,11 @@
                             <td>{{$lamaran->lowongan->jenis_kerja}}</td>
                             <td>{{$lamaran->status}}</td>
                             <td>
+                            @if($lamaran->status=="Dalam Proses")
                             <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#edit{{$lamaran->id_lamaran}}" >Edit</button>
+                            @endif
                             <button type="danger" class="btn btn-warning btn-sm" data-toggle="modal" data-target="#detail{{$lamaran->id_lamaran}}" >Detail</button>
+                            @if($lamaran->status=="Dalam Proses"||$lamaran->status=="Ditolak")
                             <div style="float:right;">
                                 <form form action="{{route('lamaran-masyarakat.destroy', $lamaran->id_lamaran)}}" method="POST">
                                     @csrf
@@ -61,6 +79,7 @@
                                     <button type="submit" class="btn btn-danger btn-sm">Hapus</i></a>
                                 </form>
                               </div>
+                              @endif
                             </td>
                           </tr>
                           @endif

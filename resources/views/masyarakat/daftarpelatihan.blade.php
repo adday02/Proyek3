@@ -1,6 +1,18 @@
 @extends('masyarakat.template.layout')
 @section('title','Masyarakat - Daftar Pelatihan' )
 @section('content')
+<?php
+$tmb=0;
+?>
+@foreach($pendaftar_pelatihans as $daftar_pelatihan)
+  @if(auth()->user()->nik==$daftar_pelatihan->masyarakat->nik)
+    @if($daftar_pelatihan->status=="Diterima"||$daftar_pelatihan->status=="Dalam Proses")
+  <?php
+  $tmb=1;
+  ?>
+  @endif
+  @endif
+@endforeach
         <!-- page content -->
         <div class="right_col" role="main">
           <div class="">
@@ -27,7 +39,9 @@
                 <div class="x_panel">
                   <div class="x_title">
                     <h2>Pengajuan Pelatihan</h2>
+                    @if($tmb==0)
                     <div style="float:right;"><button type="danger" class="btn btn-success btn-sm" data-toggle="modal" data-target="#tambah" >Tambah  Pengajuan Pelatihan</button></div> 
+                    @endif
                     <div class="clearfix"></div>
                   </div>
                   <div class="x_content">
@@ -48,8 +62,11 @@
                             <td>{{$daftar_pelatihan->pelatihan->bidang_kejuruan}}</td>
                             <td>{{$daftar_pelatihan->status}}</td>
                             <td>
+                            @if($daftar_pelatihan->status=="Dalam Proses")
                             <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#edit{{$daftar_pelatihan->id_pen_pelatihan}}" >Edit</button>
+                            @endif
                             <button type="danger" class="btn btn-warning btn-sm" data-toggle="modal" data-target="#detail{{$daftar_pelatihan->id_pen_pelatihan}}" >Detail</button>
+                            @if($daftar_pelatihan->status=="Dalam Proses"||$daftar_pelatihan->status=="Ditolak")
                                 <div style="float:right;">
                                 <form action="{{route('daftarpelatihan-masyarakat.destroy', $daftar_pelatihan->id_pen_pelatihan)}}" method="POST">
                                     @csrf
@@ -57,6 +74,7 @@
                                     <button type="submit" class="btn btn-danger btn-sm">Hapus</i></a>
                                 </form>
                                 </div>
+                              @endif
                             </td>
                           </tr>
                           @endif
