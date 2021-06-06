@@ -191,28 +191,7 @@
     <script src="../chart.js"></script>
     <script type="text/javascript">
   // Bar chart
-          new Chart(document.getElementById("bar-chart"), {
-              type: 'bar',
-              data: {
-                labels: ["RPL", "MM", "TKR", "AP"],
-                datasets: [
-                  {
-                    label: "Jumlah siswa",
-                    backgroundColor: ["#3e95cd", "#8e5ea2","#3cba9f","#e8c3b9"],
-                    data: [
-                      {{$perusahaan}}
-                    ,0]
-                  }
-                ]
-              },
-              options: {
-                legend: { display: false },
-                title: {
-                  display: true,
-                  text: 'Peserta didik tahun pelajaran 2019/2020'
-                }
-              }
-          });
+         
         </script>
     </body>
 </html>
