@@ -76,7 +76,7 @@ class Admin_masyarakatController extends Controller
             $data = array(            
                 'foto'=>$new_name,
             );
-        Masayarkat::wherenik($id)->update($data);
+        Masyarakat::wherenik($id)->update($data);
         }
 
         if($request->has('jk'))
