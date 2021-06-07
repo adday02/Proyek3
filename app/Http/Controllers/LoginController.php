@@ -6,15 +6,43 @@ use Illuminate\Http\Request;
 use App\Models\Admin;
 use App\Models\Perusahaan;
 use App\Models\Masyarakat;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Crypt;
+use DB;
 use Auth;
 
 class LoginController extends Controller
 {
     function masuk(Request $kiriman)
     {
-        $data1=Admin::where('username',$kiriman->username)->where('password',$kiriman->password)->get();
-        $data2=Perusahaan::where('id_perusahaan',$kiriman->username)->where('password',$kiriman->password)->get();
-        $data3=Masyarakat::where('nik',$kiriman->username)->where('password',$kiriman->password)->get();
+		
+		$y=Masyarakat::All();
+		foreach ($y as $p) {
+			$decrypted = Crypt::decryptString($p->password);
+			if($decrypted==$kiriman->password)
+			{
+				$pw=$p->password;
+			}		
+		}
+		$y=Perusahaan::All();
+		foreach ($y as $p) {
+			$decrypted = Crypt::decryptString($p->password);
+			if($decrypted==$kiriman->password)
+			{
+				$pw=$p->password;
+			}		
+		}
+		$y=Admin::All();
+		foreach ($y as $p) {
+			$decrypted = Crypt::decryptString($p->password);
+			if($decrypted==$kiriman->password)
+			{
+				$pw=$p->password;
+			}		
+		}
+        $data1=Admin::where('username',$kiriman->username)->where('password',$pw)->get();
+        $data2=Perusahaan::where('id_perusahaan',$kiriman->username)->where('password',$pw)->get();
+        $data3=Masyarakat::where('nik',$kiriman->username)->where('password',$pw)->get();
 
         if (count($data1)>0) {
     		Auth::guard('admin')->LoginUsingId($data1[0]['username']);

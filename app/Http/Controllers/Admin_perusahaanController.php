@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Perusahaan;
 use Validator;
 use App\Http\Requests\CreateAdminPerusahaanRequest;
+use Illuminate\Support\Facades\Crypt;
 
 class Admin_perusahaanController extends Controller
 {
@@ -40,7 +41,7 @@ class Admin_perusahaanController extends Controller
 
         $data = array(
             'id_perusahaan'=>$request->id_perusahaan,
-            'password'=>bcrypt($request->password),
+            'password'=>Crypt::encryptString($request->password),
             'nama'=>$request->nama,
             'logo'=>$new_name,
             'email'=>$request->email,

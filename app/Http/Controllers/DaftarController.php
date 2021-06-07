@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Masyarakat;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Crypt;
 
 class DaftarController extends Controller
 {
@@ -37,7 +38,7 @@ class DaftarController extends Controller
 
         $data = array(
             'nik'=>$request->nik,
-            'password'=>bcrypt($request->password),
+            'password' => Crypt::encryptString($request->password),
             'nama'=>$request->nama,
             'jk'=>$request->jk,
             'no_hp'=>$request->no_hp,

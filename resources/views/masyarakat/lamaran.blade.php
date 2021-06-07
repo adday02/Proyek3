@@ -9,7 +9,7 @@
   @if(auth()->user()->nik==$lamaran->masyarakat->nik)
     @if($lamaran->status=="Diterima"||$lamaran->status=="Dalam Proses")
   <?php
-  $tmb=1;
+  $tmb+=1;
   ?>
   @endif
   @endif
@@ -40,7 +40,7 @@
                 <div class="x_panel">
                   <div class="x_title">
                     <h2>Lamaran Pekerjaan</h2>
-                    @if($tmb==0)
+                    @if($tmb<=2)
                      <div style="float:right;"><button type="danger" class="btn btn-success btn-sm" data-toggle="modal" data-target="#tambah" >Tambah Lamaran Pekerjaan</button></div> 
                     @endif
                     <div class="clearfix"></div>

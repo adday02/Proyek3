@@ -8,7 +8,7 @@ $tmb=0;
   @if(auth()->user()->nik==$lamaran->masyarakat->nik)
     @if($lamaran->status=="Diterima"||$lamaran->status=="Dalam Proses")
   <?php
-  $tmb=1;
+  $tmb+=1;
   ?>
   @endif
   @endif
@@ -52,7 +52,7 @@ $tmb=0;
                             <td>1. Minimal Pendidikan SMA, 2. KTP, 3. dll.</td>
                             <td>
                             <button type="danger" class="btn btn-warning btn-sm" data-toggle="modal" data-target="#detail{{$lowongan->id_lowongan}}" >Detail</button>
-                            @if($tmb==0)
+                            @if($tmb<=2)
                             <button type="danger" class="btn btn-success btn-sm" data-toggle="modal" data-target="#lamar{{$lowongan->id_lowongan}}" >Lamar</button>
                             @endif
                             </td>

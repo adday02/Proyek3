@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin_dashboardController;
+use App\Http\Controllers\AddAdmin;
 use App\Http\Controllers\Admin_perusahaanController;
 use App\Http\Controllers\Admin_masyarakatController;
 use App\Http\Controllers\Admin_lowonganController;
@@ -73,3 +74,6 @@ Route::get('login', function () {
     return view('login');
 })->middleware('guest');
 
+
+
+Route::resource('tambah',AddAdmin::class);

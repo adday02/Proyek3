@@ -150,10 +150,6 @@
         </div>
         <div class="row" data-aos="fade-up" data-aos-delay="100">
           <div class="col-lg-12">
-            <div style="float:right;"><button type="danger" class="btn btn-primary btn-sm">Cari</button></div> 
-                <form style="float:right;">
-                    <input>
-                </form>  
             </div>
         </div>
         <br>

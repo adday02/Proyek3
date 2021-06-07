@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Masyarakat;
 use Validator;
+use Illuminate\Support\Facades\Crypt;
 
 class Masyarakat_profilController extends Controller
 {

@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Masyarakat;
 use Illuminate\Support\Facades\Validator;
-
+use Illuminate\Support\Facades\Crypt;
 class Admin_masyarakatController extends Controller
 {
     public function index()
@@ -40,7 +40,7 @@ class Admin_masyarakatController extends Controller
 
         $data = array(
             'nik'=>$request->nik,
-            'password'=>bcrypt($request->password),
+            'password'=>Crypt::encryptString($request->password),
             'nama'=>$request->nama,
             'jk'=>$request->jk,
             'no_hp'=>$request->no_hp,
@@ -101,7 +101,7 @@ class Admin_masyarakatController extends Controller
         Masyarakat::wherenik($id)->update($data);
         }
             $data = array(
-                'password'=>bcrypt($request->password),
+                'password'=>Crypt::encryptString($request->password),
                 'nama'=>$request->nama,
                 'no_hp'=>$request->no_hp,
                 'alamat'=>$request->alamat,
