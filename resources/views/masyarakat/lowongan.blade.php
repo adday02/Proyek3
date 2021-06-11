@@ -66,10 +66,6 @@ $tmb=0;
             </div>
           </div>
         </div>
-        <script>
-window.alert("Tata cara untuk melamar pekerjaan\n 1. Siapkan Persyaratan.\n 2. Pilih Pekerjaan dan klik Lamar \n 3. Upload persyaratan dengan format .pdf \n 4. Tunggu Sampai status berubah"
-);
-</script>
         <!-- /page content -->
 @foreach ($lowongans as $lowongan)
 <!-- Modal Ubah Data  -->

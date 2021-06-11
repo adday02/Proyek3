@@ -9,6 +9,7 @@ use App\Models\Lowongan;
 use App\Models\Lamaran;
 use App\Models\Pelatihan;
 use App\Models\Pendaftar_Pelatihan;
+use DB;
 
 
 
@@ -24,7 +25,10 @@ class Admin_dashboardController extends Controller
         $pen_pelatihans = Pendaftar_Pelatihan::count();
         $semuaperusahaan = Perusahaan::all();
         $semualowongan = Lowongan::all();
-        
-        return view('admin/dashboard',compact('semualowongan','semuaperusahaan','perusahaans','masyarakats','lowongans','lamarans','pelatihans','pen_pelatihans'))->with('i');
+        $diterimas = DB::table('lamarans')->where('status', '=', 'Diterima')->count();
+        $ditolaks = DB::table('lamarans')->where('status', '=', 'Ditolak')->count();
+        $dalams = DB::table('lamarans')->where('status', '!=', 'Diterima')->where('status', '!=', 'Ditolak')->count();
+
+        return view('admin/dashboard',compact('semualowongan','semuaperusahaan','perusahaans','masyarakats','lowongans','lamarans','pelatihans','pen_pelatihans','diterimas','ditolaks','dalams'))->with('i');
     }
 }

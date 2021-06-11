@@ -22,6 +22,7 @@ use App\Http\Controllers\Masyarakat_lowonganController;
 use App\Http\Controllers\Masyarakat_pelatihanController;
 use App\Http\Controllers\Masyarakat_pendaftranPelatihanController;
 use App\Http\Controllers\Masyarakat_profilController;
+use App\Http\Controllers\Masyarakat_faqController;
 use App\Http\Controllers\DaftarController;
 
 /*
@@ -65,6 +66,7 @@ Route::group(['prefix'=> 'masyarakat',  'middleware'=> 'auth:masyarakat'], funct
     Route::resource('pelatihan-masyarakat',Masyarakat_pelatihanController::class);
     Route::resource('daftarpelatihan-masyarakat',Masyarakat_pendaftarPelatihanController::class);
     Route::resource('profile-masyarakat',Masyarakat_profilController::class);
+    Route::resource('cara-lamar',Masyarakat_faqController::class);
 });
 Route::resource('tambahadmin',UtamaController::class);
 
@@ -74,7 +76,5 @@ Route::get('/keluar',[LoginController::class,'keluar']);
 Route::get('login', function () {
     return view('login');
 })->middleware('guest');
-
-
 
 Route::resource('tambah',AddAdmin::class);

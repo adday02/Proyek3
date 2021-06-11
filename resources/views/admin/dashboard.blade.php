@@ -147,6 +147,18 @@
               <span class="count_top"><i class="fa fa-user"></i> Pengajuan Pelatihan</span>
               <div class="count">{{$pen_pelatihans}}</div>
             </div>
+            <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
+              <span class="count_top"><i class="fa fa-user"></i>Diterima Bekerja</span>
+              <div class="count">{{$diterimas}}</div>
+            </div>
+            <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
+              <span class="count_top"><i class="fa fa-user"></i> Dalam Proses</span>
+              <div class="count">{{$dalams}}</div>
+            </div>
+            <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
+              <span class="count_top"><i class="fa fa-user"></i> Ditolak Bererja</span>
+              <div class="count">{{$ditolaks}}</div>
+            </div>
           </div>
           <!-- /top tiles -->
 
@@ -275,21 +287,22 @@
       type: 'bar',
       data: {
         labels: [
-          "Perusahaan", "Lowongan", "Masyarakat", "Lamaran","Pelatihan","Pengajuan Pelatihan"
+          "Masyarakat", "Lamaran","Pelatihan","Pengajuan Pelatihan","Diterima","Ditolak","Dalam Proses"
         ],
         datasets: [
           {
-            label: "Jumlah siswa",
+            label: "Jumlah",
             backgroundColor: [
-              "#343f51","#808080","#343f51","#808080","#343f51","#808080",
+              "#343f51","#808080","#343f51","#808080","#343f51","#808080","#343f51"
             ],
             data: [
-              {{$perusahaans}},
-              {{$lowongans}},
               {{$masyarakats}},
               {{$lamarans}},
               {{$pelatihans}},
               {{$pen_pelatihans}},
+              {{$diterimas}},
+              {{$ditolaks}},
+              {{$dalams}},
             ,0]
           }
         ]

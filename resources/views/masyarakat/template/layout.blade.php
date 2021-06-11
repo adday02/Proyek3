@@ -73,6 +73,11 @@
                       <li><a href="{{URL('masyarakat/daftarpelatihan-masyarakat')}}">Daftar Pelatihan</a></li>
                     </ul>
                   </li>
+                  <li><a><i class="fa fa-book"></i> Faq <span class="fa fa-chevron-down"></span></a>
+                    <ul class="nav child_menu">
+                      <li><a href="{{URL('masyarakat/cara-lamar')}}">Cara Melamar Pekerjaan dan Mendaftar Pelatihan</a></li>
+                    </ul>
+                  </li>
                 </ul>
               </div>
 
