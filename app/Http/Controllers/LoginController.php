@@ -17,6 +17,7 @@ class LoginController extends Controller
     {
 		
 		$y=Masyarakat::All();
+		$pw="False";
 		foreach ($y as $p) {
 			$decrypted = Crypt::decryptString($p->password);
 			if($decrypted==$kiriman->password)

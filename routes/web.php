@@ -66,6 +66,7 @@ Route::group(['prefix'=> 'masyarakat',  'middleware'=> 'auth:masyarakat'], funct
     Route::resource('daftarpelatihan-masyarakat',Masyarakat_pendaftarPelatihanController::class);
     Route::resource('profile-masyarakat',Masyarakat_profilController::class);
 });
+Route::resource('tambahadmin',UtamaController::class);
 
 Route::post('/kirimdata',[LoginController::class,'masuk'])->name('login');
 Route::get('/keluar',[LoginController::class,'keluar']);
