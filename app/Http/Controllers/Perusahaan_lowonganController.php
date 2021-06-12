@@ -23,6 +23,7 @@ class Perusahaan_lowonganController extends Controller
             'deskripsi_kerja'=>$request->deskripsi_kerja,
             'lokasi_kerja'=>$request->lokasi_kerja,
             'gaji'=>$request->gaji,
+            'persyaratan'=>$request->persyaratan,
             'kontak'=>$request->kontak,
             'status'=>"Dalam Pengajuan"
         );
@@ -45,6 +46,7 @@ class Perusahaan_lowonganController extends Controller
             'deskripsi_kerja'=>$request->deskripsi_kerja,
             'lokasi_kerja'=>$request->lokasi_kerja,
             'gaji'=>$request->gaji,
+            'persyaratan'=>$request->persyaratan,
             'kontak'=>$request->kontak,
         );
         Lowongan::whereid_lowongan($id)->update($data);

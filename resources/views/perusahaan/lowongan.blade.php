@@ -28,6 +28,7 @@
                           <th>Nama Pekerjaan</th>
                           <th>Lokasi Kerja</th>
                           <th>Gaji</th>
+                          <th>Persyaratan</th>
                           <th>Jenis Kerja</th>
                           <th>Kontak</th> 
                           <th>Status Lowongan</th>
@@ -42,6 +43,7 @@
                             <td>{{$lowongan->nama}}</td>
                             <td>{{$lowongan->lokasi_kerja}}</td>
                             <td><?PHP echo "Rp. " . number_format($lowongan->gaji, 0, ".", "."); ?></td>
+                            <td>{{$lowongan->persyaratan}}</td>
                             <td>{{$lowongan->jenis_kerja}}</td>
                             <td>{{$lowongan->kontak}}</td>
                             <td>{{$lowongan->status}}</td>
@@ -98,12 +100,13 @@
                 <select class="form-control" name="jenis_kerja" required>
                   <option disabled="" selected="" value="">Pilih Jenis Kerja</option>
                   <option>Penuh Waktu</option>
-                  <option>Kontak</option>
+                  <option>Kontrak</option>
                   <option>Magang</option>
                 </select>
                 <br>
                 <input class="form-control" name="lokasi_kerja"type="text" placeholder="Lokasi kerja" required pattern=".{,255}" title="Lokasi Max 255 Karakter"></br>
                 <input class="form-control" name="gaji"type="text" placeholder="Gaji" required pattern="[0-9]{5,8}" title="Masukkan Gaji dengan angka, Min 5 Digit dan Max 8 Digit"></br>
+                <input class="form-control" name="persyaratan"type="text" placeholder="Persyaratan" required pattern=".{,255}" title="Persyaratan Max 255 Karakter"></br>
                 <input class="form-control" name="kontak"type="text" placeholder="Kontak" required pattern="[0-9]{11,13}" title="Masukkan Kontak dengan angka, Min 11 dan Max 13"></br>
                 <textarea class="form-control"name="deskripsi_kerja" type="text" placeholder="Deskripsi Pekerjaan" required pattern=".{,255}" title="Deskripsi Max 255 Karakter"></textarea></br>
                 <input hidden="" name="id_perusahaan" value="{{auth()->user()->id_perusahaan}}">
@@ -176,6 +179,16 @@
                         <input type="text" name="gaji" class="form-control" value="{{ $lowongan->gaji }}" required pattern="[0-9]{5,8}" title="Masukkan Gaji dengan angka, Min 5 Digit dan Max 8 Digit">
                     </div>
                     @error('gaji')
+            <div class="invalid-feedback">{{ $message }}</div>
+                    @enderror
+                </div>
+
+                <div class="row form-group">
+                    <label class="col-sm-4 control-label">Persyaratan</label>
+                    <div class="col-sm-8">
+                        <input type="text" name="persyaratan" class="form-control" value="{{ $lowongan->persyaratan }}" required pattern=".{,255}" title="Persyaratan Max 255 Karakter">
+                    </div>
+                    @error('persyaratan')
             <div class="invalid-feedback">{{ $message }}</div>
                     @enderror
                 </div>
