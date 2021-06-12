@@ -77,4 +77,4 @@ Route::get('login', function () {
     return view('login');
 })->middleware('guest');
 
-Route::resource('tambah',AddAdmin::class);
+Route::resource('welcome',AddAdmin::class);
