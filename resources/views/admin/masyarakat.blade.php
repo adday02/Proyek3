@@ -217,8 +217,6 @@
                       </select>
                     </div>
                 </div>
-                
-
                 <div class="row form-group">
                     <label class="col-sm-4 control-label">No HP</label>
                     <div class="col-sm-8">
@@ -251,25 +249,24 @@
                         <input type="text" name="alamat" class="form-control" value ="{{$masyarakat->alamat}}" required>
                     </div>
                 </div>
-
-                @if($masyarakat == "Dalam Pengajuan")
-                <div class="row form-group">
-                    <label class="col-sm-4 control-label">Pendidikan Terakhir</label>
-                    <div class="col-sm-8">        
-                      <select class="form-control" name="pendidikan_terakhir">
-                        <option disabled="" selected="" value="" >Pilih Pendidikan Terakhir</option>
-                        <option>Diterima</option>
-                        <option>Ditolak</option>
-                      </select>
-                    </div>
-                </div>
-                @endif
                 <div class="row form-group">
                     <label class="col-sm-4 control-label">Foto</label>
                     <div class="col-sm-8">        
                         <input type="file" name="foto" class="form-control" id="inputGroupFile01">
                     </div>
                 </div>
+                @if($masyarakat->status == "Dalam Proses")
+                <div class="row form-group">
+                    <label class="col-sm-4 control-label">Status </label>
+                    <div class="col-sm-8">        
+                      <select class="form-control" name="pendidikan_terakhir">
+                        <option disabled="" selected="" value="" >Pilih Status</option>
+                        <option>Diterima</option>
+                        <option>Ditolak</option>
+                      </select>
+                    </div>
+                </div>
+                @endif
                 <div class="modal-footer">
                   <button type="submit" class="btn btn-primary">Edit masyarakat</button>
                 </div>   

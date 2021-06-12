@@ -15,7 +15,7 @@ class Masyarakat_lowonganController extends Controller
      */
     public function index()
     {
-        $lowongans = Lowongan::all();
+        $lowongans=Lowongan::where('status','Diterima')->get();
         $lamarans = Lamaran::all();
         return view('masyarakat/lowongan',compact('lowongans','lamarans'))->with('i');
     }

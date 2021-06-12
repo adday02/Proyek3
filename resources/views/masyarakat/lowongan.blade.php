@@ -82,7 +82,7 @@ $tmb=0;
                 <div class="row form-group">
                     <label class="col-sm-4 control-label">Nama Perusahaan</label>
                     <div class="col-sm-8">        
-                        <input type="text" name="nama" class="form-control" value="{{ $lowongan->perusahaan->nama}}" readonly>
+                        <input type="text" name="nama" class="form-control" value="{{$lowongan->perusahaan->nama}}" readonly>
                     </div>
                 </div>
 

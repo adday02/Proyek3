@@ -43,7 +43,7 @@
                             <td>
                                 <button type="danger" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#edit{{$lamaran->id_lamaran}}" >Edit</button>
                                 <button type="danger" class="btn btn-warning btn-sm" data-toggle="modal" data-target="#detail-data{{$lamaran->id_lamaran}}" >Detail</button>
-                                <a href="{{URL::to('/')}}/file/aliyah.pdf"><button type="danger" class="btn btn-dark btn-sm">Unduh</button></a>
+                                <a href="{{URL::to('/')}}/file/{{$lamaran->file}}"><button type="danger" class="btn btn-dark btn-sm">Unduh</button></a>
                                 <div style="float:right;">
                                 <form action="{{route('lamaran.destroy', $lamaran->id_lamaran)}}" method="POST">
                                     @csrf
@@ -64,8 +64,7 @@
           </div>
         </div>
         <!-- /page content -->
-
-        @foreach ($lamarans as $lamaran)
+@foreach ($lamarans as $lamaran)
 <!-- Modal Ubah Data  -->
 <div id="edit{{$lamaran->id_lamaran}}" class="modal fade" role="dialog">
     <div class="modal-dialog">
@@ -80,12 +79,9 @@
             </div>
             <!-- body modal -->
             <div class="modal-body">
-            <form action="{{route('lamaran.update', $lamaran->id_lamaran)}}" class="form-horizontal tasi-form" method="post" enctype="multipart/form-data">
+            <form action="{{route('lamaran-perusahaan.update', $lamaran->id_lamaran)}}" class="form-horizontal tasi-form" method="post" enctype="multipart/form-data">
                 @csrf
                 @method('PATCH')
-
-               
-                   
             <div class="row form-group">
                     <label class="col-sm-4 control-label">Nama Masyarakat</label>
                     <div class="col-sm-8">        
@@ -99,39 +95,33 @@
                 <div class="row form-group">
                     <label class="col-sm-4 control-label">Nama Perusahaan</label>
                     <div class="col-sm-8">
-                    <input class="form-control" type="text" value="{{$lamaran->lowongan->perusahaan->nama}}" readonly></input></br>
+                    <input class="form-control" type="text" value="{{$lamaran->lowongan->perusahaan->nama}}" readonly></input>
                     </div>
                     @error('nama')
-            <div class="invalid-feedback">{{ $message }}</div>
+                        <div class="invalid-feedback">{{ $message }}</div>
                     @enderror
                 </div>
-               
-
                 <div class="row form-group">
                     <label class="col-sm-4 control-label">Jenis Pekerjaan</label>
                     <div class="col-sm-8">
                         <input type="text"  class="form-control" value="{{ $lamaran->lowongan->jenis_kerja }}" required="required" readonly>
                     </div>
                     @error('jenis_kerja')
-            <div class="invalid-feedback">{{ $message }}</div>
+                    <div class="invalid-feedback">{{ $message }}</div>
                     @enderror
                 </div>
-
-                
-
                 <div class="row form-group">
                     <label class="col-sm-4 control-label">Status</label>
                     <div class="col-sm-8">        
-                    <select class="input100" type="text" name="status" required>
+                    <select class="form-control"  type="text" name="status" required>
                             <option disabled="" selected="" value="">--Pilih Jenis Status--</option>
+                            <option value="Tahap Medical Checkup">Tahap Medical Checkup</option>
+                            <option value="Tahap Interview">Tahap Interview</option>
                             <option value="Diterima">Diterima</option>
                             <option value="Ditolak">Ditolak</option>
                         </select>
                     </div>
                 </div>
-
-                
-
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
                     <button type="submit" class="btn btn-primary">Confirm</button>

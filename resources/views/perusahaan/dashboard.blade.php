@@ -34,30 +34,6 @@
     <link href="../build/css/custom.min.css" rel="stylesheet">
   </head>
   <body class="nav-md">
-  <?php
-  $grafiklowongan=0;
-  ?>
-  @foreach ($semualowongan as $lowongan)
-    @if((auth()->user()->id_perusahaan)==($lowongan->perusahaan->id_perusahaan))
-      <?php
-      $grafiklowongan=$grafiklowongan+1;
-      ?>
-    @endif
-  @endforeach
-
-  <?php
-  $grafiklamaran=0;
-  ?>
-  @foreach ($semualamaran as $la)
-    @if((auth()->user()->id_perusahaan)==($la->lowongan->perusahaan->id_perusahaan))
-      <?php
-      $grafiklamaran=$grafiklamaran+1;
-      echo"$grafiklamaran";
-      ?>
-    @endif
-  @endforeach
-
-  
     <div class="container body">
       <div class="main_container">
         <div class="col-md-3 left_col">
@@ -129,12 +105,16 @@
           <!-- top tiles -->
           <div class="row tile_count">
             <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
-              <span class="count_top"><i class="fa fa-user"></i> Lowongan Pekerjaan</span>
-              <div class="count">{{$grafiklowongan}}</div>
+              <span class="count_top"><i class="fa fa-user"></i> Lowongan Diterima</span>
+              <div class="count">{{$diterimas}}</div>
             </div>
             <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
-              <span class="count_top"><i class="fa fa-user"></i> Lamaran Pekerjaan</span>
-              <div class="count">{{$grafiklamaran}}</div>
+              <span class="count_top"><i class="fa fa-user"></i> Lowongan Ditolak</span>
+              <div class="count">{{$ditolaks}}</div>
+            </div>
+            <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
+              <span class="count_top"><i class="fa fa-user"></i> Lowongan Dalam Pengajuan</span>
+              <div class="count">{{$pengajuans}}</div>
             </div>
           </div>
           <!-- /top tiles -->
@@ -150,37 +130,6 @@
 
                 <div class="col-md-9 col-sm-9 col-xs-12">
                 <canvas id="bar-chart" width="8" height="4"></canvas>
-                </div>
-                <div class="col-md-3 col-sm-3 col-xs-12 bg-white">
-                  <div class="x_title">
-                    <h2>Top Campaign Performance</h2>
-                    <div class="clearfix"></div>
-                  </div>
-                  <div class="col-md-12 col-sm-12 col-xs-6">
-                  @foreach($semualowongan as $p)
-                  <?php
-                  $jml=0;
-                  ?>
-                    @foreach($semualamaran as $l)
-                      @if($l->lowongan->id_lowongan==$p->id_lowongan)
-                      <?php
-                        $jml=$jml+1;
-                        ?>
-                      @endif
-                    @endforeach
-                    <?php
-                      $presentase=$jml/$lamarans*100;
-                    ?>
-                    <div>
-                      <p>{{$p->nama}}<br>({{$jml}} Lamaran)</p>
-                      <div class="">
-                        <div class="progress progress_sm" style="width: 50%;">
-                          <div class="progress-bar bg-green" role="progressbar" data-transitiongoal="{{$presentase}}"></div>
-                        </div>
-                      </div>
-                    </div>
-                    @endforeach
-                  </div>
                 </div>
                 <div class="clearfix"></div>
             </div>
@@ -259,17 +208,18 @@
       type: 'bar',
       data: {
         labels: [
-          "Lowongan", "Lamaran"
+          "Lowongan Diterima","Lowongan Ditolak","Lowongan Dalama Pengajuan"
         ],
         datasets: [
           {
             label: "",
             backgroundColor: [
-              "#808080","#343f51",
+              "#808080","#343f51","#808080","#343f51",
             ],
             data: [
-              {{$grafiklowongan}},
-              {{$grafiklamaran}},
+              {{$diterimas}},
+              {{$ditolaks}},
+              {{$pengajuans}},
             ,0]
           }
         ]

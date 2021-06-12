@@ -39,7 +39,7 @@
                             <td>{{$lamaran->status}}</td>
                             <td>
                                 <button type="danger" class="btn btn-warning btn-sm" data-toggle="modal" data-target="#detail{{$lamaran->id_lamaran}}" >Detail</button>
-                                <a href="{{URL::to('/')}}/file/Aliyah.zip"><button type="danger" class="btn btn-dark btn-sm">Unduh</button></a>
+                                <a href="{{URL::to('/')}}/file/{{$lamaran->file}}"><button type="danger" class="btn btn-dark btn-sm">Unduh</button></a>
                             </td>
                         </tr>
                         @endforeach

@@ -43,7 +43,7 @@ class LoginController extends Controller
 		}
         $data1=Admin::where('username',$kiriman->username)->where('password',$pw)->get();
         $data2=Perusahaan::where('id_perusahaan',$kiriman->username)->where('password',$pw)->get();
-        $data3=Masyarakat::where('nik',$kiriman->username)->where('password',$pw)->get();
+        $data3=Masyarakat::where('nik',$kiriman->username)->where('password',$pw)->where('status','Diterima')->get();
 
         if (count($data1)>0) {
     		Auth::guard('admin')->LoginUsingId($data1[0]['username']);

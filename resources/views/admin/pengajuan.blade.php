@@ -79,6 +79,7 @@
                     <div class="col-sm-8">        
                       <select class="form-control" name="status">
                         <option disabled="" selected="" value="">Pilih Perizinan</option>
+                        <option value="Tahap Interview">Tahap Interview</option>
                         <option value="Diterima">Diterima</option>
                         <option value="Ditolak">Ditolak</option>
                       </select>

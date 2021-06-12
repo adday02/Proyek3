@@ -3,26 +3,16 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Perusahaan;
-use App\Models\Masyarakat;
 use App\Models\Lowongan;
-use App\Models\Lamaran;
-use App\Models\Pelatihan;
-use App\Models\Pendaftar_Pelatihan;
+use DB;
 
 class Perusahaan_dasboardController extends Controller
 {
     public function index()
     {
-        $perusahaans = Perusahaan::count();
-        $masyarakats = Masyarakat::count();
-        $lowongans = Lowongan::count();
-        $lamarans = Lamaran::count();
-        $pelatihans = Pelatihan::count();
-        $pen_pelatihans = Pendaftar_Pelatihan::count();
-        $semualamaran = Lamaran::all();
-        $semualowongan = Lowongan::all();
-       
-        return view('perusahaan/dashboard',compact('semualowongan','semualamaran','perusahaans','masyarakats','lowongans','lamarans','pelatihans','pen_pelatihans'))->with('i');
+        $pengajuans = DB::table('lowongans')->where('status', '=', 'Dalam Pengajuan')->where('id_perusahaan', '=',auth()->user()->id_perusahaan)->count();     
+        $diterimas = DB::table('lowongans')->where('status', '=', 'Diterima')->where('id_perusahaan', '=',auth()->user()->id_perusahaan)->count();     
+        $ditolaks = DB::table('lowongans')->where('status', '=', 'Ditolak')->where('id_perusahaan', '=',auth()->user()->id_perusahaan)->count();     
+        return view('perusahaan/dashboard',compact('diterimas','ditolaks','pengajuans'))->with('i');
     }
 }
